@@ -1679,14 +1679,18 @@ input::placeholder,textarea::placeholder{color:rgba(41,121,255,.28)!important}
 
 /* Milestones */
 .bpbar-milestones{
-  display:flex;justify-content:space-between;
-  margin-top:8px;padding:0;position:relative;
+  position:relative;
+  margin-top:8px;
+  height:18px;
 }
 .bpbar-ms{
+  position:absolute;top:0;
+  transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:3px;
   font-family:'Orbitron',monospace;font-size:6px;letter-spacing:1px;
   animation:bMsIn .4s ease-out both;
 }
+.bpbar-ms[data-edge="end"]{transform:translateX(-100%)}
 .bpbar-ms-dot{
   width:4px;height:4px;border-radius:50%;
   transition:background .5s,box-shadow .5s;
@@ -2223,13 +2227,19 @@ window.defeatFloorBoss=function(){
 // HELPERS
 // ══════════════════════════════════════════════
 function dates(h){return(h.completed_dates||'').split(',').filter(Boolean)}
+function currentDuration(h){
+  const base=Math.max(1,parseInt(h.duration_minutes)||5);
+  if((h.light_day||'')!==TODAY)return base;
+  const reduced=parseInt(h.light_duration_minutes);
+  return Number.isFinite(reduced)&&reduced>0?reduced:base;
+}
 function streak(ds){
   const s=[...ds].sort().reverse();let c=0;const now=new Date(TODAY);
   for(let i=0;i<s.length;i++){const e=new Date(now);e.setDate(e.getDate()-i);if(s[i]===e.toISOString().split('T')[0])c++;else break;}
   return c;
 }
 function xpOf(h){
-  const dur=h.duration_minutes||0,sets=h.sets||1,rest=h.rest_minutes||1;
+  const dur=currentDuration(h)||0,sets=h.sets||1,rest=h.rest_minutes||1;
   const t=dur*sets+rest*Math.max(0,sets-1);
   return Math.max(3,Math.round(Math.sqrt(t)*1.5));
 }
@@ -2612,7 +2622,8 @@ function renderMissionBoard(){
     const CIRC=+(2*Math.PI*20).toFixed(2);
     const liveCards=activeArr.map(h=>{
       const c=h.color||'#2979ff';
-      const st=timerBoardState[h.__id]||{tLeft:(h.duration_minutes||5)*60,isRest:false,cur:1,totalSets:h.sets||1,setS:(h.duration_minutes||5)*60,restS:(h.rest_minutes||1)*60,paused:false};
+      const effectiveDur=currentDuration(h);
+      const st=timerBoardState[h.__id]||{tLeft:effectiveDur*60,isRest:false,cur:1,totalSets:h.sets||1,setS:effectiveDur*60,restS:(h.rest_minutes||1)*60,paused:false};
       const total2=st.isRest?st.restS:st.setS||1;
       const frac=Math.max(0,Math.min(1,st.tLeft/total2));
       const offset=CIRC*(1-frac);
@@ -2714,7 +2725,8 @@ function habitCard(h,i){
   const c=h.color||'#2979ff';
   const active=activeTimers.has(h.__id);
   const delay=`animation-delay:${i*45}ms`;
-  const hasTmr=h.duration_minutes>0;
+  const effectiveDur=currentDuration(h);
+  const hasTmr=effectiveDur>0;
 
   const actionBtns=active?`
     <div class="hcw-actions">
@@ -2765,7 +2777,7 @@ function habitCard(h,i){
 
   if(hasTmr){
     const sets=h.sets||1,rest=h.rest_minutes||1;
-    const lbl=sets>1?`${sets}×${h.duration_minutes}min · REST ${rest}min`:`${h.duration_minutes}min`;
+    const lbl=sets>1?`${sets}×${effectiveDur}min · REST ${rest}min`:`${effectiveDur}min`;
     return`<div class="hcw card-in" data-id="${h.__id}" data-timer-active="${active?'1':''}" style="${delay}">
       <div class="card hcard${active?' hcard-active':''}">
         <div class="drag-handle"><i data-lucide="grip-vertical" style="width:14px;height:14px"></i></div>
@@ -3020,7 +3032,7 @@ function startTimer(habitId){
   delete timerBoardState[habitId];
   activeTimers.add(habitId);updateHabitCard(habitId,true);
   const col=h.color,totalSets=h.sets||1;
-  const setS=(h.duration_minutes||5)*60,restS=(h.rest_minutes||1)*60;
+  const setS=currentDuration(h)*60,restS=(h.rest_minutes||1)*60;
   const fs={tLeft:setS,isRest:false,cur:1,totalSets,setS,restS,paused:false,c:col,name:h.name};
   timerBoardState[habitId]={...fs};
   renderMissionBoard();
@@ -3325,7 +3337,7 @@ function updateHabitCard(id,active){
   if(nameEl){nameEl.style.color=active?c:'var(--t1)';nameEl.style.textShadow=active?`0 0 14px ${c}44`:'';}
   const lbl=wrap.querySelector('.tmr-label');
   if(lbl){
-    const sets=h.sets||1,rest=h.rest_minutes||1,l=sets>1?`${sets}x${h.duration_minutes}min REST${rest}min`:`${h.duration_minutes}min`;
+    const sets=h.sets||1,rest=h.rest_minutes||1,dur=currentDuration(h),l=sets>1?`${sets}x${dur}min REST${rest}min`:`${dur}min`;
     lbl.innerHTML=active
       ?`<div style="display:flex;align-items:center;gap:5px"><div class="pulse-dot" style="width:5px;height:5px;border-radius:50%;background:${c};flex-shrink:0;box-shadow:0 0 8px ${c}"></div><span style="font-family:'Orbitron',monospace;font-size:8.5px;font-weight:700;color:${c};letter-spacing:.5px">EN COURS</span></div>`
       :`<span style="font-family:'Orbitron',monospace;font-size:9px;font-weight:700;color:${c}60">${l}</span>`;
@@ -3690,7 +3702,7 @@ function renderBadgesHero(){
       </div>
       <!-- Milestones avec point -->
       <div class="bpbar-milestones">
-        ${milestones.map((m,i)=>`<span class="bpbar-ms ${pct>=m?'reached':'unreached'}" style="animation-delay:${i*.06+.3}s">
+        ${milestones.map((m,i)=>`<span class="bpbar-ms ${pct>=m?'reached':'unreached'}" data-edge="${m===100?'end':'mid'}" style="left:${m}%;animation-delay:${i*.06+.3}s">
           <div class="bpbar-ms-dot"></div>
           <span class="bpbar-ms-txt">${m}%</span>
         </span>`).join('')}
@@ -5309,45 +5321,31 @@ window.acceptNegotiation=function(habitId,mode){
   if(mode==='light'){
     const ds=dates(h);
     if(ds.includes(TODAY)){toast('Déjà complétée aujourd\'hui');return;}
-    // ── Complétion automatique avec XP allégé + résistance ──
-    const resistMult=autoResistance();
-    const nowISO=new Date().toISOString();
-    ds.push(TODAY);
-    const str=streak([...ds].sort().reverse());
-    const baseXp=xpFinal(h,str);
-    // 45% de l'XP de base × multiplicateur de résistance (effort quand même réel)
-    const reducedXp=Math.max(1,Math.round(baseXp*0.45*resistMult));
-    applyXpGain(reducedXp);
-    // Stocker timestamps et résistance
-    if(!h.completed_timestamps)h.completed_timestamps='';
-    if(!h.resistance_log)h.resistance_log='';
-    const tsArr=h.completed_timestamps.split(',').filter(Boolean);
-    const rlArr=h.resistance_log.split(',').filter(Boolean);
-    tsArr.push(nowISO);rlArr.push(resistMult.toFixed(2));
-    h.completed_timestamps=tsArr.join(',');h.resistance_log=rlArr.join(',');
-    h.completed_dates=ds.join(',');
+    if((h.light_day||'')===TODAY){toast('Quête déjà allégée aujourd\'hui');return;}
+    const baseDur=Math.max(1,parseInt(h.duration_minutes)||5);
+    const reducedDur=Math.max(1,Math.round(baseDur*0.3));
+    h.light_day=TODAY;
+    h.light_duration_minutes=reducedDur;
+    h.light_source_duration=baseDur;
     syncAll();
-    // Flash vert sur la carte
+    // Flash bleuté sur la carte
     setTimeout(()=>{
       const wrap=document.querySelector('.hcw[data-id="'+habitId+'"]');
       if(wrap){
         const card=wrap.querySelector('.card');
         if(card){
-          card.classList.add('neg-complete-flash');
           card.style.transition='background .08s,transform .14s var(--bounce),box-shadow .22s';
           card.style.transform='scale(1.035)';
-          card.style.boxShadow='0 0 28px rgba(74,222,128,.25)';
+          card.style.boxShadow='0 0 28px rgba(41,121,255,.28)';
           setTimeout(()=>{
-            card.classList.remove('neg-complete-flash');
             card.style.transform='';card.style.boxShadow='';
           },820);
         }
       }
-      showXP(reducedXp,'ALLÉGÉE');
       if(navigator.vibrate)navigator.vibrate([15,30,20]);
     },180);
-    toast('Version allégée · +'+reducedXp+' XP · Série préservée 🔥');
-    setTimeout(()=>{renderAll();checkAllDay();},220);
+    toast('Quête allégée à '+reducedDur+' min · elle reste à compléter 💡');
+    setTimeout(()=>{renderAll();},220);
 
   } else if(mode==='rest'){
     if(!h.rest_days)h.rest_days='';
