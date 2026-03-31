@@ -36,6 +36,54 @@
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
 body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--t1)}
 
+/* ── Floor Boss / Quête Urgente ── */
+body.urgent-alert{
+  --A:#ff1744!important;--AL:#ff5252!important;--AG:rgba(255,23,68,.45)!important;
+  animation:urgentShake .45s ease-in-out 5;
+}
+body.urgent-alert::after{
+  content:'';position:fixed;inset:0;z-index:120;background:
+  repeating-linear-gradient(0deg,rgba(255,23,68,.08) 0 2px,transparent 2px 6px),
+  radial-gradient(circle at 20% 20%,rgba(255,23,68,.18),transparent 48%),
+  radial-gradient(circle at 80% 80%,rgba(255,82,82,.12),transparent 45%);
+  mix-blend-mode:screen;pointer-events:none;animation:dangerGlitch .22s steps(2,end) 12;
+}
+.urgent-overlay{
+  position:fixed;inset:0;z-index:130;display:flex;align-items:center;justify-content:center;
+  background:rgba(10,0,6,.86);backdrop-filter:blur(5px);animation:fadeIn .2s ease-out both;
+}
+.urgent-overlay-box{
+  border:1px solid rgba(255,82,82,.55);border-radius:18px;padding:18px 20px;
+  background:linear-gradient(135deg,rgba(90,0,20,.84),rgba(35,0,15,.88));
+  box-shadow:0 0 42px rgba(255,23,68,.35),inset 0 0 0 1px rgba(255,255,255,.05);
+  text-align:center;animation:rise .4s var(--bounce) both;
+}
+.boss-card{
+  border:1px solid rgba(255,82,82,.42)!important;
+  background:linear-gradient(135deg,rgba(73,7,20,.96),rgba(24,6,18,.96))!important;
+  box-shadow:0 0 0 1px rgba(255,82,82,.22),0 12px 34px rgba(255,23,68,.28),inset 0 0 34px rgba(255,64,129,.06);
+  position:relative;overflow:hidden;
+}
+.boss-card::before{
+  content:'';position:absolute;inset:-40% -20%;background:linear-gradient(120deg,transparent 35%,rgba(255,82,82,.2) 50%,transparent 65%);
+  animation:shimmer 2.4s linear infinite;
+}
+.boss-card *{position:relative;z-index:1}
+@keyframes urgentShake{
+  0%,100%{transform:translate(0,0)}
+  20%{transform:translate(-2px,1px)}
+  40%{transform:translate(2px,-1px)}
+  60%{transform:translate(-1px,2px)}
+  80%{transform:translate(1px,-2px)}
+}
+@keyframes dangerGlitch{
+  0%{transform:translate(0,0);opacity:1}
+  25%{transform:translate(-2px,1px);opacity:.7}
+  50%{transform:translate(2px,-1px);opacity:.92}
+  75%{transform:translate(-1px,-2px);opacity:.74}
+  100%{transform:translate(0,0);opacity:1}
+}
+
 /* Grille de fond animée */
 body::before{
   content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
@@ -2058,6 +2106,7 @@ const LEVELS=[
   {rank:'SS',xp:2500,color:'#9c27b0'},{rank:'SSS',xp:4000,color:'#ffd700'}
 ];
 const SAO_COL=['#29b6f6','#00d4ff','#0099ff','#1a8fff','#2979ff','#7c4dff','#e040fb','#ff4081','#ff6d00','#ffd700'];
+const FLOOR_TITLES=['Rang E','Rang D','Rang C','Rang B','Rang A','Rang S','Rang SS','Rang SSS','Monarque'];
 function saoInfo(xp){
   const L=Math.min(100,Math.floor(xp/25)+1);
   const col=SAO_COL[Math.min(Math.floor((L-1)/10),9)];
@@ -2102,6 +2151,73 @@ let lastConf='';
 
 function syncAll(){const d=[...habits,...subtasks];if(pdata)d.push(pdata);save(d);}
 const genId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2);
+function ensurePData(){
+  if(!pdata)pdata={__id:genId(),total_xp:0,level:1};
+  if(typeof pdata.floor!=='number'||pdata.floor<1)pdata.floor=1;
+  if(typeof pdata.floor_title_idx!=='number'||pdata.floor_title_idx<0)pdata.floor_title_idx=0;
+  if(!pdata.floor_title)pdata.floor_title=FLOOR_TITLES[Math.min(pdata.floor_title_idx,FLOOR_TITLES.length-1)];
+  if(typeof pdata.next_urgent_xp!=='number'||pdata.next_urgent_xp<=0){
+    pdata.next_urgent_xp=(Math.floor((pdata.total_xp||0)/500)+1)*500;
+  }
+  if(!pdata.boss_queue)pdata.boss_queue=0;
+}
+function bossData(){ensurePData();return pdata.floor_boss&&pdata.floor_boss.active?pdata.floor_boss:null;}
+function showUrgentAlert(){
+  document.body.classList.add('urgent-alert');
+  if(navigator.vibrate)navigator.vibrate([120,80,120,80,220]);
+  const ov=document.createElement('div');
+  ov.className='urgent-overlay';
+  ov.innerHTML=`<div class="urgent-overlay-box">
+    <p style="font-family:'Orbitron',monospace;font-size:11px;font-weight:900;letter-spacing:2px;color:#ff8a80;margin-bottom:8px">SYSTEM OVERRIDE</p>
+    <p style="font-family:'Orbitron',monospace;font-size:17px;font-weight:900;letter-spacing:1.5px;color:#ff5252;text-shadow:0 0 18px rgba(255,82,82,.6)">ALERTE : QUÊTE URGENTE DÉTECTÉE</p>
+  </div>`;
+  document.body.appendChild(ov);
+  setTimeout(()=>{ov.remove();document.body.classList.remove('urgent-alert');},2300);
+}
+function activateFloorBoss(triggerXp){
+  ensurePData();
+  if(pdata.floor_boss&&pdata.floor_boss.active){pdata.boss_queue=(pdata.boss_queue||0)+1;return;}
+  pdata.floor_boss={id:genId(),active:true,reward_xp:250,trigger_xp:triggerXp,floor:pdata.floor||1};
+  showUrgentAlert();
+  toast('⚠️ Quête urgente déclenchée : Boss de Palier');
+}
+function handleUrgentThresholds(prevXp,newXp){
+  ensurePData();
+  while(newXp>=pdata.next_urgent_xp){
+    activateFloorBoss(pdata.next_urgent_xp);
+    pdata.next_urgent_xp+=500;
+  }
+}
+function applyXpGain(amount){
+  ensurePData();
+  const prev=pdata.total_xp||0;
+  const old=lvlInfo(prev).idx;
+  pdata.total_xp=prev+amount;
+  const ni=lvlInfo(pdata.total_xp);
+  if(ni.idx>old)showLevelUp(ni.isSAO?'NIVEAU '+ni.level:ni.rank,ni.color);
+  handleUrgentThresholds(prev,pdata.total_xp);
+}
+function advanceFloorTitle(){
+  ensurePData();
+  const nextIdx=Math.min(FLOOR_TITLES.length-1,(pdata.floor_title_idx||0)+1);
+  pdata.floor_title_idx=nextIdx;
+  pdata.floor_title=FLOOR_TITLES[nextIdx];
+}
+window.defeatFloorBoss=function(){
+  const boss=bossData();if(!boss)return;
+  applyXpGain(boss.reward_xp||250);
+  pdata.floor=(pdata.floor||1)+1;
+  advanceFloorTitle();
+  pdata.floor_boss=null;
+  if((pdata.boss_queue||0)>0){
+    pdata.boss_queue-=1;
+    activateFloorBoss(pdata.next_urgent_xp-500);
+  }
+  syncAll();
+  showXP(250,'BOSS');
+  toast('Boss vaincu ! +250 XP · Palier supérieur débloqué');
+  renderAll();
+};
 
 // ══════════════════════════════════════════════
 // HELPERS
@@ -2470,11 +2586,25 @@ function buildSAOBoard(live,pct,total,done,str,level,activeCount){
 
 function renderMissionBoard(){
   const board=document.getElementById('mission-board');if(!board)return;
+  ensurePData();
   const total=habits.length,doneToday=habits.filter(h=>dates(h).includes(TODAY)).length;
   const pct=total?Math.round(doneToday/total*100):0;
   const activeArr=[...activeTimers].map(id=>habits.find(h=>h.__id===id)).filter(Boolean);
   const activeCount=activeArr.length;
   const level=lvlInfo((pdata&&pdata.total_xp)||0);
+  const boss=bossData();
+  const bossCard=boss?`<div class="command-card boss-card" style="margin-bottom:10px">
+    <span class="command-title" style="color:#ff8a80">Quête Urgente · Boss de Palier</span>
+    <div class="command-metric" style="color:#ff5252">FLOOR ${pdata.floor||1}</div>
+    <p class="command-copy" style="color:rgba(255,205,210,.9)">Objectif prioritaire non négociable · Récompense <strong style="color:#ff8a80">+250 XP</strong>.</p>
+    <div class="app-chip-row">
+      <span class="app-chip" style="border-color:rgba(255,82,82,.35);background:rgba(255,82,82,.14);color:#ff8a80">Titre : ${pdata.floor_title||'Rang E'}</span>
+      <span class="app-chip" style="border-color:rgba(255,82,82,.35);background:rgba(255,82,82,.14);color:#ff8a80">Déclenchée à ${boss.trigger_xp} XP</span>
+    </div>
+    <div class="command-actions" style="margin-top:10px">
+      <button class="section-cta primary" onclick="defeatFloorBoss()" style="background:linear-gradient(135deg,#ff1744,#ff5252);border:none">⚔️ Affronter le Boss</button>
+    </div>
+  </div>`:'';
   const nextXp=Math.max(0,level.nextXp-level.xp);
   const bestStreak=habits.length?Math.max(0,...habits.map(h=>streak(dates(h)))):0;
   let liveSection='';
@@ -2506,9 +2636,10 @@ function renderMissionBoard(){
     startLiveBoardTick();
   }else{stopLiveBoardTick();}
   if(getU()==='sao'){
-    board.innerHTML=buildSAOBoard(liveSection,pct,total,doneToday,bestStreak,level,activeCount);
+    board.innerHTML=bossCard+buildSAOBoard(liveSection,pct,total,doneToday,bestStreak,level,activeCount);
   }else{
     board.innerHTML=`
+    ${bossCard}
     <div class="command-card command-card-major"><div><span class="command-title">Command Center</span><div class="command-metric">${total?pct:0}% <span style="font-size:16px;font-weight:700;color:var(--t2)">terminé</span></div><p class="command-copy">${!total?'Crée ta première quête.':doneToday===total?'Journée validée':`<strong style="color:var(--t1)">${Math.max(total-doneToday,0)} mission${Math.max(total-doneToday,0)>1?'s':''}</strong> restantes.`}</p><div class="app-chip-row"><span class="app-chip">${doneToday}/${total||0} complétées</span><span class="app-chip">${bestStreak}j série</span><span class="app-chip">${(pdata&&pdata.total_xp)||0} XP</span></div></div><div class="command-actions"><button class="section-cta primary" onclick="openSheet('habit')">+ Quête</button><button class="section-cta" onclick="openSheet('task')">+ Tâche</button><button class="section-cta" onclick="goTab('stats')">Stats →</button></div></div>
     ${liveSection}
     <div class="command-card-grid"><div class="command-card"><span class="command-title">Prochain rang</span><div class="command-metric" style="color:${level.nextRank==='MAX'?'#ffd700':'var(--t1)'}">${level.nextRank==='MAX'?'MAX':level.nextRank}</div><p class="command-copy">${level.nextRank==='MAX'?'Rang maximum.':`${nextXp} XP restants.`}</p></div><div class="command-card"><span class="command-title">Timers actifs</span><div class="command-metric" style="color:${activeCount?'var(--AL)':'var(--t1)'}">${activeCount}</div><p class="command-copy">${activeCount?'Garde le rythme.':'Aucun timer.'}</p></div></div>`;
@@ -2823,10 +2954,7 @@ function toggleHabit(id){
     const str=streak([...ds].sort().reverse());
     const baseXp=xpFinal(h,str);
     const xp=Math.round(baseXp*resistMult);
-    if(!pdata)pdata={__id:genId(),total_xp:0,level:1};
-    const old=lvlInfo(pdata.total_xp).idx;
-    pdata.total_xp+=xp;
-    var _ni=lvlInfo(pdata.total_xp);if(_ni.idx>old)showLevelUp(_ni.isSAO?"NIVEAU "+_ni.level:_ni.rank,_ni.color);
+    applyXpGain(xp);
     if(!h.completed_timestamps)h.completed_timestamps='';
     if(!h.resistance_log)h.resistance_log='';
     const tsArr=h.completed_timestamps.split(',').filter(Boolean);
@@ -3152,10 +3280,7 @@ function completedTimer(h,modal){
   const nowISO=new Date().toISOString();
   const baseXp=xpFinal(hh,str);
   const xp=Math.round(baseXp*resistMult);
-  if(!pdata)pdata={__id:genId(),total_xp:0,level:1};
-  const old=lvlInfo(pdata.total_xp).idx;
-  pdata.total_xp+=xp;
-  var _ni=lvlInfo(pdata.total_xp);if(_ni.idx>old)showLevelUp(_ni.isSAO?"NIVEAU "+_ni.level:_ni.rank,_ni.color);
+  applyXpGain(xp);
   if(!hh.completed_timestamps)hh.completed_timestamps='';
   if(!hh.resistance_log)hh.resistance_log='';
   const tsArr=hh.completed_timestamps.split(',').filter(Boolean);
@@ -5194,11 +5319,7 @@ window.acceptNegotiation=function(habitId,mode){
     const baseXp=xpFinal(h,str);
     // 45% de l'XP de base × multiplicateur de résistance (effort quand même réel)
     const reducedXp=Math.max(1,Math.round(baseXp*0.45*resistMult));
-    if(!pdata)pdata={__id:genId(),total_xp:0,level:1};
-    const old=lvlInfo(pdata.total_xp).idx;
-    pdata.total_xp+=reducedXp;
-    const _ni=lvlInfo(pdata.total_xp);
-    if(_ni.idx>old)showLevelUp(_ni.isSAO?'NIVEAU '+_ni.level:_ni.rank,_ni.color);
+    applyXpGain(reducedXp);
     // Stocker timestamps et résistance
     if(!h.completed_timestamps)h.completed_timestamps='';
     if(!h.resistance_log)h.resistance_log='';
