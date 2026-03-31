@@ -5316,31 +5316,10 @@ window.acceptNegotiation=function(habitId,mode){
 
   if(mode==='light'){
     const ds=dates(h);
+    if(ds.includes(TODAY)){toast('Déjà complétée aujourd\'hui');return;}
     if((h.light_day||'')===TODAY){toast('Quête déjà allégée aujourd\'hui');return;}
     const baseDur=Math.max(1,parseInt(h.duration_minutes)||5);
     const reducedDur=Math.max(1,Math.round(baseDur*0.3));
-    // Forcer l'état "non terminée" pour aujourd'hui
-    const cleanDs=ds.filter(d=>d!==TODAY);
-    h.completed_dates=cleanDs.join(',');
-    // Nettoyer les logs éventuels de complétion du jour
-    if(h.completed_timestamps){
-      const ts=h.completed_timestamps.split(',').filter(Boolean);
-      const rl=(h.resistance_log||'').split(',').filter(Boolean);
-      const keptTs=[],keptRl=[];
-      ts.forEach((t,i)=>{
-        const d=new Date(t).toISOString().slice(0,10);
-        if(d!==TODAY){keptTs.push(t);if(rl[i]!=null)keptRl.push(rl[i]);}
-      });
-      h.completed_timestamps=keptTs.join(',');
-      if(h.resistance_log!=null)h.resistance_log=keptRl.join(',');
-    }
-    // Si un timer est actif, l'arrêter pour appliquer la nouvelle mission
-    if(activeTimers.has(habitId)){
-      activeTimers.delete(habitId);
-      delete timerBoardState[habitId];
-      const pill=document.getElementById('pill-'+habitId);if(pill)pill.remove();
-      updateHabitCard(habitId,false);
-    }
     h.light_day=TODAY;
     h.light_duration_minutes=reducedDur;
     h.light_source_duration=baseDur;
@@ -5361,7 +5340,7 @@ window.acceptNegotiation=function(habitId,mode){
       }
       if(navigator.vibrate)navigator.vibrate([15,30,20]);
     },180);
-    toast('Quête allégée à '+reducedDur+' min · progression réinitialisée pour aujourd\'hui 💡');
+    toast('Quête allégée à '+reducedDur+' min · elle reste à compléter 💡');
     setTimeout(()=>{renderAll();},220);
 
   } else if(mode==='rest'){
