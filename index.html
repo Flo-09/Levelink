@@ -603,6 +603,22 @@ body::before{
   display:block;font-size:10px;font-weight:700;letter-spacing:1.4px;
   color:var(--t3);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
+.char-stats{
+  margin-top:12px;padding:10px 11px;border-radius:12px;
+  background:rgba(3,8,22,.55);border:1px solid rgba(41,121,255,.15);
+}
+.char-stats-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.char-stats-head span{font-family:'Orbitron',monospace;font-size:7px;font-weight:700;letter-spacing:2px;color:var(--t3)}
+.char-skill-badge{
+  font-family:'Orbitron',monospace;font-size:7px;font-weight:700;letter-spacing:1.2px;
+  padding:4px 7px;border-radius:99px;border:1px solid rgba(74,222,128,.35);color:#86efac;background:rgba(74,222,128,.12);
+}
+.char-row{display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center;margin-bottom:7px}
+.char-row:last-child{margin-bottom:0}
+.char-lbl{font-family:'Orbitron',monospace;font-size:8px;font-weight:800;letter-spacing:1px;color:var(--AL)}
+.char-track{height:7px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);overflow:hidden}
+.char-fill{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,#0ea5e9,#38bdf8,#22d3ee);box-shadow:0 0 10px rgba(56,189,248,.5);transition:width .55s var(--spring)}
+.char-val{font-family:'Orbitron',monospace;font-size:9px;font-weight:700;color:var(--t2);min-width:38px;text-align:right}
 
 /* ══════════════════════════════════
    RANK BADGE — animé
@@ -1679,14 +1695,18 @@ input::placeholder,textarea::placeholder{color:rgba(41,121,255,.28)!important}
 
 /* Milestones */
 .bpbar-milestones{
-  display:flex;justify-content:space-between;
-  margin-top:8px;padding:0;position:relative;
+  position:relative;
+  margin-top:8px;
+  height:18px;
 }
 .bpbar-ms{
+  position:absolute;top:0;
+  transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:3px;
   font-family:'Orbitron',monospace;font-size:6px;letter-spacing:1px;
   animation:bMsIn .4s ease-out both;
 }
+.bpbar-ms[data-edge="end"]{transform:translateX(-100%)}
 .bpbar-ms-dot{
   width:4px;height:4px;border-radius:50%;
   transition:background .5s,box-shadow .5s;
@@ -1848,6 +1868,19 @@ input::placeholder,textarea::placeholder{color:rgba(41,121,255,.28)!important}
                   <span id="week-score" style="font-family:'Orbitron',monospace;font-size:10px;font-weight:900;color:var(--A);transition:all .3s">0/7</span>
                 </div>
                 <div id="week-dots" style="display:flex;gap:4px"></div>
+              </div>
+              <div class="char-stats">
+                <div class="char-stats-head">
+                  <span>CHARACTER STATS</span>
+                  <div style="display:flex;gap:6px">
+                    <span id="wil-shield-badge" class="char-skill-badge" style="display:none">🛡️ PROTÉGÉ</span>
+                    <span id="int-insight-badge" class="char-skill-badge" style="display:none;border-color:rgba(56,189,248,.35);color:#7dd3fc;background:rgba(56,189,248,.12)">👁️ XP +15%</span>
+                  </div>
+                </div>
+                <div class="char-row"><span class="char-lbl">STR</span><div class="char-track"><div id="char-fill-str" class="char-fill"></div></div><span id="char-val-str" class="char-val">0</span></div>
+                <div class="char-row"><span class="char-lbl">INT</span><div class="char-track"><div id="char-fill-int" class="char-fill"></div></div><span id="char-val-int" class="char-val">0</span></div>
+                <div class="char-row"><span class="char-lbl">WIL</span><div class="char-track"><div id="char-fill-wil" class="char-fill"></div></div><span id="char-val-wil" class="char-val">0</span></div>
+                <div class="char-row"><span class="char-lbl">AGI</span><div class="char-track"><div id="char-fill-agi" class="char-fill"></div></div><span id="char-val-agi" class="char-val">0</span></div>
               </div>
               <div style="display:flex;justify-content:space-between;gap:10px;margin-top:12px">
                 <div style="flex:1;border-radius:16px;padding:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);transition:border-color .25s,transform .25s var(--spring)">
@@ -2160,6 +2193,11 @@ function ensurePData(){
     pdata.next_urgent_xp=(Math.floor((pdata.total_xp||0)/500)+1)*500;
   }
   if(!pdata.boss_queue)pdata.boss_queue=0;
+  if(!pdata.attributes||typeof pdata.attributes!=='object'){
+    pdata.attributes={STR:0,INT:0,WIL:0,AGI:0};
+  }else{
+    ['STR','INT','WIL','AGI'].forEach(k=>{if(typeof pdata.attributes[k]!=='number')pdata.attributes[k]=0;});
+  }
 }
 function bossData(){ensurePData();return pdata.floor_boss&&pdata.floor_boss.active?pdata.floor_boss:null;}
 function showUrgentAlert(){
@@ -2223,13 +2261,37 @@ window.defeatFloorBoss=function(){
 // HELPERS
 // ══════════════════════════════════════════════
 function dates(h){return(h.completed_dates||'').split(',').filter(Boolean)}
+function currentDuration(h){
+  const base=Math.max(1,parseInt(h.duration_minutes)||5);
+  if((h.light_day||'')!==TODAY)return base;
+  const reduced=parseInt(h.light_duration_minutes);
+  return Number.isFinite(reduced)&&reduced>0?reduced:base;
+}
+function attrKeyForIcon(icon){
+  if(['💪','🏃','🏋️'].includes(icon))return'STR';
+  if(['📚','🧠','✍️','🎨'].includes(icon))return'INT';
+  if(['🧘','🌿','💤'].includes(icon))return'WIL';
+  return'AGI';
+}
+function addHabitAttributeGain(h,amount=5){
+  ensurePData();
+  const k=attrKeyForIcon(h&&h.icon||'');
+  pdata.attributes[k]=(pdata.attributes[k]||0)+amount;
+}
+function hasPassive(skill){
+  ensurePData();
+  if(skill==='shield')return(pdata.attributes.WIL||0)>=50;
+  if(skill==='insight')return(pdata.attributes.INT||0)>=50;
+  return false;
+}
+function buildXpBonusMult(){return hasPassive('insight')?1.15:1;}
 function streak(ds){
   const s=[...ds].sort().reverse();let c=0;const now=new Date(TODAY);
   for(let i=0;i<s.length;i++){const e=new Date(now);e.setDate(e.getDate()-i);if(s[i]===e.toISOString().split('T')[0])c++;else break;}
   return c;
 }
 function xpOf(h){
-  const dur=h.duration_minutes||0,sets=h.sets||1,rest=h.rest_minutes||1;
+  const dur=currentDuration(h)||0,sets=h.sets||1,rest=h.rest_minutes||1;
   const t=dur*sets+rest*Math.max(0,sets-1);
   return Math.max(3,Math.round(Math.sqrt(t)*1.5));
 }
@@ -2468,6 +2530,24 @@ function updateHeroSummary(){
 
   // ── FIX 3b : Hint négociation le soir si quêtes non faites ──
   _updateNegotiationHint(total, doneToday);
+  renderCharacterStats();
+}
+
+function renderCharacterStats(){
+  ensurePData();
+  const attrs=pdata.attributes||{STR:0,INT:0,WIL:0,AGI:0};
+  const cap=100;
+  [['str','STR'],['int','INT'],['wil','WIL'],['agi','AGI']].forEach(([id,key])=>{
+    const val=Math.max(0,Math.round(attrs[key]||0));
+    const vEl=document.getElementById('char-val-'+id);
+    const fEl=document.getElementById('char-fill-'+id);
+    if(vEl)vEl.textContent=String(val);
+    if(fEl)fEl.style.width=Math.min(100,Math.round(val/cap*100))+'%';
+  });
+  const sh=document.getElementById('wil-shield-badge');
+  if(sh)sh.style.display=hasPassive('shield')?'inline-flex':'none';
+  const ins=document.getElementById('int-insight-badge');
+  if(ins)ins.style.display=hasPassive('insight')?'inline-flex':'none';
 }
 
 function _updateReturnMessage(total, doneToday, bestStreak, isSAO){
@@ -2535,7 +2615,7 @@ function _updateNegotiationHint(total, doneToday){
   if(h>=19&&remaining>0&&total>0){
     hintEl.style.display='flex';
     const lbl=hintEl.querySelector('.nego-hint-lbl');
-    if(lbl)lbl.textContent=remaining+' quête'+(remaining>1?'s':'')+' restante'+(remaining>1?'s':'')+' — journée difficile ?';
+    if(lbl)lbl.textContent=remaining+' quête'+(remaining>1?'s':'')+' restante'+(remaining>1?'s':'')+(hasPassive('shield')?' — 🛡️ série protégée':' — journée difficile ?');
   } else {
     hintEl.style.display='none';
   }
@@ -2612,7 +2692,8 @@ function renderMissionBoard(){
     const CIRC=+(2*Math.PI*20).toFixed(2);
     const liveCards=activeArr.map(h=>{
       const c=h.color||'#2979ff';
-      const st=timerBoardState[h.__id]||{tLeft:(h.duration_minutes||5)*60,isRest:false,cur:1,totalSets:h.sets||1,setS:(h.duration_minutes||5)*60,restS:(h.rest_minutes||1)*60,paused:false};
+      const effectiveDur=currentDuration(h);
+      const st=timerBoardState[h.__id]||{tLeft:effectiveDur*60,isRest:false,cur:1,totalSets:h.sets||1,setS:effectiveDur*60,restS:(h.rest_minutes||1)*60,paused:false};
       const total2=st.isRest?st.restS:st.setS||1;
       const frac=Math.max(0,Math.min(1,st.tLeft/total2));
       const offset=CIRC*(1-frac);
@@ -2714,7 +2795,8 @@ function habitCard(h,i){
   const c=h.color||'#2979ff';
   const active=activeTimers.has(h.__id);
   const delay=`animation-delay:${i*45}ms`;
-  const hasTmr=h.duration_minutes>0;
+  const effectiveDur=currentDuration(h);
+  const hasTmr=effectiveDur>0;
 
   const actionBtns=active?`
     <div class="hcw-actions">
@@ -2765,7 +2847,7 @@ function habitCard(h,i){
 
   if(hasTmr){
     const sets=h.sets||1,rest=h.rest_minutes||1;
-    const lbl=sets>1?`${sets}×${h.duration_minutes}min · REST ${rest}min`:`${h.duration_minutes}min`;
+    const lbl=sets>1?`${sets}×${effectiveDur}min · REST ${rest}min`:`${effectiveDur}min`;
     return`<div class="hcw card-in" data-id="${h.__id}" data-timer-active="${active?'1':''}" style="${delay}">
       <div class="card hcard${active?' hcard-active':''}">
         <div class="drag-handle"><i data-lucide="grip-vertical" style="width:14px;height:14px"></i></div>
@@ -2955,6 +3037,7 @@ function toggleHabit(id){
     const baseXp=xpFinal(h,str);
     const xp=Math.round(baseXp*resistMult);
     applyXpGain(xp);
+    addHabitAttributeGain(h,5);
     if(!h.completed_timestamps)h.completed_timestamps='';
     if(!h.resistance_log)h.resistance_log='';
     const tsArr=h.completed_timestamps.split(',').filter(Boolean);
@@ -3020,7 +3103,7 @@ function startTimer(habitId){
   delete timerBoardState[habitId];
   activeTimers.add(habitId);updateHabitCard(habitId,true);
   const col=h.color,totalSets=h.sets||1;
-  const setS=(h.duration_minutes||5)*60,restS=(h.rest_minutes||1)*60;
+  const setS=currentDuration(h)*60,restS=(h.rest_minutes||1)*60;
   const fs={tLeft:setS,isRest:false,cur:1,totalSets,setS,restS,paused:false,c:col,name:h.name};
   timerBoardState[habitId]={...fs};
   renderMissionBoard();
@@ -3281,6 +3364,7 @@ function completedTimer(h,modal){
   const baseXp=xpFinal(hh,str);
   const xp=Math.round(baseXp*resistMult);
   applyXpGain(xp);
+  addHabitAttributeGain(hh,5);
   if(!hh.completed_timestamps)hh.completed_timestamps='';
   if(!hh.resistance_log)hh.resistance_log='';
   const tsArr=hh.completed_timestamps.split(',').filter(Boolean);
@@ -3325,7 +3409,7 @@ function updateHabitCard(id,active){
   if(nameEl){nameEl.style.color=active?c:'var(--t1)';nameEl.style.textShadow=active?`0 0 14px ${c}44`:'';}
   const lbl=wrap.querySelector('.tmr-label');
   if(lbl){
-    const sets=h.sets||1,rest=h.rest_minutes||1,l=sets>1?`${sets}x${h.duration_minutes}min REST${rest}min`:`${h.duration_minutes}min`;
+    const sets=h.sets||1,rest=h.rest_minutes||1,dur=currentDuration(h),l=sets>1?`${sets}x${dur}min REST${rest}min`:`${dur}min`;
     lbl.innerHTML=active
       ?`<div style="display:flex;align-items:center;gap:5px"><div class="pulse-dot" style="width:5px;height:5px;border-radius:50%;background:${c};flex-shrink:0;box-shadow:0 0 8px ${c}"></div><span style="font-family:'Orbitron',monospace;font-size:8.5px;font-weight:700;color:${c};letter-spacing:.5px">EN COURS</span></div>`
       :`<span style="font-family:'Orbitron',monospace;font-size:9px;font-weight:700;color:${c}60">${l}</span>`;
@@ -3690,7 +3774,7 @@ function renderBadgesHero(){
       </div>
       <!-- Milestones avec point -->
       <div class="bpbar-milestones">
-        ${milestones.map((m,i)=>`<span class="bpbar-ms ${pct>=m?'reached':'unreached'}" style="animation-delay:${i*.06+.3}s">
+        ${milestones.map((m,i)=>`<span class="bpbar-ms ${pct>=m?'reached':'unreached'}" data-edge="${m===100?'end':'mid'}" style="left:${m}%;animation-delay:${i*.06+.3}s">
           <div class="bpbar-ms-dot"></div>
           <span class="bpbar-ms-txt">${m}%</span>
         </span>`).join('')}
@@ -4703,8 +4787,9 @@ function autoResistance(){
   if(dow===1&&h>=6&&h<=9)score+=0.25;
   // Dimanche soir : résistance "fin de semaine"
   if(dow===0&&h>=19)score+=0.35;
-  // Clamp entre 1.0 et 2.5
-  return Math.min(2.5,Math.max(1.0,score));
+  // Clamp entre 1.0 et 2.5 puis bonus Build INT (Vision du Système)
+  const base=Math.min(2.5,Math.max(1.0,score));
+  return base*buildXpBonusMult();
 }
 
 // Label narratif du multiplicateur
@@ -5309,45 +5394,31 @@ window.acceptNegotiation=function(habitId,mode){
   if(mode==='light'){
     const ds=dates(h);
     if(ds.includes(TODAY)){toast('Déjà complétée aujourd\'hui');return;}
-    // ── Complétion automatique avec XP allégé + résistance ──
-    const resistMult=autoResistance();
-    const nowISO=new Date().toISOString();
-    ds.push(TODAY);
-    const str=streak([...ds].sort().reverse());
-    const baseXp=xpFinal(h,str);
-    // 45% de l'XP de base × multiplicateur de résistance (effort quand même réel)
-    const reducedXp=Math.max(1,Math.round(baseXp*0.45*resistMult));
-    applyXpGain(reducedXp);
-    // Stocker timestamps et résistance
-    if(!h.completed_timestamps)h.completed_timestamps='';
-    if(!h.resistance_log)h.resistance_log='';
-    const tsArr=h.completed_timestamps.split(',').filter(Boolean);
-    const rlArr=h.resistance_log.split(',').filter(Boolean);
-    tsArr.push(nowISO);rlArr.push(resistMult.toFixed(2));
-    h.completed_timestamps=tsArr.join(',');h.resistance_log=rlArr.join(',');
-    h.completed_dates=ds.join(',');
+    if((h.light_day||'')===TODAY){toast('Quête déjà allégée aujourd\'hui');return;}
+    const baseDur=Math.max(1,parseInt(h.duration_minutes)||5);
+    const reducedDur=Math.max(1,Math.round(baseDur*0.3));
+    h.light_day=TODAY;
+    h.light_duration_minutes=reducedDur;
+    h.light_source_duration=baseDur;
     syncAll();
-    // Flash vert sur la carte
+    // Flash bleuté sur la carte
     setTimeout(()=>{
       const wrap=document.querySelector('.hcw[data-id="'+habitId+'"]');
       if(wrap){
         const card=wrap.querySelector('.card');
         if(card){
-          card.classList.add('neg-complete-flash');
           card.style.transition='background .08s,transform .14s var(--bounce),box-shadow .22s';
           card.style.transform='scale(1.035)';
-          card.style.boxShadow='0 0 28px rgba(74,222,128,.25)';
+          card.style.boxShadow='0 0 28px rgba(41,121,255,.28)';
           setTimeout(()=>{
-            card.classList.remove('neg-complete-flash');
             card.style.transform='';card.style.boxShadow='';
           },820);
         }
       }
-      showXP(reducedXp,'ALLÉGÉE');
       if(navigator.vibrate)navigator.vibrate([15,30,20]);
     },180);
-    toast('Version allégée · +'+reducedXp+' XP · Série préservée 🔥');
-    setTimeout(()=>{renderAll();checkAllDay();},220);
+    toast('Quête allégée à '+reducedDur+' min · elle reste à compléter 💡');
+    setTimeout(()=>{renderAll();},220);
 
   } else if(mode==='rest'){
     if(!h.rest_days)h.rest_days='';
