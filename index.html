@@ -2136,9 +2136,23 @@ const getU=()=>localStorage.getItem(UK)||'sl';
 const setU=u=>localStorage.setItem(UK,u);
 const SKEY='hr2_settings';
 function DKEY(){return getU()==='sao'?'hr2_data_sao':'hr2_data';}
-const load=()=>{try{return JSON.parse(localStorage.getItem(DKEY())||'[]')}catch{return[]}};
+const load=()=>{
+  try{
+    const parsed=JSON.parse(localStorage.getItem(DKEY())||'[]');
+    return Array.isArray(parsed)?parsed:[];
+  }catch{
+    return[];
+  }
+};
 const save=d=>localStorage.setItem(DKEY(),JSON.stringify(d));
-const loadS=()=>{try{return JSON.parse(localStorage.getItem(SKEY)||'{}')}catch{return{}}};
+const loadS=()=>{
+  try{
+    const parsed=JSON.parse(localStorage.getItem(SKEY)||'{}');
+    return parsed&&typeof parsed==='object'&&!Array.isArray(parsed)?parsed:{};
+  }catch{
+    return{};
+  }
+};
 const saveS=s=>localStorage.setItem(SKEY,JSON.stringify(s));
 
 let rawData=load();
