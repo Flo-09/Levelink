@@ -3031,18 +3031,19 @@ function toggleHabit(id){
   const ds=dates(h),idx=ds.indexOf(TODAY);
   if(idx<0){
     const resistMult=autoResistance();
+    const xpMult=resistMult*buildXpBonusMult();
     const nowISO=new Date().toISOString();
     ds.push(TODAY);
     const str=streak([...ds].sort().reverse());
     const baseXp=xpFinal(h,str);
-    const xp=Math.round(baseXp*resistMult);
+    const xp=Math.round(baseXp*xpMult);
     applyXpGain(xp);
     addHabitAttributeGain(h,5);
     if(!h.completed_timestamps)h.completed_timestamps='';
     if(!h.resistance_log)h.resistance_log='';
     const tsArr=h.completed_timestamps.split(',').filter(Boolean);
     const rlArr=h.resistance_log.split(',').filter(Boolean);
-    tsArr.push(nowISO);rlArr.push(resistMult.toFixed(2));
+    tsArr.push(nowISO);rlArr.push(xpMult.toFixed(2));
     h.completed_timestamps=tsArr.join(',');h.resistance_log=rlArr.join(',');
     const wrap=document.querySelector('.hcw[data-id="'+id+'"]');
     if(wrap){
@@ -3360,16 +3361,17 @@ function completedTimer(h,modal){
   const ds=dates(hh);ds.push(TODAY);
   const str=streak([...ds].sort().reverse());
   const resistMult=autoResistance();
+  const xpMult=resistMult*buildXpBonusMult();
   const nowISO=new Date().toISOString();
   const baseXp=xpFinal(hh,str);
-  const xp=Math.round(baseXp*resistMult);
+  const xp=Math.round(baseXp*xpMult);
   applyXpGain(xp);
   addHabitAttributeGain(hh,5);
   if(!hh.completed_timestamps)hh.completed_timestamps='';
   if(!hh.resistance_log)hh.resistance_log='';
   const tsArr=hh.completed_timestamps.split(',').filter(Boolean);
   const rlArr=hh.resistance_log.split(',').filter(Boolean);
-  tsArr.push(nowISO);rlArr.push(resistMult.toFixed(2));
+  tsArr.push(nowISO);rlArr.push(xpMult.toFixed(2));
   hh.completed_timestamps=tsArr.join(',');hh.resistance_log=rlArr.join(',');
   hh.completed_dates=ds.join(',');syncAll();
   if(navigator.vibrate)navigator.vibrate([50,30,50,30,180]);
@@ -4787,10 +4789,10 @@ function autoResistance(){
   if(dow===1&&h>=6&&h<=9)score+=0.25;
   // Dimanche soir : résistance "fin de semaine"
   if(dow===0&&h>=19)score+=0.35;
-  // Clamp entre 1.0 et 2.5 puis bonus Build INT (Vision du Système)
-  const base=Math.min(2.5,Math.max(1.0,score));
-  return base*buildXpBonusMult();
+  // Clamp entre 1.0 et 2.5 (difficulté pure)
+  return Math.min(2.5,Math.max(1.0,score));
 }
+function xpResistanceMult(){return autoResistance()*buildXpBonusMult();}
 
 // Label narratif du multiplicateur
 function resistanceLabel(mult){
@@ -4808,7 +4810,7 @@ function xpFinalWithResistance(h,str){
   return Math.round(base*mult);
 }
 // Patch global
-window._xpResistanceMult=autoResistance;
+window._xpResistanceMult=xpResistanceMult;
 
 // ── PATTERN RECOGNITION ENGINE ────────────────
 
