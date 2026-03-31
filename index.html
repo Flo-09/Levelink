@@ -4806,7 +4806,7 @@ function resistanceLabel(mult){
 const _origXpFinal=window.xpFinal||xpFinal;
 function xpFinalWithResistance(h,str){
   const base=_origXpFinal(h,str);
-  const mult=autoResistance();
+  const mult=xpResistanceMult();
   return Math.round(base*mult);
 }
 // Patch global
