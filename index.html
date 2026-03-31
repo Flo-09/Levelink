@@ -2267,6 +2267,7 @@ function currentDuration(h){
   const reduced=parseInt(h.light_duration_minutes);
   return Number.isFinite(reduced)&&reduced>0?reduced:base;
 }
+// Build System — helpers fusionnés (feature + main)
 function attrKeyForIcon(icon){
   if(['💪','🏃','🏋️'].includes(icon))return'STR';
   if(['📚','🧠','✍️','🎨'].includes(icon))return'INT';
