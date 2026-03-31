@@ -603,6 +603,24 @@ body::before{
   display:block;font-size:10px;font-weight:700;letter-spacing:1.4px;
   color:var(--t3);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
+.hero-build{
+  margin-top:12px;padding:11px 10px;border-radius:14px;
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));
+  border:1px solid rgba(255,255,255,.06);
+}
+.hero-build-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.build-row{display:grid;gap:4px}
+.build-top{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.build-top span{font-family:'Orbitron',monospace;font-size:9px;font-weight:800;letter-spacing:1.2px;color:var(--t2)}
+.build-top strong{font-family:'Orbitron',monospace;font-size:10px;font-weight:900;color:var(--t1)}
+.build-track{height:5px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+.build-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--A),var(--AL));transition:width .35s var(--spring)}
+.passive-chip{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;
+  border-radius:12px;padding:9px 10px;background:rgba(124,77,255,.08);border:1px solid rgba(124,77,255,.28);
+}
+.passive-chip .p-title{font-family:'Orbitron',monospace;font-size:8px;font-weight:800;letter-spacing:1.4px;color:#c4b5fd}
+.passive-chip .p-sub{font-size:11px;font-weight:700;color:#e9ddff}
 
 /* ══════════════════════════════════
    RANK BADGE — animé
@@ -1842,6 +1860,14 @@ input::placeholder,textarea::placeholder{color:rgba(41,121,255,.28)!important}
                   <span id="lbl-xp">Puissance totale</span>
                 </div>
               </div>
+              <div class="hero-build">
+                <div class="hero-build-grid">
+                  <div class="build-row"><div class="build-top"><span>STR</span><strong id="b-str">Lv.1</strong></div><div class="build-track"><div id="b-str-fill" class="build-fill" style="width:0%"></div></div></div>
+                  <div class="build-row"><div class="build-top"><span>INT</span><strong id="b-int">Lv.1</strong></div><div class="build-track"><div id="b-int-fill" class="build-fill" style="width:0%"></div></div></div>
+                  <div class="build-row"><div class="build-top"><span>WIL</span><strong id="b-wil">Lv.1</strong></div><div class="build-track"><div id="b-wil-fill" class="build-fill" style="width:0%"></div></div></div>
+                  <div class="build-row"><div class="build-top"><span>AGI</span><strong id="b-agi">Lv.1</strong></div><div class="build-track"><div id="b-agi-fill" class="build-fill" style="width:0%"></div></div></div>
+                </div>
+              </div>
             </div>
 
             <!-- Panneau secondaire -->
@@ -1865,6 +1891,13 @@ input::placeholder,textarea::placeholder{color:rgba(41,121,255,.28)!important}
               </div>
               <!-- Message de retour contextuel -->
               <div id="hero-return-msg" style="display:none;margin-top:10px;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;letter-spacing:1.5px;line-height:1.5;padding:8px 11px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)"></div>
+              <div class="passive-chip">
+                <div>
+                  <div class="p-title">COMPÉTENCE PASSIVE</div>
+                  <div class="p-sub">Bouclier de Volonté</div>
+                </div>
+                <div id="wil-shield" style="font-family:'Orbitron',monospace;font-size:10px;font-weight:900;color:#c4b5fd">0 charge</div>
+              </div>
               <!-- Hint négociation (soir) -->
               <div id="nego-hint" style="display:none;margin-top:10px;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;border-radius:12px;background:rgba(255,109,0,.06);border:1px solid rgba(255,109,0,.18);cursor:pointer" onclick="document.querySelector('.hcw:not([style*=\'display:none\']) .neg-btn')?.click()||toast('Ouvre une quête pour négocier')">
                 <span class="nego-hint-lbl" style="font-size:11px;font-weight:600;color:#ff6d00"></span>
@@ -2136,9 +2169,23 @@ const getU=()=>localStorage.getItem(UK)||'sl';
 const setU=u=>localStorage.setItem(UK,u);
 const SKEY='hr2_settings';
 function DKEY(){return getU()==='sao'?'hr2_data_sao':'hr2_data';}
-const load=()=>{try{return JSON.parse(localStorage.getItem(DKEY())||'[]')}catch{return[]}};
+const load=()=>{
+  try{
+    const parsed=JSON.parse(localStorage.getItem(DKEY())||'[]');
+    return Array.isArray(parsed)?parsed:[];
+  }catch{
+    return[];
+  }
+};
 const save=d=>localStorage.setItem(DKEY(),JSON.stringify(d));
-const loadS=()=>{try{return JSON.parse(localStorage.getItem(SKEY)||'{}')}catch{return{}}};
+const loadS=()=>{
+  try{
+    const parsed=JSON.parse(localStorage.getItem(SKEY)||'{}');
+    return parsed&&typeof parsed==='object'&&!Array.isArray(parsed)?parsed:{};
+  }catch{
+    return{};
+  }
+};
 const saveS=s=>localStorage.setItem(SKEY,JSON.stringify(s));
 
 let rawData=load();
@@ -2164,6 +2211,16 @@ function ensurePData(){
     pdata.next_urgent_xp=(Math.floor((pdata.total_xp||0)/500)+1)*500;
   }
   if(!pdata.boss_queue)pdata.boss_queue=0;
+  if(!pdata.build_stats||typeof pdata.build_stats!=='object'){
+    pdata.build_stats={str:1,int:1,wil:1,agi:1,shield_charges:0,last_shield_day:''};
+  }
+  ['str','int','wil','agi'].forEach(k=>{
+    const v=parseInt(pdata.build_stats[k]);
+    pdata.build_stats[k]=Number.isFinite(v)&&v>0?v:1;
+  });
+  if(typeof pdata.build_stats.shield_charges!=='number'||pdata.build_stats.shield_charges<0)pdata.build_stats.shield_charges=0;
+  if(typeof pdata.build_stats.last_shield_day!=='string')pdata.build_stats.last_shield_day='';
+  if(typeof pdata.build_stats.last_shield_refresh!=='string')pdata.build_stats.last_shield_refresh='';
 }
 function bossData(){ensurePData();return pdata.floor_boss&&pdata.floor_boss.active?pdata.floor_boss:null;}
 function showUrgentAlert(){
@@ -2237,6 +2294,56 @@ function streak(ds){
   const s=[...ds].sort().reverse();let c=0;const now=new Date(TODAY);
   for(let i=0;i<s.length;i++){const e=new Date(now);e.setDate(e.getDate()-i);if(s[i]===e.toISOString().split('T')[0])c++;else break;}
   return c;
+}
+function lvlFromPoints(points){
+  const raw=Math.floor((points||0)/40)+1;
+  const level=Math.max(1,Math.min(99,raw));
+  const next=level*40;
+  const pct=Math.max(0,Math.min(100,Math.round((((points||0)-((level-1)*40))/40)*100)));
+  return {level,pct,next};
+}
+function buildStatsSnapshot(){
+  const completedHabits=habits.reduce((acc,h)=>acc+dates(h).length,0);
+  const completedTasks=subtasks.reduce((acc,t)=>acc+dates(t).length,0);
+  const distinctHabitDays=new Set(habits.flatMap(h=>dates(h))).size;
+  const distinctTaskDays=new Set(subtasks.flatMap(t=>dates(t))).size;
+  const weekDone=habits.reduce((acc,h)=>acc+dates(h).filter(d=>{const dd=new Date(d),n=new Date(TODAY);const diff=Math.floor((n-dd)/86400000);return diff>=0&&diff<7;}).length,0);
+  const bestStreak=habits.length?Math.max(0,...habits.map(h=>streak(dates(h)))):0;
+  return {
+    str:lvlFromPoints(completedHabits*12+Math.round((pdata?.total_xp||0)/16)),
+    int:lvlFromPoints(completedTasks*14+distinctTaskDays*5),
+    wil:lvlFromPoints(bestStreak*22+distinctHabitDays*4),
+    agi:lvlFromPoints(weekDone*10+Math.min(120,distinctHabitDays*3))
+  };
+}
+function refreshBuildStats(){
+  ensurePData();
+  const snap=buildStatsSnapshot();
+  pdata.build_stats.str=snap.str.level;
+  pdata.build_stats.int=snap.int.level;
+  pdata.build_stats.wil=snap.wil.level;
+  pdata.build_stats.agi=snap.agi.level;
+  const maxCharges=snap.wil.level>=45?2:snap.wil.level>=25?1:0;
+  if(pdata.build_stats.last_shield_refresh!==TODAY){
+    pdata.build_stats.shield_charges=maxCharges;
+    pdata.build_stats.last_shield_refresh=TODAY;
+  }
+  const curCharges=Number.isFinite(pdata.build_stats.shield_charges)?pdata.build_stats.shield_charges:maxCharges;
+  pdata.build_stats.shield_charges=Math.min(maxCharges,Math.max(0,curCharges));
+  if(!pdata.build_stats.last_shield_day)pdata.build_stats.last_shield_day='';
+  return {...snap,maxCharges,charges:pdata.build_stats.shield_charges};
+}
+function maybeConsumeWillShield(dsBeforeToday){
+  ensurePData();
+  const bs=refreshBuildStats();
+  if((bs.charges||0)<=0)return {used:false,virtualDates:dsBeforeToday};
+  if(pdata.build_stats.last_shield_day===TODAY)return {used:false,virtualDates:dsBeforeToday};
+  const y=new Date(TODAY);y.setDate(y.getDate()-1);const ys=y.toISOString().split('T')[0];
+  const d2=new Date(TODAY);d2.setDate(d2.getDate()-2);const d2s=d2.toISOString().split('T')[0];
+  if(dsBeforeToday.includes(ys)||!dsBeforeToday.includes(d2s))return {used:false,virtualDates:dsBeforeToday};
+  pdata.build_stats.shield_charges=Math.max(0,(pdata.build_stats.shield_charges||0)-1);
+  pdata.build_stats.last_shield_day=TODAY;
+  return {used:true,virtualDates:[...dsBeforeToday,ys]};
 }
 function xpOf(h){
   const dur=currentDuration(h)||0,sets=h.sets||1,rest=h.rest_minutes||1;
@@ -2456,6 +2563,7 @@ function renderAll(){
 }
 
 function updateHeroSummary(){
+  const build=refreshBuildStats();
   const total=habits.length,doneToday=habits.filter(h=>dates(h).includes(TODAY)).length;
   const bestStreak=Math.max(0,...habits.map(h=>streak(dates(h))));
   const totalXp=(pdata&&pdata.total_xp)||0;
@@ -2472,6 +2580,17 @@ function updateHeroSummary(){
   if(lblXp)lblXp.textContent=_sao?'EXP total':'Puissance totale';
   if(focusEl)focusEl.textContent=_sao?(!total?'STANDBY':doneToday===total?'ALL CLEAR':doneToday>0?'IN PROGRESS':'READY'):(!total?'Crée une quête':doneToday===total?'Terminé':doneToday>0?'En cours':'Prêt');
   if(paceEl){const ratio=total?doneToday/total:0;paceEl.textContent=_sao?(ratio===1?'S-RANK':ratio>=.6?'A-RANK':ratio>0?'B-RANK':'E-RANK'):(ratio===1?'Parfait':ratio>=.6?'Solide':ratio>0?'Lancé':'Calme');}
+  const setBuild=(k,v)=>{
+    const t=el('b-'+k),f=el('b-'+k+'-fill');
+    if(t)t.textContent='Lv.'+v.level;
+    if(f)f.style.width=v.pct+'%';
+  };
+  setBuild('str',build.str);setBuild('int',build.int);setBuild('wil',build.wil);setBuild('agi',build.agi);
+  const shieldEl=el('wil-shield');
+  if(shieldEl){
+    const n=pdata.build_stats.shield_charges||0;
+    shieldEl.textContent=n+' charge'+(n>1?'s':'');
+  }
 
   // ── FIX 3a : Message de retour contextuel ──
   _updateReturnMessage(total, doneToday, bestStreak, _sao);
@@ -2962,8 +3081,9 @@ function toggleHabit(id){
   if(idx<0){
     const resistMult=autoResistance();
     const nowISO=new Date().toISOString();
+    const shield=maybeConsumeWillShield(ds);
     ds.push(TODAY);
-    const str=streak([...ds].sort().reverse());
+    const str=streak([...shield.virtualDates,TODAY].sort().reverse());
     const baseXp=xpFinal(h,str);
     const xp=Math.round(baseXp*resistMult);
     applyXpGain(xp);
@@ -2984,6 +3104,7 @@ function toggleHabit(id){
       }
     }
     showXP(xp,resistMult>=1.3?resistanceLabel(resistMult).label:null);
+    if(shield.used)toast('🛡️ Bouclier de Volonté activé : série protégée');
     if(navigator.vibrate)navigator.vibrate([10,40,25]);
     h.completed_dates=ds.join(',');syncAll();
     requestAnimationFrame(()=>requestAnimationFrame(()=>{renderAll();checkAllDay();}));
