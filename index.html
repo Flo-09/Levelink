@@ -682,6 +682,13 @@ body::before{
 .passive-chip .p-title{font-family:'Orbitron',monospace;font-size:8px;font-weight:800;letter-spacing:1.4px;color:#c4b5fd}
 .passive-chip .p-sub{font-size:11px;font-weight:700;color:#e9ddff}
 
+@keyframes hitImpact{
+  0%{transform:scale(1);filter:brightness(1)}
+  20%{transform:scale(1.015);filter:brightness(1.4)}
+  100%{transform:scale(1);filter:brightness(1)}
+}
+.hit-impact{animation:hitImpact .18s ease-out}
+
 /* ══════════════════════════════════
    RANK BADGE — animé
 ══════════════════════════════════ */
@@ -3232,6 +3239,11 @@ function toggleHabit(id){
   }else{
     ds.splice(idx,1);h.completed_dates=ds.join(',');syncAll();renderAll();
   }
+}
+function triggerHit(){
+  document.body.classList.add('hit-impact');
+  if(navigator.vibrate)navigator.vibrate(25);
+  setTimeout(()=>document.body.classList.remove('hit-impact'),180);
 }
 window.uncomplete=id=>{
   const h=habits.find(x=>x.__id===id);if(!h)return;
