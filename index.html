@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -2801,36 +2801,6 @@ input, textarea, select {
   transition-duration: 0.08s;
 }
 
-</style>
-</head>
-<body>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
-<canvas id="rank-particles"></canvas>
-
-<!-- ══ INTRO v2 — CINEMATIC ══ -->
-<div id="intro" style="position:fixed;inset:0;z-index:9999;background:#000;overflow:hidden">
-  <canvas id="ic" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
-  <div id="intro-ui" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:16vh;pointer-events:none">
-    <!-- LEVELINK wordmark -->
-    <div id="i-wordmark" style="display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:14px;position:relative">
-      <span class="il" data-c="#bdd4f0" data-i="0">L</span><span class="il" data-c="#a8c8ee" data-i="1">E</span><span class="il" data-c="#90b8f0" data-i="2">V</span><span class="il" data-c="#78a8f8" data-i="3">E</span><span class="il" data-c="#29b6f6" data-bright="1" data-i="4">L</span><span class="il" data-c="#3ca0ff" data-i="5">I</span><span class="il" data-c="#2979ff" data-bright="1" data-i="6">N</span><span class="il" data-c="#7c4dff" data-bright="1" data-i="7">K</span>
-    </div>
-    <!-- Tagline -->
-    <p id="i-tag" style="font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:6px;color:rgba(41,182,246,0);text-transform:uppercase;margin:0 0 36px;transition:color 1s ease-out,letter-spacing 1.2s ease-out,transform .8s ease-out;transform:translateY(6px)">Construis ta meilleure version</p>
-    <!-- Loader -->
-    <div id="ibar" style="width:200px;opacity:0;transition:opacity .5s ease-out">
-      <div style="height:2px;background:rgba(255,255,255,.04);border-radius:99px;overflow:hidden;position:relative">
-        <div id="ibfill" style="height:100%;width:0%;background:linear-gradient(90deg,#2979ff,#29b6f6,#7c4dff);border-radius:99px;box-shadow:0 0 16px #2979ff55,0 0 4px #29b6f6;transition:width .06s linear;position:relative"></div>
-      </div>
-      <p id="ibtxt" style="font-family:'Orbitron',monospace;font-size:6px;font-weight:700;color:rgba(41,182,246,.25);letter-spacing:4px;margin-top:10px;text-align:center;transition:color .3s">INITIALISATION</p>
-    </div>
-  </div>
-  <div id="iflash" style="position:absolute;inset:0;background:radial-gradient(circle at center,rgba(41,182,246,.6),rgba(41,121,255,.3),rgba(0,0,0,0));opacity:0;pointer-events:none;mix-blend-mode:screen"></div>
-</div>
-
-<style>
 .il{
   font-family:'Orbitron',monospace;
   font-size:clamp(36px,8.5vw,60px);
@@ -3239,7 +3209,37 @@ input, textarea, select {
 .bpbar-ms.unreached .bpbar-ms-dot{background:rgba(255,255,255,.1)}
 .bpbar-ms.unreached .bpbar-ms-txt{color:rgba(255,255,255,.15)}
 
+
 </style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+<canvas id="rank-particles"></canvas>
+
+<!-- ══ INTRO v2 — CINEMATIC ══ -->
+<div id="intro" style="position:fixed;inset:0;z-index:9999;background:#000;overflow:hidden">
+  <canvas id="ic" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+  <div id="intro-ui" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:16vh;pointer-events:none">
+    <!-- LEVELINK wordmark -->
+    <div id="i-wordmark" style="display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:14px;position:relative">
+      <span class="il" data-c="#bdd4f0" data-i="0">L</span><span class="il" data-c="#a8c8ee" data-i="1">E</span><span class="il" data-c="#90b8f0" data-i="2">V</span><span class="il" data-c="#78a8f8" data-i="3">E</span><span class="il" data-c="#29b6f6" data-bright="1" data-i="4">L</span><span class="il" data-c="#3ca0ff" data-i="5">I</span><span class="il" data-c="#2979ff" data-bright="1" data-i="6">N</span><span class="il" data-c="#7c4dff" data-bright="1" data-i="7">K</span>
+    </div>
+    <!-- Tagline -->
+    <p id="i-tag" style="font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:6px;color:rgba(41,182,246,0);text-transform:uppercase;margin:0 0 36px;transition:color 1s ease-out,letter-spacing 1.2s ease-out,transform .8s ease-out;transform:translateY(6px)">Construis ta meilleure version</p>
+    <!-- Loader -->
+    <div id="ibar" style="width:200px;opacity:0;transition:opacity .5s ease-out">
+      <div style="height:2px;background:rgba(255,255,255,.04);border-radius:99px;overflow:hidden;position:relative">
+        <div id="ibfill" style="height:100%;width:0%;background:linear-gradient(90deg,#2979ff,#29b6f6,#7c4dff);border-radius:99px;box-shadow:0 0 16px #2979ff55,0 0 4px #29b6f6;transition:width .06s linear;position:relative"></div>
+      </div>
+      <p id="ibtxt" style="font-family:'Orbitron',monospace;font-size:6px;font-weight:700;color:rgba(41,182,246,.25);letter-spacing:4px;margin-top:10px;text-align:center;transition:color .3s">INITIALISATION</p>
+    </div>
+  </div>
+  <div id="iflash" style="position:absolute;inset:0;background:radial-gradient(circle at center,rgba(41,182,246,.6),rgba(41,121,255,.3),rgba(0,0,0,0));opacity:0;pointer-events:none;mix-blend-mode:screen"></div>
+</div>
+
+
 
 
 <!-- ══ APP ══ -->
@@ -3269,7 +3269,7 @@ input, textarea, select {
         <div class="us-feat"><div class="us-fdot"></div>Interface épurée</div>
         <div class="us-feat"><div class="us-fdot"></div>Progression classique RPG</div>
       </div>
-      <button class="us-cta">CHOISIR →</button>
+      <button type="button" class="us-cta">CHOISIR →</button>
     </div>
     <div class="us-gutter"></div>
     <div class="usp sao" onclick="pickU('sao')">
@@ -3289,9 +3289,9 @@ input, textarea, select {
         <div class="us-feat"><div class="us-fdot"></div>Niveaux 1→100 (4× plus rapide)</div>
         <div class="us-feat"><div class="us-fdot"></div>Board mission holographique</div>
         <div class="us-feat"><div class="us-fdot"></div>Panneaux avec coins décoratifs</div>
-        <div class="us-feat"><div class="us-fdot"></div>Scanlines & interface cyan</div>
+        <div class="us-feat"><div class="us-fdot"></div>Scanlines &amp; interface cyan</div>
       </div>
-      <button class="us-cta">CHOISIR →</button>
+      <button type="button" class="us-cta">CHOISIR →</button>
     </div>
   </div>
   <p class="us-foot">MODIFIABLE DANS LES PARAMÈTRES</p>
@@ -3364,7 +3364,7 @@ input, textarea, select {
                       <span id="prog-txt" style="font-family:'Orbitron',monospace;font-size:9px;font-weight:900;color:var(--A);transition:all .3s">0%</span>
                     </div>
                   </div>
-                  <button onclick="openSettings()" class="btn-icon" style="width:42px;height:42px;border-radius:13px">
+                  <button type="button" onclick="openSettings()" class="btn-icon" style="width:42px;height:42px;border-radius:13px">
                     <i data-lucide="settings-2" style="width:16px;height:16px"></i>
                   </button>
                 </div>
@@ -3443,7 +3443,7 @@ input, textarea, select {
               <!-- Pari actif -->
               <div id="bet-chip" style="display:none;margin-top:10px;padding:10px 12px;border-radius:12px;cursor:pointer;transition:all .25s" onclick="openBetDetail()"></div>
               <!-- Bouton parier -->
-              <button id="bet-btn" onclick="openBetSheet()" style="display:none;margin-top:10px;width:100%;padding:11px;border-radius:12px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);color:#fbbf24;font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1.8px;cursor:pointer;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:8px">
+              <button type="button" id="bet-btn" onclick="openBetSheet()" style="display:none;margin-top:10px;width:100%;padding:11px;border-radius:12px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);color:#fbbf24;font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1.8px;cursor:pointer;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:8px">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
                 PARIER SUR MOI
               </button>
@@ -3486,7 +3486,7 @@ input, textarea, select {
       <div class="page-shell">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:16px 0 0">
           <h2 style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:1.5px;color:var(--t1)">SOUS-TÂCHES</h2>
-          <button onclick="openSheet('task')" class="btn-icon" style="width:34px;height:34px;border-radius:10px;background:rgba(41,121,255,.1);border-color:rgba(41,121,255,.2);color:var(--A)">
+          <button type="button" onclick="openSheet('task')" class="btn-icon" style="width:34px;height:34px;border-radius:10px;background:rgba(41,121,255,.1);border-color:rgba(41,121,255,.2);color:var(--A)">
             <i data-lucide="plus" style="width:16px;height:16px"></i>
           </button>
         </div>
@@ -3585,30 +3585,30 @@ input, textarea, select {
 
   <!-- ══ TAB BAR ══ -->
   <div id="tab-bar">
-    <button class="tab-btn active" id="tb-habits" onclick="goTab('habits')">
+    <button type="button" class="tab-btn active" id="tb-habits" onclick="goTab('habits')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
       <span>Quêtes</span>
     </button>
-    <button class="tab-btn" id="tb-tasks" onclick="goTab('tasks')">
+    <button type="button" class="tab-btn" id="tb-tasks" onclick="goTab('tasks')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
       <span>Tâches</span>
     </button>
-    <button class="tab-btn" id="tb-stats" onclick="goTab('stats')">
+    <button type="button" class="tab-btn" id="tb-stats" onclick="goTab('stats')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       <span>Stats</span>
     </button>
-    <button class="tab-btn" id="tb-badges" onclick="goTab('badges')">
+    <button type="button" class="tab-btn" id="tb-badges" onclick="goTab('badges')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
       <span>Palmarès</span>
     </button>
-    <button class="tab-btn" id="tb-analyse" onclick="goTab('analyse')">
+    <button type="button" class="tab-btn" id="tb-analyse" onclick="goTab('analyse')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
       <span>Analyse</span>
     </button>
   </div>
 
   <!-- FAB -->
-  <button class="fab" id="fab" onclick="openSheet('habit')">
+  <button type="button" class="fab" id="fab" onclick="openSheet('habit')">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
   </button>
 
@@ -3631,8 +3631,8 @@ input, textarea, select {
       <p id="del-label" style="font-size:13px;color:var(--t3);margin-top:8px;line-height:1.5"></p>
     </div>
     <div style="display:flex;gap:10px">
-      <button onclick="cancelDel()" class="btn-ghost" style="flex:1;letter-spacing:1px">ANNULER</button>
-      <button onclick="confirmDel()" style="flex:1;padding:13px;border-radius:var(--r);background:linear-gradient(135deg,#e53935,#ff5252);border:none;color:#fff;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;box-shadow:0 6px 20px rgba(229,57,53,.35);transition:transform .2s var(--bounce),box-shadow .2s;position:relative;overflow:hidden" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">SUPPRIMER</button>
+      <button type="button" onclick="cancelDel()" class="btn-ghost" style="flex:1;letter-spacing:1px">ANNULER</button>
+      <button type="button" onclick="confirmDel()" style="flex:1;padding:13px;border-radius:var(--r);background:linear-gradient(135deg,#e53935,#ff5252);border:none;color:#fff;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;box-shadow:0 6px 20px rgba(229,57,53,.35);transition:transform .2s var(--bounce),box-shadow .2s;position:relative;overflow:hidden" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">SUPPRIMER</button>
     </div>
   </div>
 </div>
@@ -3654,23 +3654,23 @@ input, textarea, select {
       <div style="margin-bottom:20px">
         <label class="lbl">Thème couleur</label>
         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
-          <button onclick="setTheme('blue')"   data-tbtn="blue"   style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(41,121,255,.12);color:#2979ff;transition:all .22s var(--spring);opacity:.5">BLEU</button>
-          <button onclick="setTheme('red')"    data-tbtn="red"    style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(229,57,53,.1);color:#e53935;transition:all .22s var(--spring);opacity:.5">ROUGE</button>
-          <button onclick="setTheme('purple')" data-tbtn="purple" style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(124,77,255,.1);color:#7c4dff;transition:all .22s var(--spring);opacity:.5">VIOLET</button>
-          <button onclick="setTheme('green')"  data-tbtn="green"  style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(0,200,83,.08);color:#00c853;transition:all .22s var(--spring);opacity:.5">VERT</button>
-          <button onclick="setTheme('orange')" data-tbtn="orange" style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(255,109,0,.1);color:#ff6d00;transition:all .22s var(--spring);opacity:.5">ORNG</button>
+          <button type="button" onclick="setTheme('blue')"   data-tbtn="blue"   style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(41,121,255,.12);color:#2979ff;transition:all .22s var(--spring);opacity:.5">BLEU</button>
+          <button type="button" onclick="setTheme('red')"    data-tbtn="red"    style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(229,57,53,.1);color:#e53935;transition:all .22s var(--spring);opacity:.5">ROUGE</button>
+          <button type="button" onclick="setTheme('purple')" data-tbtn="purple" style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(124,77,255,.1);color:#7c4dff;transition:all .22s var(--spring);opacity:.5">VIOLET</button>
+          <button type="button" onclick="setTheme('green')"  data-tbtn="green"  style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(0,200,83,.08);color:#00c853;transition:all .22s var(--spring);opacity:.5">VERT</button>
+          <button type="button" onclick="setTheme('orange')" data-tbtn="orange" style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(255,109,0,.1);color:#ff6d00;transition:all .22s var(--spring);opacity:.5">ORNG</button>
         </div>
       </div>
       <div style="margin-bottom:24px">
         <label class="lbl">Son de fin</label>
         <div style="display:flex;gap:8px">
-          <button onclick="setSound(true)"  data-sbtn="on"  style="flex:1;padding:11px;border-radius:11px;border:1.5px solid transparent;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;cursor:pointer;background:rgba(41,121,255,.08);color:var(--A);transition:all .22s var(--spring);opacity:.45">SON ON</button>
-          <button onclick="setSound(false)" data-sbtn="off" style="flex:1;padding:11px;border-radius:11px;border:1.5px solid transparent;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.05);color:var(--t3);transition:all .22s var(--spring);opacity:.45">SON OFF</button>
+          <button type="button" onclick="setSound(true)"  data-sbtn="on"  style="flex:1;padding:11px;border-radius:11px;border:1.5px solid transparent;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;cursor:pointer;background:rgba(41,121,255,.08);color:var(--A);transition:all .22s var(--spring);opacity:.45">SON ON</button>
+          <button type="button" onclick="setSound(false)" data-sbtn="off" style="flex:1;padding:11px;border-radius:11px;border:1.5px solid transparent;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.05);color:var(--t3);transition:all .22s var(--spring);opacity:.45">SON OFF</button>
         </div>
       </div>
-      <button onclick="tryShowU()" style="width:100%;padding:12px 16px;border-radius:var(--r);border:1px solid var(--bdr);background:rgba(41,121,255,.06);color:var(--t1);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;margin-bottom:10px"><span id="cur-u-lbl">SOLO LEVELING</span><span style="color:var(--t3);font-size:8px">CHANGER →</span></button>
-      <button onclick="closeSettings();openPresentation()" style="width:100%;padding:12px 16px;border-radius:var(--r);border:1px solid rgba(41,182,246,.15);background:linear-gradient(135deg,rgba(41,121,255,.06),rgba(124,77,255,.04));color:var(--AL);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;margin-bottom:10px"><span>DÉCOUVRIR LEVELINK</span><span style="color:var(--t3);font-size:8px">GUIDE →</span></button>
-      <button onclick="doReset()" style="width:100%;padding:12px;border-radius:var(--r);background:rgba(229,57,53,.07);border:1px solid rgba(229,57,53,.16);color:#e57373;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .22s;margin-bottom:4px" onmouseover="this.style.background='rgba(229,57,53,.12)'" onmouseout="this.style.background='rgba(229,57,53,.07)'">RÉINITIALISER LES DONNÉES</button>
+      <button type="button" onclick="tryShowU()" style="width:100%;padding:12px 16px;border-radius:var(--r);border:1px solid var(--bdr);background:rgba(41,121,255,.06);color:var(--t1);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;margin-bottom:10px"><span id="cur-u-lbl">SOLO LEVELING</span><span style="color:var(--t3);font-size:8px">CHANGER →</span></button>
+      <button type="button" onclick="closeSettings();openPresentation()" style="width:100%;padding:12px 16px;border-radius:var(--r);border:1px solid rgba(41,182,246,.15);background:linear-gradient(135deg,rgba(41,121,255,.06),rgba(124,77,255,.04));color:var(--AL);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;margin-bottom:10px"><span>DÉCOUVRIR LEVELINK</span><span style="color:var(--t3);font-size:8px">GUIDE →</span></button>
+      <button type="button" onclick="doReset()" style="width:100%;padding:12px;border-radius:var(--r);background:rgba(229,57,53,.07);border:1px solid rgba(229,57,53,.16);color:#e57373;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .22s;margin-bottom:4px" onmouseover="this.style.background='rgba(229,57,53,.12)'" onmouseout="this.style.background='rgba(229,57,53,.07)'">RÉINITIALISER LES DONNÉES</button>
     </div>
   </div>
 </div>
@@ -3801,16 +3801,99 @@ const UK='lk_u';
 const getU=()=>localStorage.getItem(UK)||'sl';
 const setU=u=>localStorage.setItem(UK,u);
 const SKEY='hr2_settings';
-function DKEY(){return getU()==='sao'?'hr2_data_sao':'hr2_data';}
-const load=()=>{
+const DATA_KEY='hr2_data';
+const LEGACY_SAO_DATA_KEY='hr2_data_sao';
+function DKEY(){return DATA_KEY;}
+function readStoredArray(key){
   try{
-    const parsed=JSON.parse(localStorage.getItem(DKEY())||'[]');
+    const parsed=JSON.parse(localStorage.getItem(key)||'[]');
     return Array.isArray(parsed)?parsed:[];
   }catch{
     return[];
   }
+}
+function mergeCsvValues(a,b){
+  return [...new Set([...(a||'').split(','),...(b||'').split(',')].filter(Boolean))].sort().join(',');
+}
+function storedCompletionHistory(item){
+  if(Array.isArray(item.completion_log))return item.completion_log.filter(entry=>entry&&entry.date).map(entry=>({...entry}));
+  const completionDates=(item.completed_dates||'').split(',').filter(Boolean);
+  const timestamps=(item.completed_timestamps||'').split(',').filter(Boolean);
+  const resistance=(item.resistance_log||'').split(',').filter(Boolean);
+  return completionDates.map((date,index)=>({
+    date,
+    completed_at:timestamps[index]||null,
+    resistance:resistance[index]!=null&&resistance[index]!==''?Number(resistance[index]):null,
+    xp:null,
+    source:'legacy'
+  }));
+}
+function mergeCompletionHistory(a,b){
+  const byDate=new Map();
+  [...storedCompletionHistory(a),...storedCompletionHistory(b)].forEach(entry=>{
+    const previous=byDate.get(entry.date)||{};
+    byDate.set(entry.date,{...previous,...Object.fromEntries(Object.entries(entry).filter(([,value])=>value!=null))});
+  });
+  return [...byDate.values()].sort((x,y)=>x.date.localeCompare(y.date));
+}
+(function migrateLegacyUniverseStore(){
+  const migrationKey='lk_unified_store_v3';
+  if(localStorage.getItem(migrationKey))return;
+  try{
+    const primary=readStoredArray(DATA_KEY);
+    const legacy=readStoredArray(LEGACY_SAO_DATA_KEY);
+    if(!legacy.length){localStorage.setItem(migrationKey,'1');return;}
+
+    const mergedHabits=[];
+    [...primary.filter(i=>i&&i.name!=null),...legacy.filter(i=>i&&i.name!=null)].forEach(item=>{
+      const key=String(item.name).trim().toLocaleLowerCase('fr-FR');
+      const existing=mergedHabits.find(h=>String(h.name).trim().toLocaleLowerCase('fr-FR')===key);
+      if(!existing){mergedHabits.push({...item});return;}
+      const history=mergeCompletionHistory(existing,item);
+      existing.completion_log=history;
+      existing.completed_dates=history.map(entry=>entry.date).join(',');
+      existing.completed_timestamps=history.map(entry=>entry.completed_at).filter(Boolean).join(',');
+      existing.resistance_log=history.map(entry=>entry.resistance).filter(value=>value!=null).join(',');
+      existing.rest_days=mergeCsvValues(existing.rest_days,item.rest_days);
+    });
+
+    const taskMap=new Map();
+    [...primary.filter(i=>i&&i.text!=null),...legacy.filter(i=>i&&i.text!=null)].forEach(item=>{
+      const key=item.__id||`${item.text}|${item.created_at||''}`;
+      const existing=taskMap.get(key);
+      if(!existing){taskMap.set(key,{...item});return;}
+      const history=mergeCompletionHistory(existing,item);
+      existing.completion_log=history;
+      existing.completed_dates=history.map(entry=>entry.date).join(',');
+      existing.completed_timestamps=history.map(entry=>entry.completed_at).filter(Boolean).join(',');
+    });
+
+    const p1=primary.find(i=>i&&i.total_xp!=null)||null;
+    const p2=legacy.find(i=>i&&i.total_xp!=null)||null;
+    let mergedProgress=null;
+    if(p1||p2){
+      const preferred=(p2?.total_xp||0)>(p1?.total_xp||0)?p2:p1;
+      const secondary=preferred===p1?p2:p1;
+      mergedProgress={...(secondary||{}),...(preferred||{})};
+      mergedProgress.total_xp=Math.max(p1?.total_xp||0,p2?.total_xp||0);
+      if(!mergedProgress.__id)mergedProgress.__id=Date.now().toString(36)+Math.random().toString(36).slice(2);
+    }
+
+    const merged=[...mergedHabits,...taskMap.values()];
+    if(mergedProgress)merged.push(mergedProgress);
+    localStorage.setItem(DATA_KEY,JSON.stringify(merged));
+    localStorage.setItem(migrationKey,'1');
+  }catch(error){
+    console.warn('Levelink: migration de sauvegarde ignorée',error);
+  }
+})();
+const load=()=>{
+  return readStoredArray(DKEY());
 };
-const save=d=>localStorage.setItem(DKEY(),JSON.stringify(d));
+const save=d=>{
+  try{localStorage.setItem(DKEY(),JSON.stringify(d));return true;}
+  catch(error){console.warn('Levelink: sauvegarde impossible',error);return false;}
+};
 const loadS=()=>{
   try{
     const parsed=JSON.parse(localStorage.getItem(SKEY)||'{}');
@@ -3827,7 +3910,24 @@ let subtasks=rawData.filter(i=>i.text!=null);
 let pdata=rawData.find(i=>i.total_xp!=null)||null;
 let settings=loadS();
 
-const TODAY=new Date().toISOString().split('T')[0];
+function localDateKey(date=new Date()){
+  const y=date.getFullYear();
+  const m=String(date.getMonth()+1).padStart(2,'0');
+  const d=String(date.getDate()).padStart(2,'0');
+  return `${y}-${m}-${d}`;
+}
+function dateFromKey(key){
+  const [y,m,d]=String(key).split('-').map(Number);
+  return new Date(y,m-1,d,12);
+}
+function daysBetween(fromKey,toKey){
+  return Math.round((dateFromKey(toKey)-dateFromKey(fromKey))/86400000);
+}
+function escapeHTML(value){
+  return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+
+const TODAY=localDateKey();
 let curTab='habits',searchQ='',delTarget=null,editId=null;
 let selIcon=ICONS[0],selColor=COLORS[0],selEI=ICONS[0],selEC=COLORS[0];
 const activeTimers=new Set();
@@ -3884,6 +3984,8 @@ function handleUrgentThresholds(prevXp,newXp){
 }
 function applyXpGain(amount){
   ensurePData();
+  amount=Math.max(0,Math.round(Number(amount)||0));
+  if(!amount)return;
   const prev=pdata.total_xp||0;
   const old=lvlInfo(prev).idx;
   pdata.total_xp=prev+amount;
@@ -3907,6 +4009,13 @@ function applyXpGain(amount){
   }
   if(ni.idx>old)showLevelUp(ni.isSAO?'NIVEAU '+ni.level:ni.rank,ni.color);
   handleUrgentThresholds(prev,pdata.total_xp);
+}
+function revokeXp(amount){
+  ensurePData();
+  amount=Math.max(0,Math.round(Number(amount)||0));
+  const previous=pdata.total_xp||0;
+  pdata.total_xp=Math.max(0,previous-amount);
+  return previous-pdata.total_xp;
 }
 function advanceFloorTitle(){
   ensurePData();
@@ -3934,6 +4043,36 @@ window.defeatFloorBoss=function(){
 // HELPERS
 // ══════════════════════════════════════════════
 function dates(h){return(h.completed_dates||'').split(',').filter(Boolean)}
+function appendCompletionRecord(item,{date=TODAY,completedAt=new Date().toISOString(),resistance=null,xp=0,source='manual'}={}){
+  if(!Array.isArray(item.completion_log))item.completion_log=[];
+  if(item.completion_log.some(entry=>entry&&entry.date===date))return false;
+  item.completion_log.push({date,completed_at:completedAt,resistance,xp,source});
+  const timestamps=(item.completed_timestamps||'').split(',').filter(Boolean);
+  timestamps.push(completedAt);
+  item.completed_timestamps=timestamps.join(',');
+  if(resistance!=null){
+    const resistanceLog=(item.resistance_log||'').split(',').filter(Boolean);
+    resistanceLog.push(Number(resistance).toFixed(2));
+    item.resistance_log=resistanceLog.join(',');
+  }
+  return true;
+}
+function removeCompletionRecord(item,date=TODAY){
+  const completionDates=dates(item);
+  const dateIndex=completionDates.indexOf(date);
+  if(dateIndex>=0){
+    completionDates.splice(dateIndex,1);
+    item.completed_dates=completionDates.join(',');
+    const timestamps=(item.completed_timestamps||'').split(',').filter(Boolean);
+    if(dateIndex<timestamps.length){timestamps.splice(dateIndex,1);item.completed_timestamps=timestamps.join(',');}
+    const resistanceLog=(item.resistance_log||'').split(',').filter(Boolean);
+    if(dateIndex<resistanceLog.length){resistanceLog.splice(dateIndex,1);item.resistance_log=resistanceLog.join(',');}
+  }
+  if(!Array.isArray(item.completion_log))return null;
+  const logIndex=item.completion_log.findIndex(entry=>entry&&entry.date===date);
+  if(logIndex<0)return null;
+  return item.completion_log.splice(logIndex,1)[0]||null;
+}
 function currentDuration(h){
   const base=Math.max(1,parseInt(h.duration_minutes)||5);
   if((h.light_day||'')!==TODAY)return base;
@@ -3941,8 +4080,8 @@ function currentDuration(h){
   return Number.isFinite(reduced)&&reduced>0?reduced:base;
 }
 function streak(ds){
-  const s=[...ds].sort().reverse();let c=0;const now=new Date(TODAY);
-  for(let i=0;i<s.length;i++){const e=new Date(now);e.setDate(e.getDate()-i);if(s[i]===e.toISOString().split('T')[0])c++;else break;}
+  const s=[...new Set(ds)].sort().reverse();let c=0;const now=dateFromKey(TODAY);
+  for(let i=0;i<s.length;i++){const e=new Date(now);e.setDate(e.getDate()-i);if(s[i]===localDateKey(e))c++;else break;}
   return c;
 }
 function lvlFromPoints(points){
@@ -3957,7 +4096,7 @@ function buildStatsSnapshot(){
   const completedTasks=subtasks.reduce((acc,t)=>acc+dates(t).length,0);
   const distinctHabitDays=new Set(habits.flatMap(h=>dates(h))).size;
   const distinctTaskDays=new Set(subtasks.flatMap(t=>dates(t))).size;
-  const weekDone=habits.reduce((acc,h)=>acc+dates(h).filter(d=>{const dd=new Date(d),n=new Date(TODAY);const diff=Math.floor((n-dd)/86400000);return diff>=0&&diff<7;}).length,0);
+  const weekDone=habits.reduce((acc,h)=>acc+dates(h).filter(d=>{const diff=daysBetween(d,TODAY);return diff>=0&&diff<7;}).length,0);
   const bestStreak=habits.length?Math.max(0,...habits.map(h=>streak(dates(h)))):0;
   return {
     str:lvlFromPoints(completedHabits*12+Math.round((pdata?.total_xp||0)/16)),
@@ -3988,8 +4127,8 @@ function maybeConsumeWillShield(dsBeforeToday){
   const bs=refreshBuildStats();
   if((bs.charges||0)<=0)return {used:false,virtualDates:dsBeforeToday};
   if(pdata.build_stats.last_shield_day===TODAY)return {used:false,virtualDates:dsBeforeToday};
-  const y=new Date(TODAY);y.setDate(y.getDate()-1);const ys=y.toISOString().split('T')[0];
-  const d2=new Date(TODAY);d2.setDate(d2.getDate()-2);const d2s=d2.toISOString().split('T')[0];
+  const y=dateFromKey(TODAY);y.setDate(y.getDate()-1);const ys=localDateKey(y);
+  const d2=dateFromKey(TODAY);d2.setDate(d2.getDate()-2);const d2s=localDateKey(d2);
   if(dsBeforeToday.includes(ys)||!dsBeforeToday.includes(d2s))return {used:false,virtualDates:dsBeforeToday};
   pdata.build_stats.shield_charges=Math.max(0,(pdata.build_stats.shield_charges||0)-1);
   pdata.build_stats.last_shield_day=TODAY;
@@ -4180,11 +4319,11 @@ function habitSheet(h){
     <div class="sheet-handle"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
       <h2 style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:1px;color:var(--t1)">${edit?'MODIFIER LA QUÊTE':'NOUVELLE QUÊTE'}</h2>
-      <button onclick="closeSheet()" class="btn-icon"><i data-lucide="x" style="width:15px;height:15px"></i></button>
+      <button type="button" onclick="closeSheet()" class="btn-icon"><i data-lucide="x" style="width:15px;height:15px"></i></button>
     </div>
     <form onsubmit="saveHabit(event,'${pfx}')">
       <label class="lbl">Nom de la quête</label>
-      <input id="${pfx}hname" type="text" required maxlength="50" placeholder="Ex: Méditation" value="${h?h.name:''}" style="margin-bottom:16px">
+      <input id="${pfx}hname" type="text" required maxlength="50" placeholder="Ex: Méditation" value="${escapeHTML(h?h.name:'')}" style="margin-bottom:16px">
       <label class="lbl">Symbole</label>
       <div id="${pfx}icon-picker" style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px"></div>
       <label class="lbl">Couleur</label>
@@ -4208,7 +4347,7 @@ function taskSheet(){
     <div class="sheet-handle"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
       <h2 style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:1px;color:var(--t1)">NOUVELLE TÂCHE</h2>
-      <button onclick="closeSheet()" class="btn-icon"><i data-lucide="x" style="width:15px;height:15px"></i></button>
+      <button type="button" onclick="closeSheet()" class="btn-icon"><i data-lucide="x" style="width:15px;height:15px"></i></button>
     </div>
     <form onsubmit="saveTask(event)">
       <label class="lbl">Description</label>
@@ -4251,6 +4390,7 @@ function renderAll(){
     _renderAllPending=false;
     renderHabits();renderTasks();updateProgress();updateWeekDots();updateLevel();
     updateHeroSummary();renderMissionBoard();renderTaskBoard();
+    injectNegotiationButtons();updateBetUI();
   });
 }
 
@@ -4295,13 +4435,11 @@ function _updateReturnMessage(total, doneToday, bestStreak, isSAO){
   const msgEl=document.getElementById('hero-return-msg');if(!msgEl)return;
   if(!total){msgEl.style.display='none';return;}
   const now=new Date();
-  const yesterday=new Date(now);yesterday.setDate(yesterday.getDate()-1);
-  const yStr=yesterday.toISOString().split('T')[0];
   // Calculer jours sans activité (absences consécutives avant aujourd'hui)
   let absenceDays=0;
   for(let i=1;i<=30;i++){
     const d=new Date(now);d.setDate(d.getDate()-i);
-    const ds=d.toISOString().split('T')[0];
+    const ds=localDateKey(d);
     const hadActivity=habits.some(h=>dates(h).includes(ds));
     if(!hadActivity)absenceDays++;else break;
   }
@@ -4311,7 +4449,7 @@ function _updateReturnMessage(total, doneToday, bestStreak, isSAO){
     const d=new Date(now);
     const daysToLastMonday=((now.getDay()+6)%7)+(w*7);
     d.setDate(d.getDate()-daysToLastMonday);
-    const ds=d.toISOString().split('T')[0];
+    const ds=localDateKey(d);
     if(habits.every(h=>dates(h).includes(ds)))mondaysStreak++;else break;
   }
   const h=now.getHours();
@@ -4423,7 +4561,7 @@ function renderMissionBoard(){
       <span class="app-chip" style="border-color:rgba(255,82,82,.35);background:rgba(255,82,82,.14);color:#ff8a80">Déclenchée à ${boss.trigger_xp} XP</span>
     </div>
     <div class="command-actions" style="margin-top:10px">
-      <button class="section-cta primary" onclick="defeatFloorBoss()" style="background:linear-gradient(135deg,#ff1744,#ff5252);border:none">⚔️ Affronter le Boss</button>
+      <button type="button" class="section-cta primary" onclick="defeatFloorBoss()" style="background:linear-gradient(135deg,#ff1744,#ff5252);border:none">⚔️ Affronter le Boss</button>
     </div>
   </div>`:'';
   const nextXp=Math.max(0,level.nextXp-level.xp);
@@ -4447,11 +4585,11 @@ function renderMissionBoard(){
           <div class="ltc-emoji" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:15px">${h.icon||''}</div>
         </div>
         <div style="flex:1;min-width:0">
-          <p style="font-weight:700;font-size:14px;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h.name}</p>
+          <p style="font-weight:700;font-size:14px;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(h.name)}</p>
           <p class="ltc-ser" style="font-family:'Orbitron',monospace;font-size:7px;font-weight:700;letter-spacing:1.2px;color:${c}88;margin-top:2px">${st.isRest?`REST · ${st.cur}/${st.totalSets}`:`SÉRIE ${st.cur}/${st.totalSets}`}</p>
         </div>
         <div class="ltc-time" style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:${c};text-shadow:0 0 20px ${c}88;min-width:66px;text-align:right;flex-shrink:0">${fmtTime(st.tLeft)}</div>
-        <button onclick="restoreTimer('${h.__id}')" title="Ouvrir" style="width:34px;height:34px;border-radius:10px;background:${c}18;border:1px solid ${c}44;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s var(--out-expo)"><i data-lucide="maximize-2" style="width:13px;height:13px;color:${c}"></i></button>
+        <button type="button" onclick="restoreTimer('${h.__id}')" title="Ouvrir" style="width:34px;height:34px;border-radius:10px;background:${c}18;border:1px solid ${c}44;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s var(--out-expo)"><i data-lucide="maximize-2" style="width:13px;height:13px;color:${c}"></i></button>
       </div>`;
     }).join('');
     liveSection=`<div class="command-card" style="padding:14px 16px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><span class="command-title" style="margin-bottom:0">CHRONO ACTIFS</span><div style="display:flex;align-items:center;gap:6px"><div class="pulse-dot" style="width:7px;height:7px;border-radius:50%;background:var(--AL);box-shadow:0 0 10px var(--AG)"></div><span style="font-family:'Orbitron',monospace;font-size:8.5px;font-weight:900;color:var(--AL)">${activeCount} LIVE</span></div></div><div style="display:grid;gap:8px">${liveCards}</div></div>`;
@@ -4462,7 +4600,7 @@ function renderMissionBoard(){
   }else{
     board.innerHTML=`
     ${bossCard}
-    <div class="command-card command-card-major"><div><span class="command-title">Command Center</span><div class="command-metric">${total?pct:0}% <span style="font-size:16px;font-weight:700;color:var(--t2)">terminé</span></div><p class="command-copy">${!total?'Crée ta première quête.':doneToday===total?'Journée validée':`<strong style="color:var(--t1)">${Math.max(total-doneToday,0)} mission${Math.max(total-doneToday,0)>1?'s':''}</strong> restantes.`}</p><div class="app-chip-row"><span class="app-chip">${doneToday}/${total||0} complétées</span><span class="app-chip">${bestStreak}j série</span><span class="app-chip">${(pdata&&pdata.total_xp)||0} XP</span></div></div><div class="command-actions"><button class="section-cta primary" onclick="openSheet('habit')">+ Quête</button><button class="section-cta" onclick="openSheet('task')">+ Tâche</button><button class="section-cta" onclick="goTab('stats')">Stats →</button></div></div>
+    <div class="command-card command-card-major"><div><span class="command-title">Command Center</span><div class="command-metric">${total?pct:0}% <span style="font-size:16px;font-weight:700;color:var(--t2)">terminé</span></div><p class="command-copy">${!total?'Crée ta première quête.':doneToday===total?'Journée validée':`<strong style="color:var(--t1)">${Math.max(total-doneToday,0)} mission${Math.max(total-doneToday,0)>1?'s':''}</strong> restantes.`}</p><div class="app-chip-row"><span class="app-chip">${doneToday}/${total||0} complétées</span><span class="app-chip">${bestStreak}j série</span><span class="app-chip">${(pdata&&pdata.total_xp)||0} XP</span></div></div><div class="command-actions"><button type="button" class="section-cta primary" onclick="openSheet('habit')">+ Quête</button><button type="button" class="section-cta" onclick="openSheet('task')">+ Tâche</button><button type="button" class="section-cta" onclick="goTab('stats')">Stats →</button></div></div>
     ${liveSection}
     <div class="command-card-grid"><div class="command-card"><span class="command-title">Prochain rang</span><div class="command-metric" style="color:${level.nextRank==='MAX'?'#ffd700':'var(--t1)'}">${level.nextRank==='MAX'?'MAX':level.nextRank}</div><p class="command-copy">${level.nextRank==='MAX'?'Rang maximum.':`${nextXp} XP restants.`}</p></div><div class="command-card"><span class="command-title">Timers actifs</span><div class="command-metric" style="color:${activeCount?'var(--AL)':'var(--t1)'}">${activeCount}</div><p class="command-copy">${activeCount?'Garde le rythme.':'Aucun timer.'}</p></div></div>`;
   }
@@ -4551,18 +4689,18 @@ function habitCard(h,i){
     <div class="hcw-pc-actions" style="pointer-events:none;opacity:0!important"></div>`:
   `
     <div class="hcw-actions">
-      <button class="btn-icon warn" onclick="openSheet('habit','${h.__id}')" style="width:40px;height:40px;border-radius:13px">
+      <button type="button" class="btn-icon warn" onclick="openSheet('habit','${h.__id}')" style="width:40px;height:40px;border-radius:13px">
         <i data-lucide="pencil" style="width:15px;height:15px"></i>
       </button>
-      <button class="btn-icon danger" onclick="askDel('habit','${h.__id}','${h.name.replace(/'/g,"\\'")}')">
+      <button type="button" class="btn-icon danger" onclick="askDel('habit','${h.__id}')">
         <i data-lucide="trash-2" style="width:15px;height:15px"></i>
       </button>
     </div>
     <div class="hcw-pc-actions">
-      <button class="btn-icon warn" onclick="openSheet('habit','${h.__id}')" style="width:34px;height:34px;border-radius:10px" title="Modifier">
+      <button type="button" class="btn-icon warn" onclick="openSheet('habit','${h.__id}')" style="width:34px;height:34px;border-radius:10px" title="Modifier">
         <i data-lucide="pencil" style="width:13px;height:13px"></i>
       </button>
-      <button class="btn-icon danger" onclick="askDel('habit','${h.__id}','${h.name.replace(/'/g,"\\'")}')">
+      <button type="button" class="btn-icon danger" onclick="askDel('habit','${h.__id}')">
         <i data-lucide="trash-2" style="width:13px;height:13px"></i>
       </button>
     </div>`;
@@ -4573,14 +4711,14 @@ function habitCard(h,i){
         <div class="drag-handle"><i data-lucide="grip-vertical" style="width:14px;height:14px"></i></div>
         <div class="completed" style="width:46px;height:46px;border-radius:14px;background:${c}20;border:1px solid ${c}50;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 16px ${c}30"><svg viewBox="0 0 24 24" fill="none" style="width:20px;height:20px"><polyline points="4,13 9,18 20,7" stroke="${c}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div style="flex:1;min-width:0">
-          <p style="font-weight:700;font-size:16px;color:${c};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 0 12px ${c}40">${h.name}</p>
+          <p style="font-weight:700;font-size:16px;color:${c};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 0 12px ${c}40">${escapeHTML(h.name)}</p>
           <div style="display:flex;align-items:center;gap:7px;margin-top:3px">
             ${str>0?`<span class="streak-fire" style="display:inline-flex;align-items:center"><svg viewBox="0 0 14 16" fill="none" style="width:13px;height:13px;display:inline-block;vertical-align:middle"><path d="M7 1C7 1 10 4 10 7C10 8.5 9 9.5 7.5 9.5C8 8.5 7.5 7 6 6C6 8 4 9.5 4 11.5C4 13.5 5.5 15 7 15C9.5 15 12 13 12 10C12 6 9 3 7 1Z" fill="#ff6b35" opacity=".9"/><path d="M7 8C7 8 8.5 9 8.5 10.5C8.5 11.5 7.8 12 7 12C6.2 12 5.5 11.5 5.5 10.5C5.5 9 7 8 7 8Z" fill="#fbbf24"/></svg></span><span style="font-size:12px;font-weight:700;color:${c}">${str}j</span>`:''}
             <span style="font-size:11px;font-weight:600;color:${c}80">${isLight?`<s style="opacity:.4">+${origXp}</s> `:''}<span style="${isLight?'color:#ffab40':''}">+${xp} XP</span>${isLight?' <span style="font-size:8px;color:#ffab40;opacity:.7">ALLÉGÉE</span>':''}</span>
             <span style="font-family:'Orbitron',monospace;font-size:8.5px;font-weight:700;color:${c}90;letter-spacing:.5px">DONE</span>
           </div>
         </div>
-        <button onclick="uncomplete('${h.__id}')" class="btn-icon warn" title="Décocher" style="width:32px;height:32px;border-radius:9px;flex-shrink:0">
+        <button type="button" onclick="uncomplete('${h.__id}')" class="btn-icon warn" title="Décocher" style="width:32px;height:32px;border-radius:9px;flex-shrink:0">
           <i data-lucide="rotate-ccw" style="width:13px;height:13px"></i>
         </button>
       </div>
@@ -4594,14 +4732,14 @@ function habitCard(h,i){
     return`<div class="hcw card-in" data-id="${h.__id}" data-timer-active="${active?'1':''}" style="${delay}">
       <div class="card hcard${active?' hcard-active':''}">
         <div class="drag-handle"><i data-lucide="grip-vertical" style="width:14px;height:14px"></i></div>
-        <button class="tmr-btn" data-hid="${h.__id}" ${active?'disabled':''} style="width:46px;height:46px;border-radius:14px;background:${c}18;border:1px solid ${c}40;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:${active?'not-allowed':'pointer'};transition:all .25s var(--out-expo)">
+        <button type="button" class="tmr-btn" data-hid="${h.__id}" ${active?'disabled':''} style="width:46px;height:46px;border-radius:14px;background:${c}18;border:1px solid ${c}40;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:${active?'not-allowed':'pointer'};transition:all .25s var(--out-expo)">
           ${active
             ?`<i data-lucide="clock" style="width:20px;height:20px;color:${c}" class="spin-anim"></i>`
             :`<i data-lucide="play" style="width:20px;height:20px;color:${c}"></i>`
           }
         </button>
         <div style="flex:1;min-width:0">
-          <p class="hcard-name" style="font-weight:700;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:color .35s var(--out-expo),text-shadow .35s;${active?`color:${c};text-shadow:0 0 14px ${c}44`:'color:var(--t1)'}">${h.name}</p>
+          <p class="hcard-name" style="font-weight:700;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:color .35s var(--out-expo),text-shadow .35s;${active?`color:${c};text-shadow:0 0 14px ${c}44`:'color:var(--t1)'}">${escapeHTML(h.name)}</p>
           <div style="display:flex;align-items:center;gap:7px;margin-top:3px">
             ${str>0?`<span class="streak-fire" style="display:inline-flex;align-items:center"><svg viewBox="0 0 14 16" fill="none" style="width:13px;height:13px;display:inline-block;vertical-align:middle"><path d="M7 1C7 1 10 4 10 7C10 8.5 9 9.5 7.5 9.5C8 8.5 7.5 7 6 6C6 8 4 9.5 4 11.5C4 13.5 5.5 15 7 15C9.5 15 12 13 12 10C12 6 9 3 7 1Z" fill="#ff6b35" opacity=".9"/><path d="M7 8C7 8 8.5 9 8.5 10.5C8.5 11.5 7.8 12 7 12C6.2 12 5.5 11.5 5.5 10.5C5.5 9 7 8 7 8Z" fill="#fbbf24"/></svg></span><span style="font-size:12px;font-weight:700;color:${c}">${str}j</span>`:''}
             <span style="font-size:11px;font-weight:600;color:#4ade80aa">${isLight?`<s style="opacity:.4">+${origXp}</s> <span style="color:#ffab40">+${xp} XP</span> <span style="font-size:8px;color:#ffab40;opacity:.7">ALLÉGÉE</span>`:`+${xp} XP`}</span>
@@ -4621,9 +4759,9 @@ function habitCard(h,i){
   return`<div class="hcw card-in" data-id="${h.__id}" data-timer-active="${active?'1':''}" style="${delay}">
     <div class="card hcard">
       <div class="drag-handle"><i data-lucide="grip-vertical" style="width:14px;height:14px"></i></div>
-      <button class="tog-btn" data-hid="${h.__id}" style="width:46px;height:46px;border-radius:14px;background:${c}16;border:1px solid ${c}35;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;cursor:pointer;transition:all .25s var(--bounce)">${h.icon||'<svg viewBox="0 0 24 24" fill="none" style="width:22px;height:22px"><polygon points="12,2 20,7 20,17 12,22 4,17 4,7" stroke="currentColor" stroke-width="1.8" fill="currentColor" fill-opacity=".15"/></svg>'}</button>
+      <button type="button" class="tog-btn" data-hid="${h.__id}" style="width:46px;height:46px;border-radius:14px;background:${c}16;border:1px solid ${c}35;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;cursor:pointer;transition:all .25s var(--bounce)">${h.icon||'<svg viewBox="0 0 24 24" fill="none" style="width:22px;height:22px"><polygon points="12,2 20,7 20,17 12,22 4,17 4,7" stroke="currentColor" stroke-width="1.8" fill="currentColor" fill-opacity=".15"/></svg>'}</button>
       <div style="flex:1;min-width:0">
-        <p style="font-weight:700;font-size:16px;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h.name}</p>
+        <p style="font-weight:700;font-size:16px;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(h.name)}</p>
         <div style="display:flex;align-items:center;gap:7px;margin-top:3px">
           ${str>0?`<span class="streak-fire" style="display:inline-flex;align-items:center"><svg viewBox="0 0 14 16" fill="none" style="width:13px;height:13px;display:inline-block;vertical-align:middle"><path d="M7 1C7 1 10 4 10 7C10 8.5 9 9.5 7.5 9.5C8 8.5 7.5 7 6 6C6 8 4 9.5 4 11.5C4 13.5 5.5 15 7 15C9.5 15 12 13 12 10C12 6 9 3 7 1Z" fill="#ff6b35" opacity=".9"/><path d="M7 8C7 8 8.5 9 8.5 10.5C8.5 11.5 7.8 12 7 12C6.2 12 5.5 11.5 5.5 10.5C5.5 9 7 8 7 8Z" fill="#fbbf24"/></svg></span><span style="font-size:12px;font-weight:700;color:${c}">${str}j</span>`:`<span style="font-size:11px;color:var(--t3)">Commence aujourd'hui</span>`}
           <span style="font-size:11px;font-weight:600;color:#4ade80aa">${isLight?`<s style="opacity:.4">+${origXp}</s> <span style="color:#ffab40">+${xp} XP</span> <span style="font-size:8px;color:#ffab40;opacity:.7">ALLÉGÉE</span>`:`+${xp} XP`}</span>
@@ -4645,12 +4783,12 @@ function renderTaskSection(title,count,items,startIndex){
       const done=dates(s).includes(TODAY);
       return`<div class="card card-in" style="margin-bottom:8px;animation-delay:${(startIndex+i)*50}ms">
         <div style="display:flex;align-items:center;gap:12px;padding:14px 14px 14px 12px;${done?'background:rgba(74,222,128,.035)':''}">
-          <button class="task-tog" data-tid="${s.__id}" style="width:42px;height:42px;border-radius:13px;background:${done?'rgba(74,222,128,.12)':'rgba(255,255,255,.04)'};border:1px solid ${done?'rgba(74,222,128,.35)':'rgba(255,255,255,.07)'};display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;cursor:pointer;transition:all .25s var(--out-expo)"style="color:${done?'rgba(74,222,128,.9)':'rgba(255,255,255,.3)'}">${done?'<svg viewBox="0 0 20 20" fill="none" style="width:18px;height:18px"><polyline points="3,10 8,15 17,5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>':'<svg viewBox="0 0 20 20" fill="none" style="width:18px;height:18px"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.8"/></svg>'}</button>
+          <button type="button" class="task-tog" data-tid="${s.__id}" style="width:42px;height:42px;border-radius:13px;background:${done?'rgba(74,222,128,.12)':'rgba(255,255,255,.04)'};border:1px solid ${done?'rgba(74,222,128,.35)':'rgba(255,255,255,.07)'};color:${done?'rgba(74,222,128,.9)':'rgba(255,255,255,.3)'};display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;cursor:pointer;transition:all .25s var(--out-expo)">${done?'<svg viewBox="0 0 20 20" fill="none" style="width:18px;height:18px"><polyline points="3,10 8,15 17,5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>':'<svg viewBox="0 0 20 20" fill="none" style="width:18px;height:18px"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.8"/></svg>'}</button>
           <div style="flex:1;min-width:0">
-            <p style="font-weight:700;font-size:15px;color:${done?'#4ade80':'var(--t1)'};${done?'text-decoration:line-through;opacity:.65':''}; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:color .3s,opacity .3s">${s.text}</p>
+            <p style="font-weight:700;font-size:15px;color:${done?'#4ade80':'var(--t1)'};${done?'text-decoration:line-through;opacity:.65':''}; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:color .3s,opacity .3s">${escapeHTML(s.text)}</p>
             <p style="font-size:11px;color:var(--t3);margin-top:2px">${new Date(s.created_at).toLocaleDateString('fr-FR')}</p>
           </div>
-          <button class="btn-icon danger" onclick="askDel('task','${s.__id}','${s.text.replace(/'/g,"\\'")}')">
+          <button type="button" class="btn-icon danger" onclick="askDel('task','${s.__id}')">
             <i data-lucide="trash-2" style="width:13px;height:13px"></i>
           </button>
         </div>
@@ -4697,7 +4835,7 @@ function updateWeekDots(){
   let done=0,html='';
   for(let i=0;i<7;i++){
     const d=new Date(today);d.setDate(d.getDate()-dow+i);
-    const ds=d.toISOString().split('T')[0];
+    const ds=localDateKey(d);
     const isT=ds===TODAY,isFut=d>today&&!isT;
     const full=!isFut&&habits.length>0&&habits.every(h=>dates(h).includes(ds));
     if(full)done++;
@@ -4787,12 +4925,7 @@ function toggleHabit(id){
     const xp=Math.round(baseXp*resistMult);
     applyXpGain(xp);
     triggerHit();
-    if(!h.completed_timestamps)h.completed_timestamps='';
-    if(!h.resistance_log)h.resistance_log='';
-    const tsArr=h.completed_timestamps.split(',').filter(Boolean);
-    const rlArr=h.resistance_log.split(',').filter(Boolean);
-    tsArr.push(nowISO);rlArr.push(resistMult.toFixed(2));
-    h.completed_timestamps=tsArr.join(',');h.resistance_log=rlArr.join(',');
+    appendCompletionRecord(h,{completedAt:nowISO,resistance:resistMult,xp,source:(h.light_day||'')===TODAY?'light':'manual'});
     const wrap=document.querySelector('.hcw[data-id="'+id+'"]');
     if(wrap){
       const card=wrap.querySelector('.card');
@@ -4809,7 +4942,11 @@ function toggleHabit(id){
     h.completed_dates=ds.join(',');syncAll();
     requestAnimationFrame(()=>requestAnimationFrame(()=>{renderAll();checkAllDay();}));
   }else{
-    ds.splice(idx,1);h.completed_dates=ds.join(',');syncAll();renderAll();
+    const record=removeCompletionRecord(h,TODAY);
+    const removedXp=revokeXp(record?.xp||0);
+    syncAll();
+    toast(removedXp?`Décochée · −${removedXp} XP`:'Décochée ↩');
+    renderAll();
   }
 }
 function triggerHit(){
@@ -4819,14 +4956,19 @@ function triggerHit(){
 }
 window.uncomplete=id=>{
   const h=habits.find(x=>x.__id===id);if(!h)return;
-  h.completed_dates=dates(h).filter(d=>d!==TODAY).join(',');
-  syncAll();toast('Décochée ↩');renderAll();
+  const record=removeCompletionRecord(h,TODAY);
+  const removedXp=revokeXp(record?.xp||0);
+  syncAll();toast(removedXp?`Décochée · −${removedXp} XP`:'Décochée ↩');renderAll();
 };
 function toggleTask(id){
   const s=subtasks.find(x=>x.__id===id);if(!s)return;
   const ds=dates(s),idx=ds.indexOf(TODAY);
-  if(idx>=0)ds.splice(idx,1);else ds.push(TODAY);
-  s.completed_dates=ds.join(',');syncAll();
+  if(idx>=0)removeCompletionRecord(s,TODAY);
+  else{
+    ds.push(TODAY);s.completed_dates=ds.join(',');
+    appendCompletionRecord(s,{xp:0,source:'task'});
+  }
+  syncAll();
   requestAnimationFrame(()=>{renderTasks();renderTaskBoard();});
 }
 window.filterHabits=q=>{searchQ=q.trim().toLowerCase();renderHabits()};
@@ -4834,7 +4976,9 @@ window.filterHabits=q=>{searchQ=q.trim().toLowerCase();renderHabits()};
 // ══════════════════════════════════════════════
 // DELETE
 // ══════════════════════════════════════════════
-window.askDel=(type,id,label)=>{
+window.askDel=(type,id)=>{
+  const item=type==='habit'?habits.find(h=>h.__id===id):subtasks.find(task=>task.__id===id);
+  const label=item?(type==='habit'?item.name:item.text):'Cet élément';
   delTarget={type,id};
   document.getElementById('del-label').textContent=`"${label}" sera supprimée définitivement.`;
   const m=document.getElementById('del-modal');m.style.display='flex';
@@ -4901,9 +5045,9 @@ function buildTimerModal(h,habitId,initState){
       <div style="width:34px;height:34px;border-radius:10px;background:${c}14;border:1px solid ${c}22;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">${h.icon||''}</div>
       <div style="flex:1;min-width:0">
         <div id="tm-lbl" style="font-family:'Orbitron',monospace;font-size:6px;font-weight:700;letter-spacing:2.5px;color:${c}44;text-transform:uppercase;margin-bottom:2px">SÉRIE ${cur}/${totalSets}</div>
-        <div style="font-size:${isD?14:12}px;font-weight:700;color:rgba(255,255,255,.8);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h.name}</div>
+        <div style="font-size:${isD?14:12}px;font-weight:700;color:rgba(255,255,255,.8);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(h.name)}</div>
       </div>
-      <button id="tm-min" style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0" title="Réduire">
+      <button type="button" id="tm-min" style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0" title="Réduire">
         <i data-lucide="minus" style="width:10px;height:10px;color:rgba(255,255,255,.3)"></i>
       </button>
     </div>
@@ -4966,7 +5110,7 @@ function buildTimerModal(h,habitId,initState){
 
     <!-- Boutons -->
     <div style="padding:0 ${isD?20:15}px ${isD?18:14}px;display:flex;gap:8px">
-      <button id="tm-pause" style="
+      <button type="button" id="tm-pause" style="
         flex:1;padding:${isD?13:11}px;
         border-radius:${isD?13:11}px;
         background:${c};border:none;color:#fff;
@@ -4978,7 +5122,7 @@ function buildTimerModal(h,habitId,initState){
         <span id="tm-pi" style="display:flex;align-items:center;width:13px;height:13px"></span>
         <span id="tm-pl">PAUSE</span>
       </button>
-      <button id="tm-stop" style="
+      <button type="button" id="tm-stop" style="
         width:${isD?46:40}px;
         border-radius:${isD?13:11}px;
         background:rgba(255,255,255,.04);
@@ -5112,19 +5256,20 @@ function completedTimer(h,modal){
   activeTimers.delete(h.__id);updateHabitCard(h.__id,false);
   delete timerBoardState[h.__id];
   const hh=habits.find(x=>x.__id===h.__id);if(!hh)return;
-  const ds=dates(hh);ds.push(TODAY);
+  const ds=dates(hh);
+  if(ds.includes(TODAY)){
+    if(modal)modal.remove();
+    renderAll();
+    return;
+  }
+  ds.push(TODAY);
   const str=streak([...ds].sort().reverse());
   const resistMult=autoResistance();
   const nowISO=new Date().toISOString();
   const baseXp=xpFinal(hh,str);
   const xp=Math.round(baseXp*resistMult);
   applyXpGain(xp);
-  if(!hh.completed_timestamps)hh.completed_timestamps='';
-  if(!hh.resistance_log)hh.resistance_log='';
-  const tsArr=hh.completed_timestamps.split(',').filter(Boolean);
-  const rlArr=hh.resistance_log.split(',').filter(Boolean);
-  tsArr.push(nowISO);rlArr.push(resistMult.toFixed(2));
-  hh.completed_timestamps=tsArr.join(',');hh.resistance_log=rlArr.join(',');
+  appendCompletionRecord(hh,{completedAt:nowISO,resistance:resistMult,xp,source:(hh.light_day||'')===TODAY?'light-timer':'timer'});
   hh.completed_dates=ds.join(',');syncAll();
   if(navigator.vibrate)navigator.vibrate([50,30,50,30,180]);
   const resist=resistanceLabel(resistMult);
@@ -5175,7 +5320,7 @@ function updateHabitCard(id,active){
     if(active){
       mobileAct.innerHTML=`<div style="display:flex;align-items:center;gap:6px;padding:0 12px"><div class="pulse-dot" style="width:5px;height:5px;border-radius:50%;background:${c};box-shadow:0 0 8px ${c}"></div><span style="font-family:'Orbitron',monospace;font-size:7px;font-weight:700;color:${c}88;letter-spacing:1px;white-space:nowrap">LIVE</span></div>`;
     }else{
-      mobileAct.innerHTML=`<button class="btn-icon warn" onclick="openSheet('habit','${id}')" style="width:40px;height:40px;border-radius:13px"><i data-lucide="pencil" style="width:15px;height:15px"></i></button><button class="btn-icon danger" onclick="askDel('habit','${id}','${h.name.replace(/'/g,"\\'")}')"><i data-lucide="trash-2" style="width:15px;height:15px"></i></button>`;
+      mobileAct.innerHTML=`<button type="button" class="btn-icon warn" onclick="openSheet('habit','${id}')" style="width:40px;height:40px;border-radius:13px"><i data-lucide="pencil" style="width:15px;height:15px"></i></button><button type="button" class="btn-icon danger" onclick="askDel('habit','${id}')"><i data-lucide="trash-2" style="width:15px;height:15px"></i></button>`;
     }
   }
 
@@ -5186,7 +5331,7 @@ function updateHabitCard(id,active){
       pcAct.innerHTML='';
       pcAct.style.cssText='pointer-events:none;opacity:0';
     }else{
-      pcAct.innerHTML=`<button class="btn-icon warn" onclick="openSheet('habit','${id}')" style="width:34px;height:34px;border-radius:10px" title="Modifier"><i data-lucide="pencil" style="width:13px;height:13px"></i></button><button class="btn-icon danger" onclick="askDel('habit','${id}','${h.name.replace(/'/g,"\\'")}')"><i data-lucide="trash-2" style="width:13px;height:13px"></i></button>`;
+      pcAct.innerHTML=`<button type="button" class="btn-icon warn" onclick="openSheet('habit','${id}')" style="width:34px;height:34px;border-radius:10px" title="Modifier"><i data-lucide="pencil" style="width:13px;height:13px"></i></button><button type="button" class="btn-icon danger" onclick="askDel('habit','${id}')"><i data-lucide="trash-2" style="width:13px;height:13px"></i></button>`;
       pcAct.style.cssText='';
     }
   }
@@ -5224,17 +5369,17 @@ function showPill(h,id,state){
         <div id="pe-${id}" style="position:absolute;bottom:-1px;right:-1px;width:17px;height:17px;border-radius:50%;background:${c};display:flex;align-items:center;justify-content:center;box-shadow:0 0 6px ${c};border:1.5px solid rgba(3,7,20,.97)">${isRest?'<svg width="9" height="9" viewBox="0 0 9 9" fill="none"><rect x=".5" y="2.5" width="8" height="1.5" rx=".75" fill="#fff" opacity=".9"/><rect x="2" y="5" width="5" height="1.2" rx=".6" fill="#fff" opacity=".55"/></svg>':'<svg width="9" height="9" viewBox="0 0 9 9" fill="none"><polygon points="2,1 8,4.5 2,8" fill="#fff"/></svg>'}</div>
       </div>
       <div style="flex:1;min-width:0">
-        <p style="font-weight:700;font-size:14px;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h.name}</p>
+        <p style="font-weight:700;font-size:14px;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(h.name)}</p>
         <p id="ps-${id}" style="font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;letter-spacing:1.5px;color:${c}88;margin-top:3px;transition:color .3s">SÉRIE ${cur}/${totalSets}</p>
       </div>
       <div id="pt-${id}" style="font-family:'Orbitron',monospace;font-size:26px;font-weight:900;color:${c};text-shadow:0 0 20px ${c}88;min-width:72px;text-align:right;flex-shrink:0;transition:color .3s,text-shadow .3s">${fmtTime(tLeft)}</div>
-      <button id="pp-${id}" style="width:40px;height:40px;border-radius:13px;background:${c}20;border:1px solid ${c}50;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .22s var(--out-expo)">
+      <button type="button" id="pp-${id}" style="width:40px;height:40px;border-radius:13px;background:${c}20;border:1px solid ${c}50;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .22s var(--out-expo)">
         <i data-lucide="pause" style="width:15px;height:15px;color:${c}"></i>
       </button>
-      <button id="pex-${id}" onclick="restoreTimer('${id}')" style="width:40px;height:40px;border-radius:13px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .22s var(--out-expo)" title="Agrandir">
+      <button type="button" id="pex-${id}" onclick="restoreTimer('${id}')" style="width:40px;height:40px;border-radius:13px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .22s var(--out-expo)" title="Agrandir">
         <i data-lucide="maximize-2" style="width:14px;height:14px;color:rgba(255,255,255,.4)"></i>
       </button>
-      <button id="ps2-${id}" style="width:40px;height:40px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s" title="Arrêter">
+      <button type="button" id="ps2-${id}" style="width:40px;height:40px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s" title="Arrêter">
         <i data-lucide="square" style="width:13px;height:13px;color:rgba(255,255,255,.3)"></i>
       </button>
     </div>`;
@@ -5420,7 +5565,7 @@ function renderStats(){
   countAnim(document.getElementById('s-month'),pct,'%',700);
 
   const days14=Array.from({length:14},(_,i)=>{const d=new Date(today);d.setDate(d.getDate()-13+i);return d;});
-  const bv=days14.map(d=>{const s=d.toISOString().split('T')[0];const n=habits.filter(h=>isDone(h,s)).length;return{s,n,pct:habits.length?n/habits.length:0,d};});
+  const bv=days14.map(d=>{const s=localDateKey(d);const n=habits.filter(h=>isDone(h,s)).length;return{s,n,pct:habits.length?n/habits.length:0,d};});
   const avg=bv.length?Math.round(bv.reduce((a,v)=>a+v.pct,0)/bv.length*100):0;
   const ae=document.getElementById('s-avg');if(ae)ae.textContent=`moy. ${avg}%`;
   const dnames=['D','L','M','M','J','V','S'];
@@ -5456,7 +5601,7 @@ function renderStats(){
     html+=`<div style="display:flex;align-items:center;gap:${GAP}px;margin-bottom:${GAP}px">
       <div style="width:${NW}px;flex-shrink:0;display:flex;align-items:center;gap:4px;overflow:hidden">
         <div style="width:5px;height:5px;border-radius:50%;background:${h.color};flex-shrink:0;box-shadow:0 0 5px ${h.color}99"></div>
-        <span style="font-size:8px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${h.name}</span>
+        <span style="font-size:8px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHTML(h.name)}</span>
         ${str2>0?`<span style="font-size:7px;color:${h.color};flex-shrink:0;display:inline-flex;align-items:center;gap:1px"><svg viewBox="0 0 10 12" fill="none" style="width:7px;height:7px"><path d="M5 0.5C5 0.5 7.5 3 7.5 5.5C7.5 6.8 6.8 7.5 5.8 7.5C6 6.8 5.7 5.8 4.8 5.3C4.8 6.5 3.2 7.5 3.2 8.8C3.2 10.1 4.1 11 5 11C6.8 11 8.5 9.8 8.5 8C8.5 5.2 6.5 2.3 5 0.5Z" fill="${h.color}"/></svg>${str2}</span>`:''}
       </div>`;
     for(let d=1;d<=dim;d++){
@@ -6609,73 +6754,6 @@ initShockwaves();
 initOrbParallax();
 
 // ══════════════════════════════════════════════
-// FIX 5 — Migration localStorage unifiée
-// Un seul store de données, l'univers = skin uniquement
-// Si SL et SAO ont des données séparées, on fusionne au boot
-// ══════════════════════════════════════════════
-(function migrateUnifiedStore(){
-  const KEY_SL='hr2_data', KEY_SAO='hr2_data_sao', KEY_DONE='lk_merged_v2';
-  if(localStorage.getItem(KEY_DONE))return;
-  try{
-    const slRaw=JSON.parse(localStorage.getItem(KEY_SL)||'[]');
-    const saoRaw=JSON.parse(localStorage.getItem(KEY_SAO)||'[]');
-    // Rien à faire si un seul store est peuplé
-    const hasSL=slRaw.some(i=>i.name!=null||i.total_xp!=null);
-    const hasSAO=saoRaw.some(i=>i.name!=null||i.total_xp!=null);
-    if(!hasSL||!hasSAO){localStorage.setItem(KEY_DONE,'1');return;}
-
-    // Fusionner le pdata — garder le XP le plus élevé
-    const slPd=slRaw.find(i=>i.total_xp!=null)||{total_xp:0};
-    const saoPd=saoRaw.find(i=>i.total_xp!=null)||{total_xp:0};
-    const mergedXp=Math.max(slPd.total_xp||0, saoPd.total_xp||0);
-
-    // Fusionner les habits — dédupliqués par nom, dates complétées combinées
-    const slHabits=slRaw.filter(i=>i.name!=null);
-    const saoHabits=saoRaw.filter(i=>i.name!=null);
-    const merged=[...slHabits];
-    saoHabits.forEach(function(sh){
-      const existing=merged.find(function(h){return h.name.toLowerCase()===sh.name.toLowerCase();});
-      if(!existing){merged.push(sh);}
-      else{
-        const dSet=new Set((existing.completed_dates||'').split(',').filter(Boolean));
-        (sh.completed_dates||'').split(',').filter(Boolean).forEach(function(d){dSet.add(d);});
-        existing.completed_dates=[...dSet].sort().join(',');
-        // Fusionner timestamps et resistance_log si disponibles
-        if(sh.completed_timestamps){
-          const tsSet=new Set((existing.completed_timestamps||'').split(',').filter(Boolean));
-          sh.completed_timestamps.split(',').filter(Boolean).forEach(function(t){tsSet.add(t);});
-          existing.completed_timestamps=[...tsSet].sort().join(',');
-        }
-      }
-    });
-
-    // Ne migrer que si ça enrichit les données actuelles
-    const curRaw=JSON.parse(localStorage.getItem(DKEY())||'[]');
-    const curHabits=curRaw.filter(function(i){return i.name!=null;});
-    const curXp=(curRaw.find(function(i){return i.total_xp!=null;})||{total_xp:0}).total_xp||0;
-    const wouldImprove=merged.length>curHabits.length||mergedXp>curXp;
-
-    if(wouldImprove){
-      const curSubtasks=subtasks.length?subtasks:curRaw.filter(function(i){return i.text!=null;});
-      const newPdata={__id:(slPd.__id||saoPd.__id||genId()),total_xp:mergedXp,level:1};
-      const finalData=[...merged,...curSubtasks,newPdata];
-      save(finalData);
-
-      // Recharger l'état mémoire
-      const reloaded=load();
-      habits=reloaded.filter(function(i){return i.name!=null;});
-      subtasks=reloaded.filter(function(i){return i.text!=null;});
-      pdata=reloaded.find(function(i){return i.total_xp!=null;})||null;
-      renderAll();updateLevel();updateHeroSummary();
-      toast('Données SL + SAO fusionnées · '+merged.length+' quêtes · '+mergedXp+' XP');
-    }
-    localStorage.setItem(KEY_DONE,'1');
-  }catch(e){
-    localStorage.setItem(KEY_DONE,'1');
-  }
-})();
-
-// ══════════════════════════════════════════════
 // ██████████████████████████████████████████████
 // LEVELINK INTELLIGENCE ENGINE v1.0
 // 1. Pattern Recognition — Rapport de Mission
@@ -6734,7 +6812,7 @@ function analysePatterns(){
   const days90=[];
   for(let i=89;i>=0;i--){
     const d=new Date(today);d.setDate(d.getDate()-i);
-    const s=d.toISOString().split('T')[0];
+    const s=localDateKey(d);
     const total=habits.length;
     const done=habits.filter(h=>dates(h).includes(s)).length;
     const dow=d.getDay();
@@ -6907,7 +6985,7 @@ function generateMissionReport(p){
         <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(41,121,255,.06);border:1px solid rgba(41,121,255,.12)">
           <span style="font-size:20px;flex-shrink:0">${p.topHabit.h.icon||'⚔️'}</span>
           <div style="flex:1;min-width:0">
-            <p style="font-size:13px;font-weight:700;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.topHabit.h.name}</p>
+            <p style="font-size:13px;font-weight:700;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(p.topHabit.h.name)}</p>
             <p style="font-size:11px;color:var(--A)">${Math.round(p.topHabit.rate*100)}% de réussite · Série : ${p.topHabit.str}j</p>
           </div>
           <span style="font-family:'Orbitron',monospace;font-size:7px;font-weight:700;padding:4px 8px;border-radius:99px;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.25);color:#4ade80;white-space:nowrap">CHAMPIONNE</span>
@@ -6916,7 +6994,7 @@ function generateMissionReport(p){
         <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.1)">
           <span style="font-size:20px;flex-shrink:0">${p.weakHabit.h.icon||'⚔️'}</span>
           <div style="flex:1;min-width:0">
-            <p style="font-size:13px;font-weight:700;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.weakHabit.h.name}</p>
+            <p style="font-size:13px;font-weight:700;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(p.weakHabit.h.name)}</p>
             <p style="font-size:11px;color:#ef4444">${Math.round(p.weakHabit.rate*100)}% de réussite · Priorité : renforcer</p>
           </div>
           <span style="font-family:'Orbitron',monospace;font-size:7px;font-weight:700;padding:4px 8px;border-radius:99px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18);color:#ef4444;white-space:nowrap">À RENFORCER</span>
@@ -7030,7 +7108,7 @@ function renderAnalyse(){
             <span style="font-size:19px;flex-shrink:0">${hs.h.icon||'⚔️'}</span>
             <div style="flex:1;min-width:0">
               <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
-                <span style="font-size:13px;font-weight:700;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${hs.h.name}</span>
+                <span style="font-size:13px;font-weight:700;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHTML(hs.h.name)}</span>
                 <span style="font-family:'Orbitron',monospace;font-size:9px;font-weight:700;color:${c};flex-shrink:0;margin-left:8px">${pct}%</span>
               </div>
               <div class="a-bar">
@@ -7103,10 +7181,23 @@ function renderAnalyse(){
 
   // ── Résistance historique ──
   if(resistEl){
-    const allResistLogs=habits.flatMap(h=>(h.resistance_log||'').split(',').filter(Boolean).map(Number));
-    const heroicCount=allResistLogs.filter(r=>r>=2.0).length;
-    const hardCount=allResistLogs.filter(r=>r>=1.5&&r<2.0).length;
-    const hasHistory=allResistLogs.length>0;
+    const resistanceByDay=new Map();
+    habits.forEach(h=>{
+      const logged=Array.isArray(h.completion_log)?h.completion_log.filter(entry=>entry&&entry.date&&Number.isFinite(Number(entry.resistance))):[];
+      if(logged.length){
+        logged.forEach(entry=>resistanceByDay.set(entry.date,Math.max(resistanceByDay.get(entry.date)||1,Number(entry.resistance))));
+        return;
+      }
+      const completionDates=dates(h);
+      (h.resistance_log||'').split(',').filter(Boolean).map(Number).forEach((resistance,index)=>{
+        const day=completionDates[index];
+        if(day&&Number.isFinite(resistance))resistanceByDay.set(day,Math.max(resistanceByDay.get(day)||1,resistance));
+      });
+    });
+    const resistanceDays=[...resistanceByDay.values()];
+    const heroicCount=resistanceDays.filter(r=>r>=2.2).length;
+    const hardCount=resistanceDays.filter(r=>r>=1.7&&r<2.2).length;
+    const hasHistory=resistanceDays.length>0;
     const resist=resistanceLabel(p.resistNow);
     const now2=new Date();
     const hh=now2.getHours(),dow=now2.getDay();
@@ -7126,12 +7217,12 @@ function renderAnalyse(){
           <div style="padding:12px;border-radius:12px;background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.22);animation:aBlockIn .5s var(--out-expo) .1s both">
             <p style="font-family:'Orbitron',monospace;font-size:6.5px;font-weight:700;letter-spacing:1.5px;color:#ff6b35;margin-bottom:5px">JOURS HÉROÏQUES</p>
             <p style="font-size:28px;font-weight:900;color:var(--t1);line-height:1;animation:aNumCount .5s var(--out-expo) .18s both">${heroicCount}</p>
-            <p style="font-size:10px;color:var(--t3);margin-top:3px">×2.0 ou plus</p>
+            <p style="font-size:10px;color:var(--t3);margin-top:3px">×2.2 ou plus</p>
           </div>
           <div style="padding:12px;border-radius:12px;background:rgba(255,171,64,.08);border:1px solid rgba(255,171,64,.2);animation:aBlockIn .5s var(--out-expo) .18s both">
             <p style="font-family:'Orbitron',monospace;font-size:6.5px;font-weight:700;letter-spacing:1.5px;color:#ffab40;margin-bottom:5px">EFFORTS DIFFICILES</p>
             <p style="font-size:28px;font-weight:900;color:var(--t1);line-height:1;animation:aNumCount .5s var(--out-expo) .24s both">${hardCount}</p>
-            <p style="font-size:10px;color:var(--t3);margin-top:3px">×1.5 à ×1.99</p>
+            <p style="font-size:10px;color:var(--t3);margin-top:3px">×1.7 à ×2.19</p>
           </div>
         </div>`
       :'')+
@@ -7191,14 +7282,6 @@ function injectNegotiationButtons(){
   });
 }
 
-// Patcher renderAll pour injecter les boutons après render
-const _origRenderAll=renderAll;
-function renderAllPatched(){
-  _origRenderAll.call(this);
-  // Délai pour laisser le DOM se mettre à jour
-  setTimeout(injectNegotiationButtons,80);
-}
-
 // Modal de négociation
 function openNegotiation(habitId){
   const h=habits.find(x=>x.__id===habitId);if(!h)return;
@@ -7231,7 +7314,7 @@ function openNegotiation(habitId){
       <div style="width:44px;height:44px;border-radius:13px;background:${c}16;border:1px solid ${c}30;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${h.icon||'⚔️'}</div>
       <div>
         <p style="font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:2px;color:#ff6d00;margin-bottom:2px">${isSAO?'MODIFICATION DE MISSION':'NÉGOCIATION DE QUÊTE'}</p>
-        <p style="font-size:15px;font-weight:700;color:var(--t1)">${h.name}</p>
+        <p style="font-size:15px;font-weight:700;color:var(--t1)">${escapeHTML(h.name)}</p>
       </div>
     </div>
 
@@ -7248,7 +7331,7 @@ function openNegotiation(habitId){
     <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
 
       <!-- Option 1 : version allégée -->
-      <button onclick="acceptNegotiation('${habitId}','light')" style="
+      <button type="button" onclick="acceptNegotiation('${habitId}','light')" style="
         display:flex;align-items:center;gap:12px;padding:14px;
         border-radius:14px;background:rgba(41,121,255,.08);border:1px solid rgba(41,121,255,.2);
         text-align:left;cursor:pointer;width:100%;
@@ -7265,7 +7348,7 @@ function openNegotiation(habitId){
       </button>
 
       <!-- Option 2 : repos mérité -->
-      <button onclick="acceptNegotiation('${habitId}','rest')" style="
+      <button type="button" onclick="acceptNegotiation('${habitId}','rest')" style="
         display:flex;align-items:center;gap:12px;padding:14px;
         border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
         text-align:left;cursor:pointer;width:100%;
@@ -7282,7 +7365,7 @@ function openNegotiation(habitId){
       </button>
     </div>
 
-    <button onclick="document.getElementById('neg-modal').remove()" style="
+    <button type="button" onclick="document.getElementById('neg-modal').remove()" style="
       width:100%;padding:13px;border-radius:var(--r);
       background:transparent;border:1px solid rgba(255,255,255,.06);
       color:var(--t3);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;
@@ -7342,7 +7425,7 @@ window.acceptNegotiation=function(habitId,mode){
       const x=new Date(d+'T00:00:00');
       const day=(x.getDay()+6)%7;
       x.setDate(x.getDate()-day);
-      return x.toISOString().slice(0,10);
+      return localDateKey(x);
     };
     const curWeek=weekKey(TODAY);
     const alreadyUsedThisWeek=rds.some(d=>weekKey(d)===curWeek);
@@ -7352,7 +7435,10 @@ window.acceptNegotiation=function(habitId,mode){
     }
     if(!rds.includes(TODAY)){rds.push(TODAY);h.rest_days=rds.join(',');}
     const ds=dates(h);
-    if(!ds.includes(TODAY)){ds.push(TODAY);h.completed_dates=ds.join(',');}
+    if(!ds.includes(TODAY)){
+      ds.push(TODAY);h.completed_dates=ds.join(',');
+      appendCompletionRecord(h,{xp:0,source:'rest'});
+    }
     syncAll();
     setTimeout(()=>{
       const wrap=document.querySelector('.hcw[data-id="'+habitId+'"]');
@@ -7370,17 +7456,6 @@ window.acceptNegotiation=function(habitId,mode){
     setTimeout(()=>renderAll(),220);
   }
 };
-
-// ── Patcher renderAll pour injecter les boutons ──
-// (On doit le faire après la déclaration de renderAll)
-const _raf_orig=window.renderAll||renderAll;
-window.renderAll=function(){
-  _raf_orig.call(this);
-  setTimeout(injectNegotiationButtons,90);
-};
-
-// Appel initial au boot
-setTimeout(injectNegotiationButtons,800);
 
 // ── CSS additionnel pour la page Analyse + animations fluides ──
 (function(){
@@ -7570,13 +7645,6 @@ setTimeout(injectNegotiationButtons,800);
   document.head.appendChild(s);
 })();
 
-// Définition des fonctions de feedback et capteurs
-function triggerHit() {
-  document.body.classList.add('hit-impact');
-  if (navigator.vibrate) navigator.vibrate(20);
-  setTimeout(() => document.body.classList.remove('hit-impact'), 180);
-}
-
 function initImmersiveSensors() {
   console.log("Système sensoriel Levelink : OK");
   // C'est ici qu'on pourra ajouter le gyroscope plus tard
@@ -7616,7 +7684,7 @@ function openPresentation(){
   ov.style.cssText='position:fixed;inset:0;z-index:250;background:#000;overflow:hidden';
   ov.innerHTML=`<div id="pres-glow" style="position:absolute;top:22%;left:50%;width:500px;height:500px;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;transition:background 1s ease-out"></div><div id="pres-a" style="position:absolute;inset:0"></div><div id="pres-b" style="position:absolute;inset:0"></div>
   <div id="pres-dots" style="position:absolute;top:max(22px,env(safe-area-inset-top,18px));left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10"></div>
-  <button id="pres-close" style="position:absolute;top:max(18px,env(safe-area-inset-top,14px));right:18px;width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;color:rgba(255,255,255,.3);transition:all .2s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
+  <button type="button" id="pres-close" style="position:absolute;top:max(18px,env(safe-area-inset-top,14px));right:18px;width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;color:rgba(255,255,255,.3);transition:all .2s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
 
   function closePres(){
     ov.style.transition='opacity .35s ease-out';ov.style.opacity='0';
@@ -7644,11 +7712,11 @@ function openPresentation(){
       <p class="pi" style="opacity:0;transform:translateY(8px);transition:opacity .4s ease-out .36s,transform .45s ${ease} .36s;font-size:14px;font-weight:600;color:rgba(122,156,200,.8);text-align:center;line-height:1.6;max-width:340px;margin-bottom:${s.ft?'18':'26'}px">${s.desc}</p>
       ${s.ft?`<div style="display:flex;flex-direction:column;gap:8px;width:100%;max-width:320px;margin-bottom:26px">${ftHTML}</div>`:''}
       <div class="pi" style="opacity:0;transform:translateY(10px);transition:opacity .4s ease-out ${s.ft?.65+s.ft.length*.08:.48}s,transform .5s ${ease} ${s.ft?.65+s.ft.length*.08:.48}s;display:flex;gap:12px;align-items:center;width:100%;max-width:320px;justify-content:center">
-        ${idx>0?`<button onclick="presNav(${idx-1},-1)" style="width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:transform .2s,background .2s"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="15 18 9 12 15 6"/></svg></button>`:''}
-        ${s.cta?`<button onclick="closePres();setTimeout(()=>openSheet('habit'),200)" style="flex:1;padding:15px;border-radius:16px;background:linear-gradient(135deg,${s.color},${s.color}cc);border:none;color:#000;font-family:'Orbitron',monospace;font-size:10px;font-weight:900;letter-spacing:2px;cursor:pointer;box-shadow:0 8px 28px ${s.color}44;transition:transform .2s,box-shadow .2s">CRÉER MA PREMIÈRE QUÊTE</button>`
-        :`<button onclick="presNav(${idx+1},1)" style="flex:1;padding:15px;border-radius:16px;background:${s.color}15;border:1px solid ${s.color}30;color:${s.color};font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:transform .2s,background .2s;display:flex;align-items:center;justify-content:center;gap:8px">SUIVANT <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="9 18 15 12 9 6"/></svg></button>`}
+        ${idx>0?`<button type="button" onclick="presNav(${idx-1},-1)" style="width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:transform .2s,background .2s"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="15 18 9 12 15 6"/></svg></button>`:''}
+        ${s.cta?`<button type="button" onclick="closePres();setTimeout(()=>openSheet('habit'),200)" style="flex:1;padding:15px;border-radius:16px;background:linear-gradient(135deg,${s.color},${s.color}cc);border:none;color:#000;font-family:'Orbitron',monospace;font-size:10px;font-weight:900;letter-spacing:2px;cursor:pointer;box-shadow:0 8px 28px ${s.color}44;transition:transform .2s,box-shadow .2s">CRÉER MA PREMIÈRE QUÊTE</button>`
+        :`<button type="button" onclick="presNav(${idx+1},1)" style="flex:1;padding:15px;border-radius:16px;background:${s.color}15;border:1px solid ${s.color}30;color:${s.color};font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:transform .2s,background .2s;display:flex;align-items:center;justify-content:center;gap:8px">SUIVANT <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="9 18 15 12 9 6"/></svg></button>`}
       </div>
-      ${!s.cta?`<button class="pi" onclick="closePres()" style="opacity:0;transition:opacity .3s ease-out .8s;margin-top:14px;background:none;border:none;color:rgba(90,130,180,.35);font-family:'Orbitron',monospace;font-size:7px;font-weight:700;letter-spacing:2px;cursor:pointer;padding:8px">PASSER</button>`:''}
+      ${!s.cta?`<button type="button" class="pi" onclick="closePres()" style="opacity:0;transition:opacity .3s ease-out .8s;margin-top:14px;background:none;border:none;color:rgba(90,130,180,.35);font-family:'Orbitron',monospace;font-size:7px;font-weight:700;letter-spacing:2px;cursor:pointer;padding:8px">PASSER</button>`:''}
     </div>`;
   }
 
@@ -7752,9 +7820,8 @@ function saveBet(bet){
 
 function checkBetProgress(){
   const bet=getBet();if(!bet||!bet.active)return;
-  const startDate=new Date(bet.start_date);
-  const now=new Date(TODAY);
-  const daysPassed=Math.floor((now-startDate)/86400000);
+  const startDate=dateFromKey(bet.start_date);
+  const daysPassed=Math.max(0,daysBetween(bet.start_date,TODAY));
   
   // Check if bet period is over
   if(daysPassed>=bet.days){
@@ -7767,7 +7834,7 @@ function checkBetProgress(){
   for(let d=0;d<daysPassed;d++){
     const checkDate=new Date(startDate);
     checkDate.setDate(checkDate.getDate()+d);
-    const ds=checkDate.toISOString().split('T')[0];
+    const ds=localDateKey(checkDate);
     const allDone=habits.length>0&&habits.every(h=>dates(h).includes(ds));
     if(!allDone){
       // FAILED — missed a day
@@ -7844,7 +7911,7 @@ function openBetSheet(){
     <div class="sheet-handle"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
       <h2 style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:1px;color:#fbbf24">PARIER SUR MOI</h2>
-      <button onclick="closeSheet()" class="btn-icon"><i data-lucide="x" style="width:15px;height:15px"></i></button>
+      <button type="button" onclick="closeSheet()" class="btn-icon"><i data-lucide="x" style="width:15px;height:15px"></i></button>
     </div>
     
     <div style="padding:14px;border-radius:16px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);margin-bottom:20px">
@@ -7867,7 +7934,7 @@ function openBetSheet(){
     <p class="lbl">CHOISIS TA MISE</p>
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
       ${presets.map((p,i)=>`
-      <button onclick="placeBet(${p.xp},${p.days})" style="
+      <button type="button" onclick="placeBet(${p.xp},${p.days})" style="
         display:flex;align-items:center;gap:14px;padding:16px;
         border-radius:16px;background:rgba(251,191,36,${.04+i*.03});
         border:1px solid rgba(251,191,36,${.12+i*.06});
@@ -7921,9 +7988,8 @@ window.placeBet=function(xp,days){
 
 function openBetDetail(){
   const bet=getBet();if(!bet||!bet.active)return;
-  const startDate=new Date(bet.start_date);
-  const now=new Date(TODAY);
-  const daysPassed=Math.floor((now-startDate)/86400000);
+  const startDate=dateFromKey(bet.start_date);
+  const daysPassed=Math.max(0,daysBetween(bet.start_date,TODAY));
   const daysLeft=Math.max(0,bet.days-daysPassed);
   const pct=Math.round((daysPassed/bet.days)*100);
   
@@ -7935,9 +8001,9 @@ function openBetDetail(){
   for(let d=0;d<bet.days;d++){
     const checkDate=new Date(startDate);
     checkDate.setDate(checkDate.getDate()+d);
-    const ds=checkDate.toISOString().split('T')[0];
+    const ds=localDateKey(checkDate);
     const isToday=ds===TODAY;
-    const isPast=new Date(ds)<now&&!isToday;
+    const isPast=daysBetween(ds,TODAY)>0;
     const done=habits.length>0&&habits.every(h=>dates(h).includes(ds));
     
     const bg=done?'#4ade80':isToday?(todayDone?'#4ade80':'rgba(251,191,36,.6)'):'rgba(255,255,255,.06)';
@@ -7955,7 +8021,7 @@ function openBetDetail(){
     <div class="sheet-handle"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
       <h2 style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:1px;color:#fbbf24">PARI EN COURS</h2>
-      <button onclick="closeSheet()" class="btn-icon"><i data-lucide="x" style="width:15px;height:15px"></i></button>
+      <button type="button" onclick="closeSheet()" class="btn-icon"><i data-lucide="x" style="width:15px;height:15px"></i></button>
     </div>
     
     <div style="padding:18px;border-radius:18px;background:linear-gradient(135deg,rgba(40,30,5,.95),rgba(20,15,3,.98));border:1px solid rgba(251,191,36,.2);margin-bottom:16px;position:relative;overflow:hidden">
@@ -7984,7 +8050,7 @@ function openBetDetail(){
       <p style="font-size:12px;font-weight:600;color:${todayDone?'#4ade80':'#ef4444'}">${todayDone?'Aujourd\'hui : Toutes les quêtes sont complétées ✓':'Aujourd\'hui : Des quêtes restent à compléter'}</p>
     </div>
     
-    <button onclick="if(confirm('Abandonner le pari ? Tu perdras ${bet.xp} XP.')){resolveBet(false);closeSheet();}" style="width:100%;padding:12px;border-radius:var(--r);background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.12);color:#ef4444;font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1.5px;cursor:pointer;transition:all .2s">ABANDONNER LE PARI</button>
+    <button type="button" onclick="if(confirm('Abandonner le pari ? Tu perdras ${bet.xp} XP.')){resolveBet(false);closeSheet();}" style="width:100%;padding:12px;border-radius:var(--r);background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.12);color:#ef4444;font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1.5px;cursor:pointer;transition:all .2s">ABANDONNER LE PARI</button>
     <div style="height:8px"></div>
   </div>`;
   
@@ -8005,8 +8071,7 @@ function updateBetUI(){
   
   if(activeBet&&activeBet.active){
     // Show active bet chip
-    const startDate=new Date(activeBet.start_date);
-    const daysPassed=Math.floor((new Date(TODAY)-startDate)/86400000);
+    const daysPassed=Math.max(0,daysBetween(activeBet.start_date,TODAY));
     const daysLeft=Math.max(0,activeBet.days-daysPassed);
     const todayDone=habits.length>0&&habits.every(h=>dates(h).includes(TODAY));
     
@@ -8028,13 +8093,6 @@ function updateBetUI(){
     btn.style.display=(pdata&&pdata.total_xp>=50&&habits.length>0)?'flex':'none';
   }
 }
-
-// Patch renderAll to include bet UI
-const _betOrigRenderAll=window.renderAll||renderAll;
-window.renderAll=renderAll=function(){
-  _betOrigRenderAll();
-  updateBetUI();
-};
 
 // ══════════════════════════════════════════════
 // ENHANCED ENGINE v3.0 — RANK EVOLUTION
@@ -8066,6 +8124,7 @@ const RANK_PARTICLES = {
   ctx: null,
   particles: [],
   raf: null,
+  running: false,
   currentRank: 'E',
   intensity: 0,
   targetIntensity: 0,
@@ -8121,8 +8180,9 @@ function initRankParticles() {
   }
   
   function animateParticles(ts) {
-    RANK_PARTICLES.raf = requestAnimationFrame(animateParticles);
-    
+    if(!RANK_PARTICLES.running||document.hidden||document.body.classList.contains('low-perf')){
+      RANK_PARTICLES.running=false;RANK_PARTICLES.raf=null;return;
+    }
     const ctx = RANK_PARTICLES.ctx;
     const W = canvas.width, H = canvas.height;
     const cfg = RANK_PARTICLES.configs[RANK_PARTICLES.currentRank] || RANK_PARTICLES.configs.E;
@@ -8130,7 +8190,9 @@ function initRankParticles() {
     // Smooth intensity transition
     RANK_PARTICLES.intensity += (RANK_PARTICLES.targetIntensity - RANK_PARTICLES.intensity) * 0.02;
     
-    if (RANK_PARTICLES.intensity < 0.01) return;
+    if (RANK_PARTICLES.intensity < 0.01&&RANK_PARTICLES.targetIntensity<0.01){
+      ctx.clearRect(0,0,W,H);RANK_PARTICLES.running=false;RANK_PARTICLES.raf=null;return;
+    }
     
     ctx.clearRect(0, 0, W, H);
     ctx.globalAlpha = RANK_PARTICLES.intensity;
@@ -8206,8 +8268,9 @@ function initRankParticles() {
         for (let j = i + 1; j < Math.min(RANK_PARTICLES.particles.length, 40); j++) {
           const b = RANK_PARTICLES.particles[j];
           const dx = a.x - b.x, dy = a.y - b.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < maxDist) {
+          const distSq = dx * dx + dy * dy;
+          if (distSq < maxDist * maxDist) {
+            const dist=Math.sqrt(distSq);
             ctx.globalAlpha = RANK_PARTICLES.intensity * (1 - dist / maxDist) * 0.15;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -8218,10 +8281,28 @@ function initRankParticles() {
       }
       ctx.restore();
     }
+    RANK_PARTICLES.raf=requestAnimationFrame(animateParticles);
+  }
+
+  function startParticles(){
+    if(RANK_PARTICLES.running||document.hidden||document.body.classList.contains('low-perf'))return;
+    RANK_PARTICLES.running=true;
+    RANK_PARTICLES.raf=requestAnimationFrame(animateParticles);
+  }
+  function stopParticles(){
+    RANK_PARTICLES.running=false;
+    if(RANK_PARTICLES.raf)cancelAnimationFrame(RANK_PARTICLES.raf);
+    RANK_PARTICLES.raf=null;
+    RANK_PARTICLES.ctx.clearRect(0,0,canvas.width,canvas.height);
   }
   
   RANK_PARTICLES.spawn = spawnParticles;
-  RANK_PARTICLES.raf = requestAnimationFrame(animateParticles);
+  RANK_PARTICLES.start=startParticles;
+  RANK_PARTICLES.stop=stopParticles;
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden)stopParticles();
+    else if(RANK_PARTICLES.targetIntensity>0)startParticles();
+  });
 }
 
 // ── Apply rank to DOM ──
@@ -8258,8 +8339,10 @@ function applyRankEvolution(rank) {
     if (cfg && cfg.count > 0) {
       canvas.classList.add('active');
       if (RANK_PARTICLES.spawn) RANK_PARTICLES.spawn(effectiveRank);
+      if (RANK_PARTICLES.start) RANK_PARTICLES.start();
     } else {
       canvas.classList.remove('active');
+      if (RANK_PARTICLES.stop) RANK_PARTICLES.stop();
     }
   }
   
@@ -8291,25 +8374,6 @@ updateLevel = function() {
   }
 };
 
-// ── Smooth scroll with orb parallax ──
-let _scrollRAF = 0;
-function initSmoothScroll() {
-  const area = document.getElementById('scroll-area');
-  if (!area) return;
-  area.addEventListener('scroll', () => {
-    if (_scrollRAF) return;
-    _scrollRAF = requestAnimationFrame(() => {
-      _scrollRAF = 0;
-      const y = area.scrollTop;
-      document.querySelectorAll('.orb').forEach((o, i) => {
-        const speed = [0.15, 0.28, 0.42][i] || 0.2;
-        o.style.setProperty('--ty', `${Math.round(y * speed)}px`);
-        o.style.setProperty('--tx', `${Math.round((i % 2 === 0 ? 1 : -1) * y * speed * .15)}px`);
-      });
-    });
-  }, { passive: true });
-}
-
 // ══════════════════════════════════════════════
 // BOOT — Initialize all enhanced systems
 // ══════════════════════════════════════════════
@@ -8323,9 +8387,6 @@ function initSmoothScroll() {
     const info = lvlInfo(pdata.total_xp || 0);
     applyRankEvolution(info.rank);
   }
-  
-  // Smooth scroll
-  initSmoothScroll();
   
   // Observe cards
   requestAnimationFrame(() => observeCards());
