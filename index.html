@@ -3400,8 +3400,14 @@ button.press-release,.fab.press-release,.tab-btn.press-release,.section-cta.pres
 @keyframes introExitLineV4{0%{opacity:0;transform:scaleX(.08)}35%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
 
 /* Thème Solo Leveling verrouillé sur sa palette bleue. */
-#theme-color-setting.solo-locked #theme-color-grid{filter:saturate(.25)}
-#theme-color-setting.solo-locked [data-tbtn]{cursor:not-allowed!important;pointer-events:none;box-shadow:none!important;transform:none!important}
+#theme-color-setting.solo-locked #theme-color-grid{filter:saturate(.12) grayscale(.72)}
+#theme-color-setting.solo-locked [data-tbtn]{
+  position:relative;cursor:not-allowed!important;pointer-events:none;box-shadow:none!important;transform:none!important;
+  text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:rgba(255,255,255,.55);
+}
+#theme-color-setting.solo-locked [data-tbtn]::after{
+  content:'◆';position:absolute;right:4px;top:3px;font-size:5px;color:rgba(190,220,255,.5);text-decoration:none;
+}
 .theme-lock-note{display:none;margin-top:9px;align-items:center;gap:7px;color:rgba(130,177,255,.55);font:700 7px/1.35 'Orbitron',monospace;letter-spacing:1px}
 #theme-color-setting.solo-locked .theme-lock-note{display:flex}
 .theme-lock-icon{width:13px;height:13px;display:inline-grid;place-items:center;border:1px solid rgba(41,121,255,.3);border-radius:4px;color:#82b1ff;font-size:8px}
@@ -3924,7 +3930,7 @@ button.press-release,.fab.press-release,.tab-btn.press-release,.section-cta.pres
           <button type="button" onclick="setTheme('green')"  data-tbtn="green"  style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(0,200,83,.08);color:#00c853;transition:all .22s var(--spring);opacity:.5">VERT</button>
           <button type="button" onclick="setTheme('orange')" data-tbtn="orange" style="padding:10px 0;border-radius:11px;border:2px solid transparent;font-family:'Orbitron',monospace;font-size:7.5px;font-weight:700;cursor:pointer;background:rgba(255,109,0,.1);color:#ff6d00;transition:all .22s var(--spring);opacity:.5">ORNG</button>
         </div>
-        <p class="theme-lock-note"><span class="theme-lock-icon">◆</span><span>PALETTE VERROUILLÉE EN SOLO LEVELING</span></p>
+        <p class="theme-lock-note"><span class="theme-lock-icon">◆</span><span>COULEURS PREMIUM — ABONNEMENT REQUIS</span></p>
       </div>
       <div style="margin-bottom:24px">
         <label class="lbl">Son de fin</label>
@@ -4500,8 +4506,16 @@ function countAnim(el,to,suf='',dur=650){
 // ══════════════════════════════════════════════
 // SETTINGS
 // ══════════════════════════════════════════════
+function hasThemeColorEntitlement(){
+  const entitlement=settings?.entitlements?.theme_colors;
+  if(entitlement!==true)return false;
+  const expiresAt=settings?.entitlements?.theme_colors_expires_at;
+  if(!expiresAt)return true;
+  const expiry=Date.parse(expiresAt);
+  return Number.isFinite(expiry)&&expiry>Date.now();
+}
 function applySettings(){
-  const soloLocked=getU()==='sl';
+  const soloLocked=getU()==='sl'&&!hasThemeColorEntitlement();
   const t=soloLocked?'blue':(settings.theme||'blue');
   document.documentElement.setAttribute('data-t',t==='blue'?'':t);
   const themeSetting=document.getElementById('theme-color-setting');
@@ -4511,8 +4525,8 @@ function applySettings(){
     b.disabled=soloLocked;
     b.setAttribute('aria-disabled',soloLocked?'true':'false');
     b.title=soloLocked?'Palette verrouillée en Solo Leveling':'';
-    b.style.opacity=soloLocked?(on?'.72':'.18'):(on?'1':'.5');
-    b.style.borderColor=on?'currentColor':'transparent';
+    b.style.opacity=soloLocked?'.2':(on?'1':'.5');
+    b.style.borderColor=soloLocked?'transparent':(on?'currentColor':'transparent');
     b.style.transform=soloLocked?'none':(on?'scale(1.03)':'scale(1)');
   });
   const snd=settings.sound!==false;
@@ -4527,8 +4541,8 @@ function applySettings(){
   if(inp&&document.activeElement!==inp)inp.value=settings.playerName||'';
 }
 window.setTheme=t=>{
-  if(getU()==='sl'){
-    toast('Palette verrouillée en Solo Leveling');
+  if(getU()==='sl'&&!hasThemeColorEntitlement()){
+    toast('Couleurs disponibles avec l’abonnement Premium');
     applySettings();
     return;
   }
