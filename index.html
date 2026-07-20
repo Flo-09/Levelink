@@ -3209,6 +3209,157 @@ input, textarea, select {
 .bpbar-ms.unreached .bpbar-ms-dot{background:rgba(255,255,255,.1)}
 .bpbar-ms.unreached .bpbar-ms-txt{color:rgba(255,255,255,.15)}
 
+/* ═══════════════════════════════════════════════
+   MOTION SYSTEM v4 — tactile, lisible, sans ripple
+═══════════════════════════════════════════════ */
+:root{
+  --motion-spring:cubic-bezier(.22,1,.36,1);
+  --motion-smooth:cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes uiPressRelease{
+  0%{transform:translate3d(0,1px,0) scale(.972);filter:brightness(.92)}
+  48%{transform:translate3d(0,-1px,0) scale(1.018);filter:brightness(1.16)}
+  100%{transform:translate3d(0,0,0) scale(1);filter:brightness(1)}
+}
+@keyframes tabLiftV4{
+  0%{transform:translateY(2px) scale(.94);opacity:.65}
+  58%{transform:translateY(-2px) scale(1.1);opacity:1}
+  100%{transform:translateY(-1px) scale(1.06);opacity:1}
+}
+@keyframes cardRevealV4{
+  0%{opacity:0;transform:translate3d(0,12px,0) scale(.986)}
+  100%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes pageInRV4{
+  0%{opacity:0;transform:translate3d(16px,6px,0) scale(.992)}
+  100%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes pageInLV4{
+  0%{opacity:0;transform:translate3d(-16px,6px,0) scale(.992)}
+  100%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes pageOutLV4{
+  from{opacity:1;transform:translate3d(0,0,0)}
+  to{opacity:0;transform:translate3d(-8px,-2px,0)}
+}
+@keyframes pageOutRV4{
+  from{opacity:1;transform:translate3d(0,0,0)}
+  to{opacity:0;transform:translate3d(8px,-2px,0)}
+}
+
+/* Les anciens cercles de clic sont volontairement supprimés. */
+.rip,.tab-rip{display:none!important}
+
+button,.fab,.tab-btn,.section-cta,.tog-btn,.task-tog,.tmr-btn,.usp{
+  -webkit-tap-highlight-color:transparent;
+}
+button.is-pressing,.fab.is-pressing,.tab-btn.is-pressing,.section-cta.is-pressing,
+.tog-btn.is-pressing,.task-tog.is-pressing,.tmr-btn.is-pressing,.usp.is-pressing{
+  transform:translate3d(0,1px,0) scale(.972)!important;
+  filter:brightness(.93) saturate(1.08);
+  transition:transform 90ms ease-out,filter 90ms ease-out,box-shadow 90ms ease-out!important;
+}
+button.press-release,.fab.press-release,.tab-btn.press-release,.section-cta.press-release,
+.tog-btn.press-release,.task-tog.press-release,.tmr-btn.press-release,.usp.press-release{
+  animation:uiPressRelease 360ms var(--motion-spring) both!important;
+}
+
+.tab-btn.active svg{animation:tabLiftV4 340ms var(--motion-spring) both}
+.card-in{animation:cardRevealV4 380ms var(--motion-spring) both}
+
+/* Nouvelles transitions de page — plus courtes et sans grand balayage latéral. */
+@keyframes pageInR{0%{opacity:0;transform:translate3d(16px,6px,0) scale(.992)}100%{opacity:1;transform:none}}
+@keyframes pageInL{0%{opacity:0;transform:translate3d(-16px,6px,0) scale(.992)}100%{opacity:1;transform:none}}
+@keyframes pageOutL{0%{opacity:1;transform:none}100%{opacity:0;transform:translate3d(-8px,-2px,0)}}
+@keyframes pageOutR{0%{opacity:1;transform:none}100%{opacity:0;transform:translate3d(8px,-2px,0)}}
+
+/* ── Intro v3 : signal propre, CSS-only, sans secousse ni faux chargement ── */
+.intro-v3{
+  position:fixed;inset:0;z-index:9999;overflow:hidden;isolation:isolate;
+  display:grid;place-items:center;background:#02050b;color:#eaf4ff;
+  transition:opacity 520ms ease,transform 620ms var(--motion-smooth),filter 520ms ease;
+}
+.intro-v3::before{
+  content:'';position:absolute;inset:-20%;z-index:-3;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(41,121,255,.22),transparent 30%),
+    radial-gradient(circle at 32% 66%,rgba(124,77,255,.12),transparent 26%),
+    radial-gradient(circle at 72% 22%,rgba(41,182,246,.1),transparent 24%);
+  opacity:0;transform:scale(.9);
+}
+.intro-grid{
+  position:absolute;inset:0;z-index:-2;opacity:0;
+  background-image:linear-gradient(rgba(130,177,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(130,177,255,.055) 1px,transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(circle at 50% 45%,#000 8%,transparent 67%);
+  mask-image:radial-gradient(circle at 50% 45%,#000 8%,transparent 67%);
+}
+.intro-beam{
+  position:absolute;left:50%;top:0;width:1px;height:100%;z-index:-1;
+  background:linear-gradient(transparent,rgba(41,182,246,.5) 43%,rgba(41,121,255,.08) 62%,transparent);
+  opacity:0;transform:scaleY(.15);transform-origin:center;
+}
+.intro-stage{width:min(88vw,560px);display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px}
+.intro-sigil{position:relative;width:116px;height:116px;margin-bottom:30px;opacity:0;transform:scale(.72)}
+.intro-sigil svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 18px rgba(41,121,255,.28))}
+.intro-sigil .intro-outer{transform-origin:center;stroke-dasharray:42 14}
+.intro-sigil .intro-inner{transform-origin:center;stroke-dasharray:12 9}
+.intro-core{
+  position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;
+  background:#eaf8ff;box-shadow:0 0 0 6px rgba(41,182,246,.12),0 0 30px #29b6f6,0 0 68px rgba(41,121,255,.8);
+  transform:translate(-50%,-50%) scale(0);
+}
+.intro-wordmark{display:flex;align-items:center;justify-content:center;margin:0 0 13px;perspective:700px}
+.intro-v3 .il{
+  font-size:clamp(34px,8vw,58px);letter-spacing:clamp(3px,1vw,8px);
+  opacity:0;filter:none;transform:translate3d(0,16px,0);will-change:transform,opacity;
+}
+.intro-tag{margin:0;color:rgba(190,220,255,.48);font:600 10px/1.4 'Rajdhani',sans-serif;letter-spacing:5px;text-transform:uppercase;opacity:0;transform:translateY(8px)}
+.intro-status{width:min(270px,76vw);margin-top:34px;opacity:0;transform:translateY(8px)}
+.intro-status-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.intro-status-label{font:700 7px/1 'Orbitron',monospace;letter-spacing:2px;color:rgba(174,213,255,.42)}
+.intro-status-value{display:flex;align-items:center;gap:7px;font:700 7px/1 'Orbitron',monospace;letter-spacing:1.5px;color:#69d6ff}
+.intro-status-dot{width:5px;height:5px;border-radius:50%;background:#29b6f6;box-shadow:0 0 10px #29b6f6}
+.intro-track{height:2px;background:rgba(255,255,255,.055);overflow:hidden;border-radius:99px}
+.intro-fill{display:block;width:0;height:100%;background:linear-gradient(90deg,#2979ff,#29b6f6 58%,#b388ff);box-shadow:0 0 16px rgba(41,182,246,.7);transition:width 720ms var(--motion-smooth)}
+.intro-skip{
+  margin-top:24px;padding:8px 12px;border:0;background:transparent;color:rgba(190,220,255,.3);
+  font:700 7px/1 'Orbitron',monospace;letter-spacing:2px;cursor:pointer;opacity:0;
+}
+.intro-skip:focus-visible{outline:1px solid rgba(41,182,246,.65);outline-offset:4px;border-radius:6px}
+
+.intro-v3.is-live::before{animation:introAuraV3 2400ms ease-out both}
+.intro-v3.is-live .intro-grid{animation:introGridV3 2200ms ease-out both}
+.intro-v3.is-live .intro-beam{animation:introBeamV3 1100ms var(--motion-smooth) 100ms both}
+.intro-v3.is-live .intro-sigil{animation:introSigilV3 720ms var(--motion-spring) 220ms both}
+.intro-v3.is-live .intro-outer{animation:introRotateV3 9s linear 300ms infinite}
+.intro-v3.is-live .intro-inner{animation:introRotateReverseV3 6s linear 300ms infinite}
+.intro-v3.is-live .intro-core{animation:introCoreV3 700ms var(--motion-spring) 520ms both}
+.intro-v3.is-live .il{animation:introLetterV3 520ms var(--motion-spring) both;animation-delay:calc(650ms + var(--i) * 52ms)}
+.intro-v3.is-live .intro-tag{animation:introTextV3 520ms ease-out 1160ms both}
+.intro-v3.is-live .intro-status{animation:introTextV3 480ms ease-out 1420ms both}
+.intro-v3.is-live .intro-skip{animation:introFadeV3 400ms ease-out 1650ms both}
+.intro-v3.is-exiting{opacity:0;transform:scale(1.025);filter:blur(5px);pointer-events:none}
+
+@keyframes introAuraV3{0%{opacity:0;transform:scale(.88)}35%,100%{opacity:1;transform:scale(1)}}
+@keyframes introGridV3{0%{opacity:0;transform:scale(1.08)}45%,100%{opacity:.75;transform:scale(1)}}
+@keyframes introBeamV3{0%{opacity:0;transform:scaleY(.1)}55%{opacity:.8}100%{opacity:.18;transform:scaleY(1)}}
+@keyframes introSigilV3{0%{opacity:0;transform:scale(.7) rotate(-8deg)}62%{opacity:1;transform:scale(1.035) rotate(1deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes introCoreV3{0%{transform:translate(-50%,-50%) scale(0);opacity:0}65%{transform:translate(-50%,-50%) scale(1.35);opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+@keyframes introRotateV3{to{transform:rotate(360deg)}}
+@keyframes introRotateReverseV3{to{transform:rotate(-360deg)}}
+@keyframes introLetterV3{0%{opacity:0;transform:translate3d(0,16px,0)}100%{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes introTextV3{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes introFadeV3{from{opacity:0}to{opacity:1}}
+
+@media(prefers-reduced-motion:reduce){
+  .intro-v3::before,.intro-grid,.intro-beam,.intro-sigil,.intro-core,.intro-v3 .il,.intro-tag,.intro-status,.intro-skip{animation:none!important;transition:none!important}
+  .intro-v3::before,.intro-grid,.intro-beam,.intro-sigil,.intro-core,.intro-v3 .il,.intro-tag,.intro-status,.intro-skip{opacity:1;transform:none}
+  .intro-core{transform:translate(-50%,-50%)}
+  .intro-fill{width:100%!important}
+}
+
 
 </style>
 </head>
@@ -3218,25 +3369,32 @@ input, textarea, select {
 <div class="orb orb3"></div>
 <canvas id="rank-particles"></canvas>
 
-<!-- ══ INTRO v2 — CINEMATIC ══ -->
-<div id="intro" style="position:fixed;inset:0;z-index:9999;background:#000;overflow:hidden">
-  <canvas id="ic" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
-  <div id="intro-ui" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:16vh;pointer-events:none">
-    <!-- LEVELINK wordmark -->
-    <div id="i-wordmark" style="display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:14px;position:relative">
-      <span class="il" data-c="#bdd4f0" data-i="0">L</span><span class="il" data-c="#a8c8ee" data-i="1">E</span><span class="il" data-c="#90b8f0" data-i="2">V</span><span class="il" data-c="#78a8f8" data-i="3">E</span><span class="il" data-c="#29b6f6" data-bright="1" data-i="4">L</span><span class="il" data-c="#3ca0ff" data-i="5">I</span><span class="il" data-c="#2979ff" data-bright="1" data-i="6">N</span><span class="il" data-c="#7c4dff" data-bright="1" data-i="7">K</span>
+<!-- ══ INTRO v3 — SIGNAL LEVELINK ══ -->
+<div id="intro" class="intro-v3" aria-label="Initialisation de Levelink">
+  <div class="intro-grid" aria-hidden="true"></div>
+  <div class="intro-beam" aria-hidden="true"></div>
+  <div class="intro-stage">
+    <div class="intro-sigil" aria-hidden="true">
+      <svg viewBox="0 0 120 120" fill="none">
+        <polygon class="intro-outer" points="60,7 106,33 106,87 60,113 14,87 14,33" stroke="#2979ff" stroke-width="1.7"/>
+        <polygon class="intro-inner" points="60,26 89,43 89,77 60,94 31,77 31,43" stroke="#29b6f6" stroke-width="1.2"/>
+        <path d="M60 7V26M106 33L89 43M106 87L89 77M60 113V94M14 87L31 77M14 33L31 43" stroke="rgba(179,136,255,.55)" stroke-width="1"/>
+      </svg>
+      <span class="intro-core"></span>
     </div>
-    <!-- Tagline -->
-    <p id="i-tag" style="font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:6px;color:rgba(41,182,246,0);text-transform:uppercase;margin:0 0 36px;transition:color 1s ease-out,letter-spacing 1.2s ease-out,transform .8s ease-out;transform:translateY(6px)">Construis ta meilleure version</p>
-    <!-- Loader -->
-    <div id="ibar" style="width:200px;opacity:0;transition:opacity .5s ease-out">
-      <div style="height:2px;background:rgba(255,255,255,.04);border-radius:99px;overflow:hidden;position:relative">
-        <div id="ibfill" style="height:100%;width:0%;background:linear-gradient(90deg,#2979ff,#29b6f6,#7c4dff);border-radius:99px;box-shadow:0 0 16px #2979ff55,0 0 4px #29b6f6;transition:width .06s linear;position:relative"></div>
+    <div id="i-wordmark" class="intro-wordmark" aria-label="Levelink">
+      <span class="il" style="--i:0">L</span><span class="il" style="--i:1">E</span><span class="il" style="--i:2">V</span><span class="il" style="--i:3">E</span><span class="il" style="--i:4">L</span><span class="il" style="--i:5">I</span><span class="il" style="--i:6">N</span><span class="il" style="--i:7">K</span>
+    </div>
+    <p id="i-tag" class="intro-tag">Construis ta meilleure version</p>
+    <div id="ibar" class="intro-status">
+      <div class="intro-status-row">
+        <span class="intro-status-label">SYSTÈME LEVELINK</span>
+        <span class="intro-status-value"><span class="intro-status-dot"></span><span id="ibtxt">SYNCHRONISATION</span></span>
       </div>
-      <p id="ibtxt" style="font-family:'Orbitron',monospace;font-size:6px;font-weight:700;color:rgba(41,182,246,.25);letter-spacing:4px;margin-top:10px;text-align:center;transition:color .3s">INITIALISATION</p>
+      <div class="intro-track"><span id="ibfill" class="intro-fill"></span></div>
     </div>
+    <button type="button" id="intro-skip" class="intro-skip">PASSER</button>
   </div>
-  <div id="iflash" style="position:absolute;inset:0;background:radial-gradient(circle at center,rgba(41,182,246,.6),rgba(41,121,255,.3),rgba(0,0,0,0));opacity:0;pointer-events:none;mix-blend-mode:screen"></div>
 </div>
 
 
@@ -4158,19 +4316,43 @@ function lvlInfo(xp){
   return{isSAO:false,rank:cur.rank,color:cur.color,pct,xp,nextXp:nxt?.xp??cur.xp,nextRank:nxt?.rank??'MAX',idx:i};
 }
 function fmtTime(s){return`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`}
-function spawnShockwave(x,y,color='var(--A)'){
-  const w=document.createElement('span');
-  w.style.cssText=`position:fixed;left:${x}px;top:${y}px;width:22px;height:22px;border-radius:999px;border:2px solid ${color};box-shadow:0 0 22px ${color};pointer-events:none;z-index:180;mix-blend-mode:screen;animation:shockwave .55s var(--out) forwards`;
-  document.body.appendChild(w);
-  setTimeout(()=>w.remove(),620);
-}
-function initShockwaves(){
-  document.addEventListener('click',e=>{
-    const t=e.target.closest('.fab,.btn-prim,.section-cta,.tog-btn,.task-tog,.tmr-btn');
-    if(!t)return;
-    const r=t.getBoundingClientRect();
-    spawnShockwave(r.left+r.width/2,r.top+r.height/2,getComputedStyle(document.documentElement).getPropertyValue('--A').trim()||'#2979ff');
+function initButtonFeedback(){
+  const selector='button,.fab,.tab-btn,.section-cta,.tog-btn,.task-tog,.tmr-btn,.usp';
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  let pressed=null;
+
+  const release=el=>{
+    if(!el)return;
+    el.classList.remove('is-pressing');
+    if(reduced.matches||document.body.classList.contains('low-perf'))return;
+    el.classList.remove('press-release');
+    requestAnimationFrame(()=>el.classList.add('press-release'));
+  };
+
+  document.addEventListener('pointerdown',e=>{
+    if(e.button!==undefined&&e.button!==0)return;
+    const el=e.target.closest(selector);
+    if(!el||el.disabled||el.getAttribute('aria-disabled')==='true')return;
+    pressed=el;
+    el.classList.remove('press-release');
+    el.classList.add('is-pressing');
   },{passive:true});
+
+  document.addEventListener('pointerup',()=>{
+    const el=pressed;pressed=null;release(el);
+  },{passive:true});
+  document.addEventListener('pointercancel',()=>{
+    if(pressed)pressed.classList.remove('is-pressing');
+    pressed=null;
+  },{passive:true});
+  window.addEventListener('blur',()=>{
+    if(pressed)pressed.classList.remove('is-pressing');
+    pressed=null;
+  });
+
+  document.addEventListener('animationend',e=>{
+    if(e.animationName==='uiPressRelease')e.target.classList.remove('press-release');
+  });
 }
 function initOrbParallax(){
   const area=document.getElementById('scroll-area');if(!area)return;
@@ -5853,22 +6035,6 @@ function toast(msg,type='ok'){
   setTimeout(()=>{t.style.opacity='0';t.style.transform='translateY(8px) scale(.94)';setTimeout(()=>t.remove(),280);},2400);
 }
 
-// Ripple universel amélioré
-document.addEventListener('pointerdown',e=>{
-  const btn=e.target.closest('.fab,.btn-icon,.btn-prim,.btn-ghost,.tab-btn,.section-cta');
-  if(!btn)return;
-  // Lire le rect avant toute mutation DOM (évite layout thrash)
-  const rect=btn.getBoundingClientRect();
-  const cx=e.clientX-rect.left, cy=e.clientY-rect.top;
-  const sz=Math.max(rect.width,rect.height)*2.6;
-  requestAnimationFrame(()=>{
-    const rip=document.createElement('span');rip.className='rip';
-    rip.style.cssText=`width:${sz}px;height:${sz}px;left:${cx-sz/2}px;top:${cy-sz/2}px`;
-    btn.appendChild(rip);
-    setTimeout(()=>rip.remove(),560);
-  });
-},{passive:true});
-
 // ══════════════════════════════════════════════
 // ALL DAY CONFETTI
 // ══════════════════════════════════════════════
@@ -5919,9 +6085,9 @@ document.addEventListener('keydown',e=>{
 });
 
 // ══════════════════════════════════════════════
-// INTRO — COSMIC ASSEMBLY
+// INTRO v2 — conservée comme référence, remplacée par la version v3 ci-dessous
 // ══════════════════════════════════════════════
-(function(){
+function legacyCosmicIntro(){
   const done=sessionStorage.getItem('hr_done');
   const app=document.getElementById('app');
   if(done){
@@ -6509,6 +6675,76 @@ document.addEventListener('keydown',e=>{
   }
 
   rafI=requestAnimationFrame(loop);
+}
+
+// ══════════════════════════════════════════════
+// INTRO v3 — SIGNAL LEVELINK (CSS-only)
+// ══════════════════════════════════════════════
+(function(){
+  const intro=document.getElementById('intro');
+  const app=document.getElementById('app');
+  if(!intro||!app)return;
+
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const alreadySeen=sessionStorage.getItem('hr_intro_v3')==='1';
+  let finished=false;
+  const timers=[];
+
+  function entrance(){
+    app.classList.add('e-app');
+    const elements=[
+      [document.querySelector('.hero'),'e-hero'],
+      [document.getElementById('mission-board'),'e-board'],
+      [document.getElementById('habits-list'),'e-list'],
+      [document.getElementById('empty-habits'),'e-list'],
+      [document.getElementById('tab-bar'),'e-tab'],
+      [document.getElementById('fab'),'e-fab']
+    ];
+    elements.forEach(([el,cls])=>el?.classList.add(cls));
+    timers.push(setTimeout(()=>{
+      app.classList.remove('e-app');
+      elements.forEach(([el,cls])=>el?.classList.remove(cls));
+    },720));
+  }
+
+  function revealApp(immediate=false){
+    if(finished)return;
+    finished=true;
+    timers.forEach(clearTimeout);
+    sessionStorage.setItem('hr_intro_v3','1');
+    sessionStorage.setItem('hr_done','1');
+    app.style.visibility='visible';
+    app.style.opacity='1';
+    if(immediate){
+      intro.style.display='none';
+      return;
+    }
+    entrance();
+    intro.classList.add('is-exiting');
+    setTimeout(()=>{intro.style.display='none';},650);
+  }
+
+  if(alreadySeen){
+    revealApp(true);
+    return;
+  }
+
+  requestAnimationFrame(()=>intro.classList.add('is-live'));
+  const fill=document.getElementById('ibfill');
+  const status=document.getElementById('ibtxt');
+  const phases=reduced
+    ? [[20,100,'PRÊT']]
+    : [[260,24,'PROFIL'],[760,58,'PROGRESSION'],[1320,84,'INTERFACE'],[1840,100,'PRÊT']];
+
+  phases.forEach(([delay,progress,label])=>{
+    timers.push(setTimeout(()=>{
+      if(fill)fill.style.width=progress+'%';
+      if(status)status.textContent=label;
+    },delay));
+  });
+
+  document.getElementById('intro-skip')?.addEventListener('click',()=>revealApp(false),{once:true});
+  timers.push(setTimeout(()=>revealApp(false),reduced?180:2450));
 })();
 
 // ══════════════════════════════════════════════
@@ -6750,7 +6986,7 @@ function showU(){
 
 applySettings();
 lucide.createIcons();
-initShockwaves();
+initButtonFeedback();
 initOrbParallax();
 
 // ══════════════════════════════════════════════
