@@ -3388,28 +3388,27 @@ button.press-release,.fab.press-release,.tab-btn.press-release,.section-cta.pres
 .intro-v4.is-live .intro-pulse-ring.r2{animation:introPulseRingV4 1050ms ease-out 660ms both}
 .intro-v4.is-live .intro-orbit{animation:introOrbitInV4 650ms var(--motion-spring) 620ms both,introRotateV3 12s linear 1270ms infinite}
 .intro-v4.is-live .intro-divider{animation:introFadeV3 480ms ease-out 1240ms both}
-.intro-v4.is-exiting{
-  opacity:1;transform:none;filter:none;clip-path:inset(50% 0 50% 0);pointer-events:none;
-  transition:clip-path 680ms cubic-bezier(.76,0,.24,1);
-}
-.intro-v4.is-exiting::after{animation:introExitLineV4 680ms ease-out both}
+.intro-v4.is-ready .intro-status-dot{background:#4ade80;box-shadow:0 0 12px rgba(74,222,128,.85);transition:background .35s,box-shadow .35s}
+.intro-v4.is-ready .intro-core{box-shadow:0 0 0 7px rgba(74,222,128,.08),0 0 28px #29b6f6,0 0 62px rgba(41,121,255,.65);transition:box-shadow .5s ease}
+.intro-v4.is-exiting .intro-stage{opacity:0;transform:translate3d(0,-12px,0) scale(.988);transition:opacity 300ms ease,transform 430ms var(--motion-spring)}
+.intro-v4.is-exiting .intro-hud,.intro-v4.is-exiting .intro-data-field,.intro-v4.is-exiting .intro-grid{opacity:0;transition:opacity 260ms ease}
+.intro-v4.is-exiting::after{animation:none;opacity:0}
 
 @keyframes introDataV4{0%{transform:translateY(-20vh);opacity:0}12%{opacity:.55}82%{opacity:.18}100%{transform:translateY(138vh);opacity:0}}
 @keyframes introPulseRingV4{0%{opacity:0;transform:scale(.42)}18%{opacity:.8}100%{opacity:0;transform:scale(1.85)}}
 @keyframes introOrbitInV4{0%{opacity:0;transform:scale(.72) rotate(-40deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
-@keyframes introExitLineV4{0%{opacity:0;transform:scaleX(.08)}35%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
 
-/* Thème Solo Leveling verrouillé sur sa palette bleue. */
-#theme-color-setting.solo-locked #theme-color-grid{filter:saturate(.12) grayscale(.72)}
-#theme-color-setting.solo-locked [data-tbtn]{
+/* Couleurs de thème réservées à l’abonnement Premium dans les deux univers. */
+#theme-color-setting.premium-locked #theme-color-grid{filter:saturate(.12) grayscale(.72)}
+#theme-color-setting.premium-locked [data-tbtn]{
   position:relative;cursor:not-allowed!important;pointer-events:none;box-shadow:none!important;transform:none!important;
   text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:rgba(255,255,255,.55);
 }
-#theme-color-setting.solo-locked [data-tbtn]::after{
+#theme-color-setting.premium-locked [data-tbtn]::after{
   content:'◆';position:absolute;right:4px;top:3px;font-size:5px;color:rgba(190,220,255,.5);text-decoration:none;
 }
 .theme-lock-note{display:none;margin-top:9px;align-items:center;gap:7px;color:rgba(130,177,255,.55);font:700 7px/1.35 'Orbitron',monospace;letter-spacing:1px}
-#theme-color-setting.solo-locked .theme-lock-note{display:flex}
+#theme-color-setting.premium-locked .theme-lock-note{display:flex}
 .theme-lock-icon{width:13px;height:13px;display:inline-grid;place-items:center;border:1px solid rgba(41,121,255,.3);border-radius:4px;color:#82b1ff;font-size:8px}
 
 .intro-v3.is-live::before{animation:introAuraV3 2400ms ease-out both}
@@ -3425,8 +3424,8 @@ button.press-release,.fab.press-release,.tab-btn.press-release,.section-cta.pres
 .intro-v3.is-live .intro-skip{animation:introFadeV3 400ms ease-out 1650ms both}
 .intro-v3.is-exiting{opacity:0;transform:scale(1.025);filter:blur(5px);pointer-events:none}
 .intro-v4.is-exiting{
-  opacity:1;transform:none;filter:none;clip-path:inset(50% 0 50% 0);
-  transition:clip-path 680ms cubic-bezier(.76,0,.24,1);
+  opacity:0;transform:translate3d(0,-8px,0) scale(1.008);filter:none;clip-path:inset(0);
+  transition:opacity 520ms ease 90ms,transform 640ms var(--motion-smooth);pointer-events:none;
 }
 
 @keyframes introAuraV3{0%{opacity:0;transform:scale(.88)}35%,100%{opacity:1;transform:scale(1)}}
@@ -4515,19 +4514,19 @@ function hasThemeColorEntitlement(){
   return Number.isFinite(expiry)&&expiry>Date.now();
 }
 function applySettings(){
-  const soloLocked=getU()==='sl'&&!hasThemeColorEntitlement();
-  const t=soloLocked?'blue':(settings.theme||'blue');
+  const themeLocked=!hasThemeColorEntitlement();
+  const t=themeLocked?'blue':(settings.theme||'blue');
   document.documentElement.setAttribute('data-t',t==='blue'?'':t);
   const themeSetting=document.getElementById('theme-color-setting');
-  themeSetting?.classList.toggle('solo-locked',soloLocked);
+  themeSetting?.classList.toggle('premium-locked',themeLocked);
   document.querySelectorAll('[data-tbtn]').forEach(b=>{
     const on=b.dataset.tbtn===t;
-    b.disabled=soloLocked;
-    b.setAttribute('aria-disabled',soloLocked?'true':'false');
-    b.title=soloLocked?'Palette verrouillée en Solo Leveling':'';
-    b.style.opacity=soloLocked?'.2':(on?'1':'.5');
-    b.style.borderColor=soloLocked?'transparent':(on?'currentColor':'transparent');
-    b.style.transform=soloLocked?'none':(on?'scale(1.03)':'scale(1)');
+    b.disabled=themeLocked;
+    b.setAttribute('aria-disabled',themeLocked?'true':'false');
+    b.title=themeLocked?'Abonnement Premium requis':'';
+    b.style.opacity=themeLocked?'.2':(on?'1':'.5');
+    b.style.borderColor=themeLocked?'transparent':(on?'currentColor':'transparent');
+    b.style.transform=themeLocked?'none':(on?'scale(1.03)':'scale(1)');
   });
   const snd=settings.sound!==false;
   document.querySelectorAll('[data-sbtn]').forEach(b=>{
@@ -4541,7 +4540,7 @@ function applySettings(){
   if(inp&&document.activeElement!==inp)inp.value=settings.playerName||'';
 }
 window.setTheme=t=>{
-  if(getU()==='sl'&&!hasThemeColorEntitlement()){
+  if(!hasThemeColorEntitlement()){
     toast('Couleurs disponibles avec l’abonnement Premium');
     applySettings();
     return;
@@ -6879,6 +6878,7 @@ function legacyCosmicIntro(){
         step.classList.toggle('done',index<activeStep);
         step.classList.toggle('active',index===activeStep);
       });
+      if(activeStep===3)intro.classList.add('is-ready');
     },delay));
   });
 
