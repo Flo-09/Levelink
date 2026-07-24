@@ -8480,6 +8480,32 @@ function stableTutorialRect(state,target,rawRect){
   return next;
 }
 
+function centerTutorialNameField(){
+  const s=contextualTutorialState;
+  const field=document.getElementById('hname');
+  if(!s||CONTEXTUAL_TUTORIAL_STEPS[s.index]?.id!=='name'||!field||document.activeElement!==field)return;
+  s.fieldAligning=true;
+  s.root.style.opacity='0';
+  s.layoutSignature='';
+  s.positionTarget=null;
+  s.targetRect=null;
+  clearTimeout(s.fieldAlignTimer);
+  clearTimeout(s.fieldAlignReleaseTimer);
+  requestAnimationFrame(()=>field.scrollIntoView?.({behavior:'auto',block:'center',inline:'nearest'}));
+  s.fieldAlignTimer=setTimeout(()=>{
+    if(contextualTutorialState!==s||document.activeElement!==field)return;
+    field.scrollIntoView?.({behavior:'auto',block:'center',inline:'nearest'});
+    s.fieldAlignReleaseTimer=setTimeout(()=>{
+      if(contextualTutorialState!==s)return;
+      s.fieldAligning=false;
+      s.layoutSignature='';
+      s.positionTarget=null;
+      s.targetRect=null;
+      scheduleTutorialPosition();
+    },90);
+  },180);
+}
+
 function positionTutorial(){
   const s=contextualTutorialState;
   if(!s)return;
@@ -8487,6 +8513,10 @@ function positionTutorial(){
   if(!target||!target.isConnected){
     s.root.style.opacity='0';
     s.layoutSignature='';
+    return;
+  }
+  if(s.fieldAligning&&CONTEXTUAL_TUTORIAL_STEPS[s.index]?.id==='name'){
+    s.root.style.opacity='0';
     return;
   }
 
@@ -8537,7 +8567,8 @@ function positionTutorial(){
   const gap=14;
   const below=viewport.bottom-bottom;
   const above=top-viewport.top;
-  const placement=(below>=bh+gap||below>=above)?'below':'above';
+  const isNameStep=CONTEXTUAL_TUTORIAL_STEPS[s.index]?.id==='name';
+  const placement=isNameStep&&above>=bh+gap?'above':(below>=bh+gap||below>=above)?'below':'above';
   let bubbleTop=placement==='below'?bottom+gap:top-bh-gap;
   bubbleTop=Math.max(viewport.top+10,Math.min(viewport.bottom-bh-10,bubbleTop));
   let bubbleLeft=(left+right-bw)/2;
@@ -8559,6 +8590,9 @@ function renderTutorialStep(index){
   s.positionTarget=null;
   s.targetRect=null;
   s.lastEnsureAt=0;
+  s.fieldAligning=false;
+  clearTimeout(s.fieldAlignTimer);
+  clearTimeout(s.fieldAlignReleaseTimer);
   s.inputReady=CONTEXTUAL_TUTORIAL_STEPS[index].id==='name'&&!!document.getElementById('hname')?.value.trim();
   s.bubble.innerHTML=tutorialBubbleHTML(CONTEXTUAL_TUTORIAL_STEPS[index],index,s.inputReady);
   s.bubble.style.animation='none';
@@ -8572,16 +8606,19 @@ function closeTutorial(completed=false){
   if(!s)return;
   localStorage.setItem(TUTORIAL_KEY,'1');
   clearTimeout(s.retry);
+  clearTimeout(s.fieldAlignTimer);
+  clearTimeout(s.fieldAlignReleaseTimer);
   if(s.raf)cancelAnimationFrame(s.raf);
   if(s.trackRaf)cancelAnimationFrame(s.trackRaf);
   s.observer?.disconnect();
-  window.removeEventListener('resize',scheduleTutorialPosition);
+  window.removeEventListener('resize',s.onViewportResize);
   window.removeEventListener('scroll',scheduleTutorialPosition,true);
-  window.visualViewport?.removeEventListener('resize',scheduleTutorialPosition);
-  window.visualViewport?.removeEventListener('scroll',scheduleTutorialPosition);
+  window.visualViewport?.removeEventListener('resize',s.onViewportResize);
+  window.visualViewport?.removeEventListener('scroll',s.onViewportScroll);
   window.visualViewport?.removeEventListener('scrollend',scheduleTutorialPosition);
   document.removeEventListener('keydown',s.onKey);
   document.removeEventListener('input',s.onInput,true);
+  document.removeEventListener('focusin',s.onFocusIn,true);
   s.root.style.transition='opacity .22s ease-out';
   s.root.style.opacity='0';
   setTimeout(()=>s.root.remove(),230);
@@ -8614,6 +8651,7 @@ function openTutorial(force=false){
   const state={
     root,index:0,createdId:null,inputReady:false,raf:0,trackRaf:0,retry:0,
     layoutSignature:'',positionTarget:null,targetRect:null,lastEnsureAt:0,
+    fieldAligning:false,fieldAlignTimer:0,fieldAlignReleaseTimer:0,
     shades:[...root.querySelectorAll('.tutorial-shade')],
     focus:root.querySelector('.tutorial-focus'),
     bubble:root.querySelector('.tutorial-bubble'),
@@ -8631,6 +8669,16 @@ function openTutorial(force=false){
     if(next)next.disabled=!ready;
     scheduleTutorialPosition();
   };
+  state.onFocusIn=event=>{
+    if(event.target.id==='hname')centerTutorialNameField();
+  };
+  state.onViewportResize=()=>{
+    scheduleTutorialPosition();
+    if(document.activeElement?.id==='hname')centerTutorialNameField();
+  };
+  state.onViewportScroll=()=>{
+    scheduleTutorialPosition();
+  };
   root.addEventListener('click',event=>{
     if(event.target.closest('.tutorial-skip')){closeTutorial(false);return}
     if(event.target.closest('.tutorial-next')&&!event.target.closest('.tutorial-next').disabled){
@@ -8641,13 +8689,14 @@ function openTutorial(force=false){
   });
   state.observer=new MutationObserver(scheduleTutorialPosition);
   state.observer.observe(document.body,{childList:true,subtree:true});
-  window.addEventListener('resize',scheduleTutorialPosition);
+  window.addEventListener('resize',state.onViewportResize);
   window.addEventListener('scroll',scheduleTutorialPosition,true);
-  window.visualViewport?.addEventListener('resize',scheduleTutorialPosition);
-  window.visualViewport?.addEventListener('scroll',scheduleTutorialPosition);
+  window.visualViewport?.addEventListener('resize',state.onViewportResize);
+  window.visualViewport?.addEventListener('scroll',state.onViewportScroll);
   window.visualViewport?.addEventListener('scrollend',scheduleTutorialPosition);
   document.addEventListener('keydown',state.onKey);
   document.addEventListener('input',state.onInput,true);
+  document.addEventListener('focusin',state.onFocusIn,true);
 
   state.trackRaf=requestAnimationFrame(trackTutorialPosition);
   setTimeout(()=>renderTutorialStep(0),curTab==='habits'?20:180);
