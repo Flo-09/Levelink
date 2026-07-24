@@ -3762,12 +3762,13 @@ body.low-perf .intro-v6-sword{filter:none}
 }
 .tutorial-shade{
   position:fixed;background:rgba(1,4,12,.76);pointer-events:auto;
-  transition:inset .28s var(--motion-smooth),width .28s var(--motion-smooth),height .28s var(--motion-smooth);
+  will-change:left,top,width,height;
 }
 .tutorial-focus{
   position:fixed;border:1px solid color-mix(in srgb,var(--A) 80%,white 20%);
   border-radius:16px;box-shadow:0 0 0 2px rgba(255,255,255,.08),0 0 30px var(--AG);
-  pointer-events:none;transition:left .28s var(--motion-smooth),top .28s var(--motion-smooth),width .28s var(--motion-smooth),height .28s var(--motion-smooth),border-radius .28s;
+  pointer-events:none;transition:border-radius .12s ease,opacity .12s ease;
+  will-change:left,top,width,height;
   animation:tutorialFocusPulse 1.9s ease-in-out infinite;
 }
 .tutorial-bubble{
@@ -8435,11 +8436,28 @@ function tutorialTarget(){
 function scheduleTutorialPosition(){
   const s=contextualTutorialState;
   if(!s||s.raf)return;
+  s.layoutSignature='';
   s.raf=requestAnimationFrame(()=>{
     if(!contextualTutorialState)return;
     s.raf=0;
     positionTutorial();
   });
+}
+
+function tutorialViewport(){
+  const viewport=window.visualViewport;
+  const left=viewport?.offsetLeft||0;
+  const top=viewport?.offsetTop||0;
+  const width=viewport?.width||window.innerWidth;
+  const height=viewport?.height||window.innerHeight;
+  return{left,top,width,height,right:left+width,bottom:top+height};
+}
+
+function trackTutorialPosition(){
+  const s=contextualTutorialState;
+  if(!s)return;
+  positionTutorial();
+  s.trackRaf=requestAnimationFrame(trackTutorialPosition);
 }
 
 function positionTutorial(){
@@ -8448,47 +8466,54 @@ function positionTutorial(){
   const target=tutorialTarget();
   if(!target||!target.isConnected){
     s.root.style.opacity='0';
-    clearTimeout(s.retry);
-    s.retry=setTimeout(scheduleTutorialPosition,100);
+    s.layoutSignature='';
     return;
   }
 
   const rect=target.getBoundingClientRect();
-  const vw=window.visualViewport?.width||window.innerWidth;
-  const vh=window.visualViewport?.height||window.innerHeight;
-  if(!s.scrolledFor.has(s.index)&&(rect.top<8||rect.bottom>vh-8)){
+  const viewport=tutorialViewport();
+  const bubble=s.bubble;
+  const bw=bubble.offsetWidth||292;
+  const bh=bubble.offsetHeight||132;
+  const signature=[
+    s.index,
+    rect.left,rect.top,rect.right,rect.bottom,
+    viewport.left,viewport.top,viewport.width,viewport.height,
+    bw,bh
+  ].map((value,index)=>index?Math.round(Number(value)*2)/2:value).join('|');
+  if(signature===s.layoutSignature)return;
+  s.layoutSignature=signature;
+
+  if(!s.scrolledFor.has(s.index)&&(rect.top<viewport.top+8||rect.bottom>viewport.bottom-8)){
     s.scrolledFor.add(s.index);
     target.scrollIntoView?.({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
     setTimeout(scheduleTutorialPosition,280);
   }
 
   const pad=8;
-  const left=Math.max(6,Math.min(vw-6,rect.left-pad));
-  const top=Math.max(6,Math.min(vh-6,rect.top-pad));
-  const right=Math.max(left,Math.min(vw-6,rect.right+pad));
-  const bottom=Math.max(top,Math.min(vh-6,rect.bottom+pad));
+  const left=Math.max(viewport.left+6,Math.min(viewport.right-6,rect.left-pad));
+  const top=Math.max(viewport.top+6,Math.min(viewport.bottom-6,rect.top-pad));
+  const right=Math.max(left,Math.min(viewport.right-6,rect.right+pad));
+  const bottom=Math.max(top,Math.min(viewport.bottom-6,rect.bottom+pad));
   const width=Math.max(1,right-left);
   const height=Math.max(1,bottom-top);
   const [shadeTop,shadeLeft,shadeRight,shadeBottom]=s.shades;
   Object.assign(shadeTop.style,{left:'0px',top:'0px',width:'100%',height:`${top}px`});
-  Object.assign(shadeBottom.style,{left:'0px',top:`${bottom}px`,width:'100%',height:`${Math.max(0,vh-bottom)}px`});
+  Object.assign(shadeBottom.style,{left:'0px',top:`${bottom}px`,width:'100%',height:`${Math.max(0,window.innerHeight-bottom)}px`});
   Object.assign(shadeLeft.style,{left:'0px',top:`${top}px`,width:`${left}px`,height:`${height}px`});
-  Object.assign(shadeRight.style,{left:`${right}px`,top:`${top}px`,width:`${Math.max(0,vw-right)}px`,height:`${height}px`});
+  Object.assign(shadeRight.style,{left:`${right}px`,top:`${top}px`,width:`${Math.max(0,window.innerWidth-right)}px`,height:`${height}px`});
 
   const radius=getComputedStyle(target).borderRadius||'16px';
   Object.assign(s.focus.style,{left:`${left}px`,top:`${top}px`,width:`${width}px`,height:`${height}px`,borderRadius:radius});
 
-  const bubble=s.bubble;
-  const bw=bubble.offsetWidth||292;
-  const bh=bubble.offsetHeight||132;
   const gap=14;
-  const below=vh-bottom;
-  const above=top;
+  const below=viewport.bottom-bottom;
+  const above=top-viewport.top;
   const placement=(below>=bh+gap||below>=above)?'below':'above';
   let bubbleTop=placement==='below'?bottom+gap:top-bh-gap;
-  bubbleTop=Math.max(10,Math.min(vh-bh-10,bubbleTop));
+  bubbleTop=Math.max(viewport.top+10,Math.min(viewport.bottom-bh-10,bubbleTop));
   let bubbleLeft=(left+right-bw)/2;
-  bubbleLeft=Math.max(10,Math.min(vw-bw-10,bubbleLeft));
+  bubbleLeft=Math.max(viewport.left+10,Math.min(viewport.right-bw-10,bubbleLeft));
   const tailX=Math.max(22,Math.min(bw-22,(left+right)/2-bubbleLeft));
   bubble.dataset.placement=placement;
   bubble.style.setProperty('--tail-x',`${tailX}px`);
@@ -8496,8 +8521,13 @@ function positionTutorial(){
   Object.assign(bubble.style,{left:`${bubbleLeft}px`,top:`${bubbleTop}px`});
   s.root.style.opacity='1';
 
-  if(CONTEXTUAL_TUTORIAL_STEPS[s.index].id==='name'&&document.activeElement!==target){
-    setTimeout(()=>{try{target.focus({preventScroll:true})}catch{target.focus()}},80);
+  if(CONTEXTUAL_TUTORIAL_STEPS[s.index].id==='name'&&document.activeElement!==target&&!s.focusScheduled){
+    s.focusScheduled=true;
+    setTimeout(()=>{
+      if(contextualTutorialState!==s)return;
+      try{target.focus({preventScroll:true})}catch{target.focus()}
+      s.focusScheduled=false;
+    },80);
   }
 }
 
@@ -8506,6 +8536,8 @@ function renderTutorialStep(index){
   if(!s||index<0||index>=CONTEXTUAL_TUTORIAL_STEPS.length)return;
   clearTimeout(s.retry);
   s.index=index;
+  s.layoutSignature='';
+  s.focusScheduled=false;
   s.inputReady=CONTEXTUAL_TUTORIAL_STEPS[index].id==='name'&&!!document.getElementById('hname')?.value.trim();
   s.bubble.innerHTML=tutorialBubbleHTML(CONTEXTUAL_TUTORIAL_STEPS[index],index,s.inputReady);
   s.bubble.style.animation='none';
@@ -8520,10 +8552,13 @@ function closeTutorial(completed=false){
   localStorage.setItem(TUTORIAL_KEY,'1');
   clearTimeout(s.retry);
   if(s.raf)cancelAnimationFrame(s.raf);
+  if(s.trackRaf)cancelAnimationFrame(s.trackRaf);
   s.observer?.disconnect();
   window.removeEventListener('resize',scheduleTutorialPosition);
   window.removeEventListener('scroll',scheduleTutorialPosition,true);
   window.visualViewport?.removeEventListener('resize',scheduleTutorialPosition);
+  window.visualViewport?.removeEventListener('scroll',scheduleTutorialPosition);
+  window.visualViewport?.removeEventListener('scrollend',scheduleTutorialPosition);
   document.removeEventListener('keydown',s.onKey);
   document.removeEventListener('input',s.onInput,true);
   s.root.style.transition='opacity .22s ease-out';
@@ -8556,7 +8591,8 @@ function openTutorial(force=false){
     <section class="tutorial-bubble" role="dialog" aria-label="Tutoriel interactif" data-placement="below"></section>`;
   document.body.appendChild(root);
   const state={
-    root,index:0,createdId:null,inputReady:false,raf:0,retry:0,
+    root,index:0,createdId:null,inputReady:false,raf:0,trackRaf:0,retry:0,
+    layoutSignature:'',focusScheduled:false,
     shades:[...root.querySelectorAll('.tutorial-shade')],
     focus:root.querySelector('.tutorial-focus'),
     bubble:root.querySelector('.tutorial-bubble'),
@@ -8587,9 +8623,12 @@ function openTutorial(force=false){
   window.addEventListener('resize',scheduleTutorialPosition);
   window.addEventListener('scroll',scheduleTutorialPosition,true);
   window.visualViewport?.addEventListener('resize',scheduleTutorialPosition);
+  window.visualViewport?.addEventListener('scroll',scheduleTutorialPosition);
+  window.visualViewport?.addEventListener('scrollend',scheduleTutorialPosition);
   document.addEventListener('keydown',state.onKey);
   document.addEventListener('input',state.onInput,true);
 
+  state.trackRaf=requestAnimationFrame(trackTutorialPosition);
   setTimeout(()=>renderTutorialStep(0),curTab==='habits'?20:180);
 }
 
