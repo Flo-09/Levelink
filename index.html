@@ -3753,6 +3753,86 @@ body.low-perf .intro-v6-sword{filter:none}
   .intro-v6-skip{opacity:1}
 }
 
+/* ═══════════════════════════════════════════════
+   TUTORIEL CONTEXTUEL — apprendre en agissant
+═══════════════════════════════════════════════ */
+#tutorial-layer{
+  position:fixed;inset:0;z-index:260;pointer-events:none;
+  font-family:Inter,system-ui,sans-serif;color:var(--t1);
+}
+.tutorial-shade{
+  position:fixed;background:rgba(1,4,12,.76);pointer-events:auto;
+  transition:inset .28s var(--motion-smooth),width .28s var(--motion-smooth),height .28s var(--motion-smooth);
+}
+.tutorial-focus{
+  position:fixed;border:1px solid color-mix(in srgb,var(--A) 80%,white 20%);
+  border-radius:16px;box-shadow:0 0 0 2px rgba(255,255,255,.08),0 0 30px var(--AG);
+  pointer-events:none;transition:left .28s var(--motion-smooth),top .28s var(--motion-smooth),width .28s var(--motion-smooth),height .28s var(--motion-smooth),border-radius .28s;
+  animation:tutorialFocusPulse 1.9s ease-in-out infinite;
+}
+.tutorial-bubble{
+  --tail-x:50%;position:fixed;width:min(292px,calc(100vw - 24px));padding:14px 15px 13px;
+  border-radius:18px;background:linear-gradient(145deg,rgba(10,20,42,.985),rgba(3,8,22,.99));
+  border:1px solid color-mix(in srgb,var(--A) 30%,transparent);
+  box-shadow:0 18px 50px rgba(0,0,0,.55),0 0 30px var(--AG);
+  pointer-events:auto;transform-origin:var(--tail-x) top;
+  animation:tutorialBubbleIn .34s var(--bounce) both;
+}
+.tutorial-bubble::before{
+  content:'';position:absolute;left:var(--tail-x);width:12px;height:12px;
+  background:#08132c;border:1px solid color-mix(in srgb,var(--A) 30%,transparent);
+  transform:translateX(-50%) rotate(45deg);
+}
+.tutorial-bubble[data-placement=below]::before{top:-7px;border-right:0;border-bottom:0}
+.tutorial-bubble[data-placement=above]::before{bottom:-7px;border-left:0;border-top:0}
+.tutorial-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.tutorial-kicker{
+  font-family:'Orbitron',monospace;font-size:7px;font-weight:800;letter-spacing:2px;
+  color:var(--A);text-transform:uppercase;
+}
+.tutorial-skip{
+  border:0;background:none;color:var(--t3);padding:4px 2px;font-family:'Orbitron',monospace;
+  font-size:7px;font-weight:700;letter-spacing:1.2px;cursor:pointer;
+}
+.tutorial-title{font-size:17px;font-weight:800;line-height:1.2;margin:0 0 4px;color:var(--t1)}
+.tutorial-copy{font-size:12px;font-weight:600;line-height:1.45;margin:0;color:var(--t2)}
+.tutorial-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}
+.tutorial-dots{display:flex;align-items:center;gap:5px}
+.tutorial-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.12);transition:width .25s var(--motion-smooth),background .25s}
+.tutorial-dot.is-active{width:17px;border-radius:4px;background:var(--A);box-shadow:0 0 10px var(--AG)}
+.tutorial-action{
+  display:flex;align-items:center;gap:6px;font-family:'Orbitron',monospace;font-size:7px;
+  font-weight:800;letter-spacing:1.4px;color:var(--AL);
+}
+.tutorial-action::after{
+  content:'';width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg) translateY(-2px);animation:tutorialNudge 1.25s ease-in-out infinite;
+}
+.tutorial-finish{
+  border:0;border-radius:11px;padding:9px 12px;background:linear-gradient(135deg,var(--A),var(--AL));
+  color:#020713;font-family:'Orbitron',monospace;font-size:7px;font-weight:900;letter-spacing:1.2px;
+  cursor:pointer;box-shadow:0 7px 20px var(--AG);
+}
+.tutorial-finish:disabled{opacity:.35;cursor:not-allowed;box-shadow:none;filter:saturate(.45)}
+@keyframes tutorialBubbleIn{
+  0%{opacity:0;transform:translateY(var(--bubble-y,8px)) scale(.94)}
+  100%{opacity:1;transform:none}
+}
+@keyframes tutorialFocusPulse{
+  0%,100%{box-shadow:0 0 0 2px rgba(255,255,255,.07),0 0 24px var(--AG)}
+  50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--A) 13%,transparent),0 0 38px var(--AG)}
+}
+@keyframes tutorialNudge{0%,100%{transform:rotate(45deg) translateY(-2px)}50%{transform:rotate(45deg) translate(2px,-4px)}}
+body.low-perf .tutorial-bubble{box-shadow:0 14px 36px rgba(0,0,0,.6)}
+body.low-perf .tutorial-focus{animation:none}
+@media(max-width:520px){
+  .tutorial-bubble{width:min(286px,calc(100vw - 20px));padding:13px 14px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .tutorial-shade,.tutorial-focus,.tutorial-bubble,.tutorial-dot{transition:none!important;animation:none!important}
+  .tutorial-action::after{animation:none}
+}
+
 
 </style>
 </head>
@@ -4223,7 +4303,7 @@ body.low-perf .intro-v6-sword{filter:none}
         </div>
       </div>
       <button type="button" onclick="tryShowU()" style="width:100%;padding:12px 16px;border-radius:var(--r);border:1px solid var(--bdr);background:rgba(41,121,255,.06);color:var(--t1);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;margin-bottom:10px"><span id="cur-u-lbl">SOLO LEVELING</span><span style="color:var(--t3);font-size:8px">CHANGER →</span></button>
-      <button type="button" onclick="closeSettings();openPresentation()" style="width:100%;padding:12px 16px;border-radius:var(--r);border:1px solid rgba(41,182,246,.15);background:linear-gradient(135deg,rgba(41,121,255,.06),rgba(124,77,255,.04));color:var(--AL);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;margin-bottom:10px"><span>DÉCOUVRIR LEVELINK</span><span style="color:var(--t3);font-size:8px">GUIDE →</span></button>
+      <button type="button" onclick="closeSettings();openTutorial(true)" style="width:100%;padding:12px 16px;border-radius:var(--r);border:1px solid rgba(41,182,246,.15);background:linear-gradient(135deg,rgba(41,121,255,.06),rgba(124,77,255,.04));color:var(--AL);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;margin-bottom:10px"><span>REJOUER LE TUTORIEL</span><span style="color:var(--t3);font-size:8px">INTERACTIF →</span></button>
       <button type="button" onclick="doReset()" style="width:100%;padding:12px;border-radius:var(--r);background:rgba(229,57,53,.07);border:1px solid rgba(229,57,53,.16);color:#e57373;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .22s;margin-bottom:4px" onmouseover="this.style.background='rgba(229,57,53,.12)'" onmouseout="this.style.background='rgba(229,57,53,.07)'">RÉINITIALISER LES DONNÉES</button>
     </div>
   </div>
@@ -4892,6 +4972,9 @@ function openSheet(type,id=null){
   }else if(type==='task'){wrap.innerHTML=taskSheet();}
   lucide.createIcons();
   document.body.style.overflow='hidden';
+  if(type==='habit'&&!id){
+    setTimeout(()=>window.tutorialSignal?.('sheet-opened'),40);
+  }
 }
 window.closeSheet=function(){
   const ov=document.getElementById('overlay');
@@ -5493,10 +5576,12 @@ window.saveHabit=function(e,pfx){
     if(habits.some(h=>h.name.toLowerCase()===name.toLowerCase())){toast('Quête déjà existante','error');return}
     if(!pdata)pdata={__id:genId(),total_xp:0,level:1};
     const ic=pfx?selEI:selIcon,col=pfx?selEC:selColor;
-    habits.push({__id:genId(),name,icon:ic,color:col,duration_minutes:dur,sets,rest_minutes:rest,completed_dates:'',created_at:new Date().toISOString(),base_xp:0});
-    habits[habits.length-1].base_xp=xpOf(habits[habits.length-1]);
+    const created={__id:genId(),name,icon:ic,color:col,duration_minutes:dur,sets,rest_minutes:rest,completed_dates:'',created_at:new Date().toISOString(),base_xp:0};
+    created.base_xp=xpOf(created);
+    habits.push(created);
     syncAll();searchQ='';const si=document.getElementById('search-input');if(si)si.value='';
     closeSheet();toast(`"${name}" créée`);renderAll();
+    setTimeout(()=>window.tutorialSignal?.('habit-created',{id:created.__id}),100);
   }
 };
 window.saveTask=function(e){
@@ -5606,6 +5691,7 @@ function startTimer(habitId){
   timerBoardState[habitId]={...fs};
   renderMissionBoard();
   buildTimerModal(h,habitId,fs);
+  setTimeout(()=>window.tutorialSignal?.('timer-opened',{id:habitId}),40);
 }
 
 function buildTimerModal(h,habitId,initState){
@@ -5832,6 +5918,7 @@ function buildTimerModal(h,habitId,initState){
   modal.querySelector('#tm-min').addEventListener('click',()=>{
     clearInterval(iv);modal.remove();
     showPill(h,habitId,{tLeft,isRest,paused,cur,totalSets,setS,restS,c});
+    setTimeout(()=>window.tutorialSignal?.('timer-minimized',{id:habitId}),40);
   });
 
   tPI.innerHTML=SVG_PAUSE;
@@ -7326,7 +7413,7 @@ function revealUIElements(){
 }
 
 function pickU(u){
-  if(u===getU())return;
+  if(u===getU()&&localStorage.getItem(UK))return;
   if(activeTimers.size>0){
     var sc=document.getElementById('usel');
     if(sc){
@@ -7364,9 +7451,8 @@ function pickU(u){
     }
     playUniverseTransition(u,function(){
       applyUniverse(u);
-      if(!localStorage.getItem('lk_seen_pres')){
-        localStorage.setItem('lk_seen_pres','1');
-        setTimeout(openPresentation,450);
+      if(!localStorage.getItem('lk_tutorial_v2_done')){
+        setTimeout(()=>openTutorial(false),450);
       }
     });
   },200);
@@ -7395,6 +7481,8 @@ function showU(){
       if(sessionStorage.getItem('hr_done')){clearInterval(iv);setTimeout(showU,200);}
     },80);
     setTimeout(function(){clearInterval(iv);},8000);
+  }else if(!localStorage.getItem('lk_tutorial_v2_done')&&!habits.length){
+    setTimeout(()=>openTutorial(false),3400);
   }
 })();
 
@@ -8302,6 +8390,225 @@ function initImmersiveSensors() {
 
 // Initialisation au démarrage
 initImmersiveSensors();
+
+
+// ══════════════════════════════════════════════
+// TUTORIEL CONTEXTUEL — 6 actions, zéro diaporama
+// ══════════════════════════════════════════════
+const TUTORIAL_KEY='lk_tutorial_v2_done';
+const CONTEXTUAL_TUTORIAL_STEPS=[
+  {id:'create',title:'Crée ta première quête',copy:'Appuie sur +.',target:()=>document.getElementById('fab')},
+  {id:'name',title:'Nomme-la',copy:'Écris ce que tu veux accomplir.',target:()=>document.getElementById('hname')},
+  {id:'save',title:'Valide ta quête',copy:'Tu pourras tout ajuster plus tard.',target:()=>document.querySelector('#sheet-wrap form button[type="submit"]')},
+  {id:'play',title:'Lance le chrono',copy:'Appuie sur lecture pour démarrer.',target:s=>{
+    const card=s.createdId&&document.querySelector(`.hcw[data-id="${s.createdId}"]`);
+    return card?.querySelector('.tmr-btn,.tog-btn')||null;
+  }},
+  {id:'minimize',title:'Garde-le en vue',copy:'Réduis le chrono : il reste actif.',target:()=>document.getElementById('tm-min')},
+  {id:'xp',title:'Chaque effort compte',copy:'Termine une quête pour remplir cette barre.',target:()=>document.querySelector('.xp-track'),finish:true}
+];
+let contextualTutorialState=null;
+
+function tutorialBubbleHTML(step,index,inputReady){
+  const dots=CONTEXTUAL_TUTORIAL_STEPS.map((_,i)=>`<span class="tutorial-dot${i===index?' is-active':''}"></span>`).join('');
+  let action='<span class="tutorial-action">À TOI</span>';
+  if(step.id==='name'){
+    action=`<button type="button" class="tutorial-finish tutorial-next" ${inputReady?'':'disabled'}>CONTINUER</button>`;
+  }else if(step.finish){
+    action='<button type="button" class="tutorial-finish tutorial-done">TERMINER</button>';
+  }
+  return`<div class="tutorial-topline">
+      <span class="tutorial-kicker">ÉTAPE ${index+1} / ${CONTEXTUAL_TUTORIAL_STEPS.length}</span>
+      <button type="button" class="tutorial-skip">PASSER</button>
+    </div>
+    <h2 class="tutorial-title">${step.title}</h2>
+    <p class="tutorial-copy">${step.copy}</p>
+    <div class="tutorial-foot"><div class="tutorial-dots">${dots}</div>${action}</div>`;
+}
+
+function tutorialTarget(){
+  const s=contextualTutorialState;
+  if(!s)return null;
+  return CONTEXTUAL_TUTORIAL_STEPS[s.index]?.target(s)||null;
+}
+
+function scheduleTutorialPosition(){
+  const s=contextualTutorialState;
+  if(!s||s.raf)return;
+  s.raf=requestAnimationFrame(()=>{
+    if(!contextualTutorialState)return;
+    s.raf=0;
+    positionTutorial();
+  });
+}
+
+function positionTutorial(){
+  const s=contextualTutorialState;
+  if(!s)return;
+  const target=tutorialTarget();
+  if(!target||!target.isConnected){
+    s.root.style.opacity='0';
+    clearTimeout(s.retry);
+    s.retry=setTimeout(scheduleTutorialPosition,100);
+    return;
+  }
+
+  const rect=target.getBoundingClientRect();
+  const vw=window.visualViewport?.width||window.innerWidth;
+  const vh=window.visualViewport?.height||window.innerHeight;
+  if(!s.scrolledFor.has(s.index)&&(rect.top<8||rect.bottom>vh-8)){
+    s.scrolledFor.add(s.index);
+    target.scrollIntoView?.({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+    setTimeout(scheduleTutorialPosition,280);
+  }
+
+  const pad=8;
+  const left=Math.max(6,Math.min(vw-6,rect.left-pad));
+  const top=Math.max(6,Math.min(vh-6,rect.top-pad));
+  const right=Math.max(left,Math.min(vw-6,rect.right+pad));
+  const bottom=Math.max(top,Math.min(vh-6,rect.bottom+pad));
+  const width=Math.max(1,right-left);
+  const height=Math.max(1,bottom-top);
+  const [shadeTop,shadeLeft,shadeRight,shadeBottom]=s.shades;
+  Object.assign(shadeTop.style,{left:'0px',top:'0px',width:'100%',height:`${top}px`});
+  Object.assign(shadeBottom.style,{left:'0px',top:`${bottom}px`,width:'100%',height:`${Math.max(0,vh-bottom)}px`});
+  Object.assign(shadeLeft.style,{left:'0px',top:`${top}px`,width:`${left}px`,height:`${height}px`});
+  Object.assign(shadeRight.style,{left:`${right}px`,top:`${top}px`,width:`${Math.max(0,vw-right)}px`,height:`${height}px`});
+
+  const radius=getComputedStyle(target).borderRadius||'16px';
+  Object.assign(s.focus.style,{left:`${left}px`,top:`${top}px`,width:`${width}px`,height:`${height}px`,borderRadius:radius});
+
+  const bubble=s.bubble;
+  const bw=bubble.offsetWidth||292;
+  const bh=bubble.offsetHeight||132;
+  const gap=14;
+  const below=vh-bottom;
+  const above=top;
+  const placement=(below>=bh+gap||below>=above)?'below':'above';
+  let bubbleTop=placement==='below'?bottom+gap:top-bh-gap;
+  bubbleTop=Math.max(10,Math.min(vh-bh-10,bubbleTop));
+  let bubbleLeft=(left+right-bw)/2;
+  bubbleLeft=Math.max(10,Math.min(vw-bw-10,bubbleLeft));
+  const tailX=Math.max(22,Math.min(bw-22,(left+right)/2-bubbleLeft));
+  bubble.dataset.placement=placement;
+  bubble.style.setProperty('--tail-x',`${tailX}px`);
+  bubble.style.setProperty('--bubble-y',placement==='below'?'8px':'-8px');
+  Object.assign(bubble.style,{left:`${bubbleLeft}px`,top:`${bubbleTop}px`});
+  s.root.style.opacity='1';
+
+  if(CONTEXTUAL_TUTORIAL_STEPS[s.index].id==='name'&&document.activeElement!==target){
+    setTimeout(()=>{try{target.focus({preventScroll:true})}catch{target.focus()}},80);
+  }
+}
+
+function renderTutorialStep(index){
+  const s=contextualTutorialState;
+  if(!s||index<0||index>=CONTEXTUAL_TUTORIAL_STEPS.length)return;
+  clearTimeout(s.retry);
+  s.index=index;
+  s.inputReady=CONTEXTUAL_TUTORIAL_STEPS[index].id==='name'&&!!document.getElementById('hname')?.value.trim();
+  s.bubble.innerHTML=tutorialBubbleHTML(CONTEXTUAL_TUTORIAL_STEPS[index],index,s.inputReady);
+  s.bubble.style.animation='none';
+  void s.bubble.offsetWidth;
+  s.bubble.style.animation='';
+  scheduleTutorialPosition();
+}
+
+function closeTutorial(completed=false){
+  const s=contextualTutorialState;
+  if(!s)return;
+  localStorage.setItem(TUTORIAL_KEY,'1');
+  clearTimeout(s.retry);
+  if(s.raf)cancelAnimationFrame(s.raf);
+  s.observer?.disconnect();
+  window.removeEventListener('resize',scheduleTutorialPosition);
+  window.removeEventListener('scroll',scheduleTutorialPosition,true);
+  window.visualViewport?.removeEventListener('resize',scheduleTutorialPosition);
+  document.removeEventListener('keydown',s.onKey);
+  document.removeEventListener('input',s.onInput,true);
+  s.root.style.transition='opacity .22s ease-out';
+  s.root.style.opacity='0';
+  setTimeout(()=>s.root.remove(),230);
+  contextualTutorialState=null;
+  if(completed)toast('Tutoriel terminé');
+}
+
+function openTutorial(force=false){
+  if(contextualTutorialState)return;
+  if(!force&&localStorage.getItem(TUTORIAL_KEY))return;
+  const universeSelector=document.getElementById('usel');
+  if(universeSelector&&getComputedStyle(universeSelector).display!=='none')return;
+  const intro=document.getElementById('intro');
+  if(intro&&getComputedStyle(intro).display!=='none'){
+    if(!force)setTimeout(()=>openTutorial(false),700);
+    return;
+  }
+
+  document.getElementById('pres-ov')?.remove();
+  if(curTab!=='habits')goTab('habits');
+
+  const root=document.createElement('div');
+  root.id='tutorial-layer';
+  root.style.opacity='0';
+  root.setAttribute('aria-live','polite');
+  root.innerHTML=`<div class="tutorial-shade"></div><div class="tutorial-shade"></div><div class="tutorial-shade"></div><div class="tutorial-shade"></div>
+    <div class="tutorial-focus"></div>
+    <section class="tutorial-bubble" role="dialog" aria-label="Tutoriel interactif" data-placement="below"></section>`;
+  document.body.appendChild(root);
+  const state={
+    root,index:0,createdId:null,inputReady:false,raf:0,retry:0,
+    shades:[...root.querySelectorAll('.tutorial-shade')],
+    focus:root.querySelector('.tutorial-focus'),
+    bubble:root.querySelector('.tutorial-bubble'),
+    scrolledFor:new Set()
+  };
+  contextualTutorialState=state;
+
+  state.onKey=event=>{if(event.key==='Escape')closeTutorial(false)};
+  state.onInput=event=>{
+    if(!contextualTutorialState||CONTEXTUAL_TUTORIAL_STEPS[state.index].id!=='name'||event.target.id!=='hname')return;
+    const ready=!!event.target.value.trim();
+    if(ready===state.inputReady)return;
+    state.inputReady=ready;
+    const next=state.bubble.querySelector('.tutorial-next');
+    if(next)next.disabled=!ready;
+    scheduleTutorialPosition();
+  };
+  root.addEventListener('click',event=>{
+    if(event.target.closest('.tutorial-skip')){closeTutorial(false);return}
+    if(event.target.closest('.tutorial-next')&&!event.target.closest('.tutorial-next').disabled){
+      renderTutorialStep(state.index+1);
+      return;
+    }
+    if(event.target.closest('.tutorial-done'))closeTutorial(true);
+  });
+  state.observer=new MutationObserver(scheduleTutorialPosition);
+  state.observer.observe(document.body,{childList:true,subtree:true});
+  window.addEventListener('resize',scheduleTutorialPosition);
+  window.addEventListener('scroll',scheduleTutorialPosition,true);
+  window.visualViewport?.addEventListener('resize',scheduleTutorialPosition);
+  document.addEventListener('keydown',state.onKey);
+  document.addEventListener('input',state.onInput,true);
+
+  setTimeout(()=>renderTutorialStep(0),curTab==='habits'?20:180);
+}
+
+window.tutorialSignal=function(event,detail={}){
+  const s=contextualTutorialState;
+  if(!s)return;
+  const step=CONTEXTUAL_TUTORIAL_STEPS[s.index]?.id;
+  if(event==='sheet-opened'&&step==='create'){
+    setTimeout(()=>renderTutorialStep(1),80);
+  }else if(event==='habit-created'&&step==='save'){
+    s.createdId=detail.id;
+    setTimeout(()=>renderTutorialStep(3),330);
+  }else if(event==='timer-opened'&&step==='play'){
+    setTimeout(()=>renderTutorialStep(4),80);
+  }else if(event==='timer-minimized'&&step==='minimize'){
+    setTimeout(()=>renderTutorialStep(5),120);
+  }
+};
+window.openTutorial=openTutorial;
 
 
 
