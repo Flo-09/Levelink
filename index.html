@@ -5391,10 +5391,511 @@ body.low-perf[data-motion=v12] #u-transition .ut-v12-bg{
   body[data-motion=v12] .intro-v6-skip{opacity:1}
 }
 
+/* ═══════════════════════════════════════════════
+   LEVELINK UNIVERSE PICKER v13 — COMPACT & FLUID
+═══════════════════════════════════════════════ */
+body[data-picker=v13] #usel{
+  min-height:100dvh;
+  height:100dvh;
+  justify-content:center;
+  padding:
+    max(24px,env(safe-area-inset-top))
+    max(18px,env(safe-area-inset-right))
+    max(24px,env(safe-area-inset-bottom))
+    max(18px,env(safe-area-inset-left));
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  perspective:none;
+  background:
+    radial-gradient(circle at 14% 18%,rgba(48,104,255,.14),transparent 34%),
+    radial-gradient(circle at 88% 78%,rgba(0,199,255,.1),transparent 32%),
+    linear-gradient(150deg,#050916,#060c18 54%,#02050b);
+}
+body[data-picker=v13] #usel::before{
+  opacity:.34;
+  animation:none;
+  mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 86%,transparent 100%);
+  background:
+    linear-gradient(rgba(103,151,219,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(103,151,219,.055) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+body[data-picker=v13] #usel::after{
+  inset:12% 8%;
+  opacity:.62;
+  animation:none;
+  background:radial-gradient(ellipse at center,rgba(64,116,226,.08),transparent 68%);
+}
+body[data-picker=v13] .us-selector-shell{
+  position:relative;
+  z-index:3;
+  width:min(100%,760px);
+  margin:auto;
+}
+body[data-picker=v13] #usel.is-open .us-selector-shell{
+  animation:usPickerV13In 420ms cubic-bezier(.16,1,.3,1) both;
+}
+body[data-picker=v13] #usel.is-closing .us-selector-shell{
+  animation:usPickerV13Out 210ms cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes usPickerV13In{
+  0%{opacity:0;transform:translateY(12px) scale(.985)}
+  100%{opacity:1;transform:none}
+}
+@keyframes usPickerV13Out{
+  0%{opacity:1;transform:none}
+  100%{opacity:0;transform:translateY(5px) scale(.99)}
+}
+body[data-picker=v13] .us-selector-head{
+  margin:0 auto 24px;
+  padding:0 52px;
+  text-align:center;
+}
+body[data-picker=v13] .us-ey{
+  margin:0 0 9px;
+  color:rgba(185,210,242,.46);
+  font:700 7px/1 'Orbitron',monospace;
+  letter-spacing:3.5px;
+  animation:none;
+}
+body[data-picker=v13] .us-ey::before,
+body[data-picker=v13] .us-ey::after{display:none}
+body[data-picker=v13] .us-h{
+  margin:0;
+  color:#f5f8ff;
+  background:linear-gradient(110deg,#f7f9ff 8%,#abc7ff 52%,#68e9ff 94%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:none;
+  font:900 clamp(25px,5vw,34px)/1 'Orbitron',monospace;
+  letter-spacing:clamp(5px,1.4vw,9px);
+  text-indent:clamp(5px,1.4vw,9px);
+  animation:none;
+}
+body[data-picker=v13] .us-close{
+  position:absolute;
+  z-index:7;
+  top:-4px;
+  right:0;
+  width:42px;
+  height:42px;
+  display:none;
+  place-items:center;
+  padding:0;
+  border:1px solid rgba(185,215,255,.13);
+  border-radius:14px;
+  color:rgba(222,236,255,.72);
+  background:rgba(255,255,255,.035);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+  cursor:pointer;
+  transition:transform 180ms ease,border-color 180ms,color 180ms,background 180ms;
+  -webkit-tap-highlight-color:transparent;
+}
+body[data-picker=v13] #usel.has-current .us-close{display:grid}
+body[data-picker=v13] .us-close svg{width:18px;height:18px}
+body[data-picker=v13] .us-close:active{transform:scale(.94)}
+@media(hover:hover){
+  body[data-picker=v13] .us-close:hover{
+    color:#fff;
+    border-color:rgba(185,215,255,.25);
+    background:rgba(255,255,255,.065);
+  }
+}
+
+body[data-picker=v13] .us-panels{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  width:100%;
+  max-width:none;
+  height:auto;
+  perspective:none;
+  animation:none;
+}
+body[data-picker=v13] .usp{
+  --us-accent:#4a80ff;
+  --us-bright:#9dbaff;
+  appearance:none;
+  min-width:0;
+  min-height:338px;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-start;
+  gap:18px;
+  overflow:hidden;
+  border:1px solid rgba(174,207,247,.14);
+  border-radius:25px;
+  color:#eff6ff;
+  text-align:left;
+  background:
+    radial-gradient(circle at 18% 12%,color-mix(in srgb,var(--us-accent) 16%,transparent),transparent 42%),
+    linear-gradient(150deg,rgba(15,23,38,.97),rgba(7,12,22,.985));
+  box-shadow:0 24px 60px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.045);
+  transform:none;
+  transform-style:flat;
+  transition:
+    transform 260ms cubic-bezier(.16,1,.3,1),
+    border-color 220ms ease,
+    box-shadow 260ms ease,
+    opacity 200ms ease;
+  will-change:auto;
+  -webkit-tap-highlight-color:transparent;
+}
+body[data-picker=v13] .usp.sao{
+  --us-accent:#00c9f5;
+  --us-bright:#8ef2ff;
+  background:
+    radial-gradient(circle at 18% 12%,rgba(0,201,245,.135),transparent 42%),
+    linear-gradient(150deg,rgba(8,25,39,.97),rgba(4,13,24,.985));
+}
+body[data-picker=v13] .usp::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  opacity:.72;
+  pointer-events:none;
+  animation:none;
+  background:
+    linear-gradient(90deg,var(--us-accent),transparent 42%) top left/68% 1px no-repeat,
+    linear-gradient(180deg,var(--us-accent),transparent 50%) top left/1px 54% no-repeat;
+}
+body[data-picker=v13] .usp::after{
+  content:'';
+  position:absolute;
+  right:-34px;
+  bottom:-44px;
+  width:130px;
+  height:130px;
+  opacity:.13;
+  border:1px solid var(--us-accent);
+  border-radius:38%;
+  transform:rotate(45deg);
+  background:none;
+  animation:none;
+  pointer-events:none;
+}
+body[data-picker=v13] .us-card-top{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding-right:52px;
+}
+body[data-picker=v13] .us-card-copy{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+body[data-picker=v13] .us-series{
+  color:color-mix(in srgb,var(--us-bright) 64%,transparent);
+  font:700 6.5px/1 'Orbitron',monospace;
+  letter-spacing:1.8px;
+}
+body[data-picker=v13] .us-logo{
+  position:relative;
+  z-index:2;
+  flex:0 0 auto;
+  width:68px;
+  height:68px;
+  margin:0;
+  display:grid;
+  place-items:center;
+  border:1px solid color-mix(in srgb,var(--us-accent) 34%,transparent);
+  border-radius:21px;
+  color:var(--us-bright);
+  background:
+    radial-gradient(circle at 50% 48%,color-mix(in srgb,var(--us-accent) 18%,transparent),transparent 54%),
+    rgba(4,10,19,.72);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 12px 28px rgba(0,0,0,.24);
+  transition:transform 260ms cubic-bezier(.16,1,.3,1),border-color 220ms,box-shadow 220ms;
+}
+body[data-picker=v13] .us-logo::before{
+  content:'';
+  position:absolute;
+  inset:7px;
+  border:1px solid color-mix(in srgb,var(--us-accent) 16%,transparent);
+  border-radius:15px;
+  transform:rotate(45deg) scale(.7);
+}
+body[data-picker=v13] .us-logo svg{
+  position:relative;
+  z-index:2;
+  width:46px;
+  height:46px;
+  overflow:visible;
+  animation:none;
+  filter:drop-shadow(0 0 7px color-mix(in srgb,var(--us-accent) 28%,transparent));
+}
+body[data-picker=v13] .us-symbol-frame{
+  fill:none;
+  stroke:var(--us-accent);
+  stroke-width:1.15;
+  opacity:.36;
+}
+body[data-picker=v13] .us-symbol-frame.is-inner{opacity:.16;stroke-dasharray:2 3}
+body[data-picker=v13] .us-symbol-blade{
+  fill:currentColor;
+  fill-opacity:.2;
+  stroke:currentColor;
+  stroke-width:1.25;
+  stroke-linejoin:round;
+}
+body[data-picker=v13] .us-symbol-ridge{
+  fill:none;
+  stroke:#eaf8ff;
+  stroke-width:.75;
+  stroke-linecap:round;
+  opacity:.7;
+}
+body[data-picker=v13] .us-symbol-guard{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.2;
+  stroke-linecap:round;
+}
+body[data-picker=v13] .us-symbol-grip{
+  fill:none;
+  stroke:#dcecff;
+  stroke-width:2;
+  stroke-linecap:round;
+  opacity:.72;
+}
+body[data-picker=v13] .us-symbol-pommel{
+  fill:var(--us-accent);
+  stroke:#eaf8ff;
+  stroke-width:.7;
+}
+body[data-picker=v13] .us-symbol-sword{
+  transform-box:view-box;
+  transform-origin:24px 24px;
+  transition:transform 300ms cubic-bezier(.16,1,.3,1);
+}
+body[data-picker=v13] .us-symbol-sword.is-one{color:var(--us-bright)}
+body[data-picker=v13] .us-symbol-sword.is-two{color:var(--us-accent)}
+body[data-picker=v13] .us-symbol-core{
+  fill:#f3fbff;
+  stroke:var(--us-accent);
+  stroke-width:1;
+  filter:drop-shadow(0 0 4px var(--us-accent));
+}
+body[data-picker=v13] .us-name{
+  margin:0;
+  color:#eef5ff;
+  text-shadow:none;
+  font:900 clamp(16px,2.4vw,21px)/1.12 'Orbitron',monospace;
+  letter-spacing:.8px;
+  text-align:left;
+}
+body[data-picker=v13] .usp.sl .us-name{color:#dbe7ff;text-shadow:none}
+body[data-picker=v13] .usp.sao .us-name{color:#d4f8ff;text-shadow:none}
+body[data-picker=v13] .us-feats{
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding:0;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:7px;
+}
+body[data-picker=v13] .us-feat{
+  min-height:38px;
+  padding:9px 11px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(190,216,248,.08);
+  border-radius:12px;
+  color:rgba(208,224,244,.64);
+  background:rgba(255,255,255,.025);
+  font:650 11px/1.25 Inter,system-ui,sans-serif;
+}
+body[data-picker=v13] .us-fdot{
+  width:5px;
+  height:5px;
+  border-radius:2px;
+  background:var(--us-accent);
+  box-shadow:0 0 8px color-mix(in srgb,var(--us-accent) 54%,transparent);
+  transform:rotate(45deg);
+}
+body[data-picker=v13] .usp.sl .us-fdot,
+body[data-picker=v13] .usp.sao .us-fdot{background:var(--us-accent)}
+body[data-picker=v13] .us-cta{
+  position:relative;
+  z-index:2;
+  width:100%;
+  min-height:46px;
+  margin-top:auto;
+  padding:0 14px 0 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid color-mix(in srgb,var(--us-accent) 28%,transparent);
+  border-radius:14px;
+  color:#eef7ff;
+  background:color-mix(in srgb,var(--us-accent) 10%,rgba(255,255,255,.025));
+  box-shadow:none;
+  font:800 8px/1 'Orbitron',monospace;
+  letter-spacing:2px;
+  overflow:hidden;
+}
+body[data-picker=v13] .us-cta::before{display:none}
+body[data-picker=v13] .us-cta svg{
+  width:17px;
+  height:17px;
+  transition:transform 220ms cubic-bezier(.16,1,.3,1);
+}
+body[data-picker=v13] .usp.sl .us-cta,
+body[data-picker=v13] .usp.sao .us-cta{
+  color:#eef7ff;
+  text-shadow:none;
+  background:color-mix(in srgb,var(--us-accent) 11%,rgba(255,255,255,.02));
+  box-shadow:none;
+}
+body[data-picker=v13] .us-cur{
+  position:absolute;
+  z-index:5;
+  top:16px;
+  right:16px;
+  left:auto;
+  padding:5px 8px;
+  border:1px solid color-mix(in srgb,var(--us-accent) 34%,transparent);
+  border-radius:8px;
+  color:var(--us-bright);
+  background:color-mix(in srgb,var(--us-accent) 10%,rgba(5,10,19,.88));
+  box-shadow:none;
+  font:800 6px/1 'Orbitron',monospace;
+  letter-spacing:1.2px;
+  animation:none;
+}
+body[data-picker=v13] .us-foot{
+  margin:16px 0 0;
+  color:rgba(158,187,222,.32);
+  font:700 6.5px/1 'Orbitron',monospace;
+  letter-spacing:2.4px;
+  animation:none;
+}
+body[data-picker=v13] #usel.is-open .usp{
+  animation:usCardV13In 430ms cubic-bezier(.16,1,.3,1) both;
+}
+body[data-picker=v13] #usel.is-open .usp.sao{animation-delay:55ms}
+@keyframes usCardV13In{
+  0%{opacity:0;transform:translateY(12px) scale(.985)}
+  100%{opacity:1;transform:none}
+}
+body[data-picker=v13] #usel.is-leaving{
+  animation:usPickerV13Leave 250ms cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes usPickerV13Leave{
+  0%{opacity:1;transform:none}
+  100%{opacity:0;transform:scale(.992)}
+}
+body[data-picker=v13] #usel .usp.is-selected{
+  transform:scale(.985);
+  border-color:color-mix(in srgb,var(--us-accent) 58%,rgba(255,255,255,.12));
+  box-shadow:0 18px 42px rgba(0,0,0,.28),0 0 26px color-mix(in srgb,var(--us-accent) 12%,transparent);
+}
+body[data-picker=v13] #usel .usp.is-selected .us-logo{
+  transform:scale(1.045);
+  border-color:color-mix(in srgb,var(--us-accent) 56%,transparent);
+}
+body[data-picker=v13] #usel .usp.is-dimmed{opacity:.22;transform:scale(.985)}
+body[data-picker=v13] .usp:active{transform:scale(.985)}
+body[data-picker=v13] .usp:focus-visible,
+body[data-picker=v13] .us-close:focus-visible{
+  outline:2px solid var(--us-accent,#73a7ff);
+  outline-offset:3px;
+}
+@media(hover:hover){
+  body[data-picker=v13] .usp:hover{
+    transform:translateY(-3px);
+    border-color:color-mix(in srgb,var(--us-accent) 35%,rgba(255,255,255,.1));
+    box-shadow:0 28px 64px rgba(0,0,0,.34),0 0 28px color-mix(in srgb,var(--us-accent) 8%,transparent);
+  }
+  body[data-picker=v13] .usp:hover .us-logo{
+    transform:translateY(-1px);
+    border-color:color-mix(in srgb,var(--us-accent) 48%,transparent);
+  }
+  body[data-picker=v13] .usp:hover .us-symbol-sword.is-one{transform:translate(-1px,1px)}
+  body[data-picker=v13] .usp:hover .us-symbol-sword.is-two{transform:translate(1px,1px)}
+  body[data-picker=v13] .usp:hover .us-cta svg{transform:translateX(3px)}
+}
+@media(max-width:619px){
+  body[data-picker=v13] #usel{
+    justify-content:flex-start;
+    padding-top:max(34px,env(safe-area-inset-top));
+    padding-bottom:max(22px,env(safe-area-inset-bottom));
+  }
+  body[data-picker=v13] .us-selector-shell{
+    display:flex;
+    min-height:calc(100dvh - max(34px,env(safe-area-inset-top)) - max(22px,env(safe-area-inset-bottom)));
+    flex-direction:column;
+    justify-content:center;
+  }
+  body[data-picker=v13] .us-selector-head{margin-bottom:19px;padding:0 48px}
+  body[data-picker=v13] .us-ey{margin-bottom:8px;font-size:6.4px;letter-spacing:2.5px}
+  body[data-picker=v13] .us-h{font-size:25px;letter-spacing:5.5px;text-indent:5.5px}
+  body[data-picker=v13] .us-close{top:-7px;width:38px;height:38px;border-radius:13px}
+  body[data-picker=v13] .us-panels{grid-template-columns:1fr;gap:10px}
+  body[data-picker=v13] .usp{
+    min-height:178px;
+    gap:12px;
+    padding:14px;
+    border-radius:20px;
+  }
+  body[data-picker=v13] .usp::after{right:-48px;bottom:-58px}
+  body[data-picker=v13] .us-card-top{gap:13px;padding-right:44px}
+  body[data-picker=v13] .us-logo{width:58px;height:58px;border-radius:18px}
+  body[data-picker=v13] .us-logo::before{inset:6px;border-radius:13px}
+  body[data-picker=v13] .us-logo svg{width:40px;height:40px}
+  body[data-picker=v13] .us-card-copy{gap:6px}
+  body[data-picker=v13] .us-series{font-size:5.8px;letter-spacing:1.35px}
+  body[data-picker=v13] .us-name{font-size:16px;letter-spacing:.65px}
+  body[data-picker=v13] .us-feats{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  body[data-picker=v13] .us-feat{
+    min-height:32px;
+    padding:7px 8px;
+    border-radius:10px;
+    font-size:9.5px;
+  }
+  body[data-picker=v13] .us-cta{min-height:38px;border-radius:11px;font-size:7px}
+  body[data-picker=v13] .us-cur{top:13px;right:13px}
+  body[data-picker=v13] .us-foot{margin-top:13px;font-size:5.8px;letter-spacing:1.8px}
+}
+@media(max-width:350px){
+  body[data-picker=v13] .us-selector-head{margin-bottom:15px}
+  body[data-picker=v13] .usp{min-height:168px;padding:12px}
+  body[data-picker=v13] .us-logo{width:52px;height:52px}
+  body[data-picker=v13] .us-logo svg{width:36px;height:36px}
+  body[data-picker=v13] .us-name{font-size:14px}
+  body[data-picker=v13] .us-feat{font-size:8.7px}
+}
+@media(max-height:650px) and (max-width:619px){
+  body[data-picker=v13] #usel{justify-content:flex-start}
+  body[data-picker=v13] .us-selector-shell{justify-content:flex-start;min-height:auto}
+  body[data-picker=v13] .us-selector-head{margin-bottom:14px}
+  body[data-picker=v13] .usp{min-height:164px}
+  body[data-picker=v13] .us-foot{margin-bottom:4px}
+}
+@media(prefers-reduced-motion:reduce){
+  body[data-picker=v13] #usel,
+  body[data-picker=v13] #usel *,
+  body[data-picker=v13] #usel::before,
+  body[data-picker=v13] #usel::after{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+
 
 </style>
 </head>
-<body data-design="v10" data-layout="v11" data-motion="v12">
+<body data-design="v10" data-layout="v11" data-motion="v12" data-picker="v13">
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
@@ -5464,56 +5965,98 @@ body.low-perf[data-motion=v12] #u-transition .ut-v12-bg{
 <!-- ══ APP ══ -->
 <div id="app" style="opacity:0;visibility:hidden">
 <!-- ══ UNIVERSE SELECT ══ -->
-<div id="usel">
-  <p class="us-ey">[ CHOISISSEZ VOTRE UNIVERS ]</p>
-  <p class="us-h">LEVELINK</p>
-  <div class="us-panels">
-    <div class="usp sl" onclick="pickU('sl')">
-      <div class="us-logo">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" fill="rgba(41,121,255,.1)" stroke="#2979ff" stroke-width="1.8"/>
-          <line x1="18" y1="2" x2="18" y2="18" stroke="rgba(41,182,246,.35)" stroke-width="1.2"/>
-          <line x1="33" y1="10" x2="18" y2="18" stroke="rgba(41,121,255,.35)" stroke-width="1.2"/>
-          <line x1="33" y1="26" x2="18" y2="18" stroke="rgba(41,182,246,.35)" stroke-width="1.2"/>
-          <line x1="18" y1="34" x2="18" y2="18" stroke="rgba(41,121,255,.35)" stroke-width="1.2"/>
-          <line x1="3" y1="26" x2="18" y2="18" stroke="rgba(41,182,246,.35)" stroke-width="1.2"/>
-          <line x1="3" y1="10" x2="18" y2="18" stroke="rgba(41,121,255,.35)" stroke-width="1.2"/>
-          <circle cx="18" cy="18" r="4" fill="#2979ff" opacity=".8"/><circle cx="18" cy="18" r="2" fill="#82b1ff"/>
-        </svg>
-      </div>
-      <div class="us-name">SOLO<br>LEVELING</div>
-      <div class="us-feats">
-        <div class="us-feat"><div class="us-fdot"></div>Rangs E → SSS</div>
-        <div class="us-feat"><div class="us-fdot"></div>Esthétique Dungeon sombre</div>
-        <div class="us-feat"><div class="us-fdot"></div>Interface épurée</div>
-        <div class="us-feat"><div class="us-fdot"></div>Progression classique RPG</div>
-      </div>
-      <button type="button" class="us-cta">CHOISIR →</button>
+<div id="usel" role="dialog" aria-modal="true" aria-labelledby="usel-title" aria-hidden="true">
+  <div class="us-selector-shell">
+    <button type="button" id="usel-close" class="us-close" onclick="hideUniverseSelector()" aria-label="Fermer le sélecteur d’univers">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <header class="us-selector-head">
+      <p class="us-ey">CHOISIS TON UNIVERS</p>
+      <h1 class="us-h" id="usel-title">LEVELINK</h1>
+    </header>
+    <div class="us-panels" role="group" aria-label="Univers disponibles">
+      <button type="button" class="usp sl" onclick="pickU('sl')" aria-label="Choisir l’univers Solo Leveling" aria-pressed="false">
+        <span class="us-card-top">
+          <span class="us-logo" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path class="us-symbol-frame" d="M24 3.5 42 13.8v20.4L24 44.5 6 34.2V13.8L24 3.5Z"/>
+              <path class="us-symbol-frame is-inner" d="m24 8.5 13.7 7.8v15.4L24 39.5l-13.7-7.8V16.3L24 8.5Z"/>
+              <g class="us-symbol-sword is-one">
+                <path class="us-symbol-blade" d="m36.7 5.1 6.7-1.9-1.9 6.7-16.1 16.2-3.5-3.5L36.7 5.1Z"/>
+                <path class="us-symbol-ridge" d="M39.7 6.7 23.9 24.5"/>
+                <path class="us-symbol-guard" d="m18.8 22.6 6.6 6.6"/>
+                <path class="us-symbol-grip" d="m20.8 27.2-7.1 7.1"/>
+                <circle class="us-symbol-pommel" cx="12.3" cy="35.7" r="2.1"/>
+              </g>
+              <g class="us-symbol-sword is-two">
+                <path class="us-symbol-blade" d="m4.6 3.2 6.7 1.9 14.8 17.5-3.5 3.5L6.5 9.9 4.6 3.2Z"/>
+                <path class="us-symbol-ridge" d="m7.6 6.7 16.5 17.8"/>
+                <path class="us-symbol-guard" d="m22.6 29.2 6.6-6.6"/>
+                <path class="us-symbol-grip" d="m27.2 27.2 7.1 7.1"/>
+                <circle class="us-symbol-pommel" cx="35.7" cy="35.7" r="2.1"/>
+              </g>
+              <rect class="us-symbol-core" x="21.8" y="21.8" width="4.4" height="4.4" rx="1" transform="rotate(45 24 24)"/>
+            </svg>
+          </span>
+          <span class="us-card-copy">
+            <span class="us-series">RANGS • E À SSS</span>
+            <span class="us-name">SOLO LEVELING</span>
+          </span>
+        </span>
+        <span class="us-feats" aria-hidden="true">
+          <span class="us-feat"><span class="us-fdot"></span>Progression RPG</span>
+          <span class="us-feat"><span class="us-fdot"></span>Interface sombre</span>
+        </span>
+        <span class="us-cta">CHOISIR
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h13M14 7l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div class="us-gutter" aria-hidden="true"></div>
+      <button type="button" class="usp sao" onclick="pickU('sao')" aria-label="Choisir l’univers Sword Art Online" aria-pressed="false">
+        <span class="us-card-top">
+          <span class="us-logo" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle class="us-symbol-frame" cx="24" cy="24" r="20"/>
+              <circle class="us-symbol-frame is-inner" cx="24" cy="24" r="15.5"/>
+              <g class="us-symbol-sword is-one">
+                <path class="us-symbol-blade" d="m36.7 5.1 6.7-1.9-1.9 6.7-16.1 16.2-3.5-3.5L36.7 5.1Z"/>
+                <path class="us-symbol-ridge" d="M39.7 6.7 23.9 24.5"/>
+                <path class="us-symbol-guard" d="m18.8 22.6 6.6 6.6"/>
+                <path class="us-symbol-grip" d="m20.8 27.2-7.1 7.1"/>
+                <circle class="us-symbol-pommel" cx="12.3" cy="35.7" r="2.1"/>
+              </g>
+              <g class="us-symbol-sword is-two">
+                <path class="us-symbol-blade" d="m4.6 3.2 6.7 1.9 14.8 17.5-3.5 3.5L6.5 9.9 4.6 3.2Z"/>
+                <path class="us-symbol-ridge" d="m7.6 6.7 16.5 17.8"/>
+                <path class="us-symbol-guard" d="m22.6 29.2 6.6-6.6"/>
+                <path class="us-symbol-grip" d="m27.2 27.2 7.1 7.1"/>
+                <circle class="us-symbol-pommel" cx="35.7" cy="35.7" r="2.1"/>
+              </g>
+              <circle class="us-symbol-core" cx="24" cy="24" r="2.6"/>
+            </svg>
+          </span>
+          <span class="us-card-copy">
+            <span class="us-series">NIVEAUX • 1 À 100</span>
+            <span class="us-name">SWORD ART ONLINE</span>
+          </span>
+        </span>
+        <span class="us-feats" aria-hidden="true">
+          <span class="us-feat"><span class="us-fdot"></span>Progression rapide</span>
+          <span class="us-feat"><span class="us-fdot"></span>Interface cyan</span>
+        </span>
+        <span class="us-cta">CHOISIR
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h13M14 7l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
     </div>
-    <div class="us-gutter"></div>
-    <div class="usp sao" onclick="pickU('sao')">
-      <div class="us-logo">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" fill="rgba(0,160,255,.08)" stroke="#00d4ff" stroke-width="1.8"/>
-          <polygon points="18,10 26,14 26,22 18,26 10,22 10,14" fill="none" stroke="rgba(0,200,255,.22)" stroke-width="1" stroke-dasharray="3 5"/>
-          <circle cx="18" cy="2" r="2.2" fill="#00d4ff"/><circle cx="33" cy="10" r="2" fill="#1a8fff"/>
-          <circle cx="33" cy="26" r="2" fill="#1a8fff"/><circle cx="18" cy="34" r="2.2" fill="#00d4ff"/>
-          <circle cx="3" cy="26" r="2" fill="#1a8fff"/><circle cx="3" cy="10" r="2" fill="#00d4ff"/>
-          <circle cx="18" cy="18" r="4" fill="rgba(0,212,255,.15)" stroke="#00d4ff" stroke-width="1.2"/>
-          <circle cx="18" cy="18" r="1.8" fill="#00d4ff"/>
-        </svg>
-      </div>
-      <div class="us-name">SWORD ART<br>ONLINE</div>
-      <div class="us-feats">
-        <div class="us-feat"><div class="us-fdot"></div>Niveaux 1→100 (4× plus rapide)</div>
-        <div class="us-feat"><div class="us-fdot"></div>Board mission holographique</div>
-        <div class="us-feat"><div class="us-fdot"></div>Panneaux avec coins décoratifs</div>
-        <div class="us-feat"><div class="us-fdot"></div>Scanlines &amp; interface cyan</div>
-      </div>
-      <button type="button" class="us-cta">CHOISIR →</button>
-    </div>
+    <p class="us-foot">MODIFIABLE À TOUT MOMENT</p>
   </div>
-  <p class="us-foot">MODIFIABLE DANS LES PARAMÈTRES</p>
 </div>
 <div class="sao-scan-line"></div>
 <!-- ══ TRANSITION OVERLAY ══ -->
@@ -9156,7 +9699,10 @@ function playUniverseTransition(targetU,cb){
 function pickU(u){
   var sc=document.getElementById('usel');
   if(universeTransitionActive||sc?.classList.contains('is-leaving'))return;
-  if(u===getU()&&localStorage.getItem(UK))return;
+  if(u===getU()&&localStorage.getItem(UK)){
+    hideUniverseSelector();
+    return;
+  }
 
   if(activeTimers.size>0){
     if(sc){
@@ -9185,6 +9731,7 @@ function pickU(u){
     var other=sc.querySelector('.usp.'+(u==='sao'?'sl':'sao'));
     chosen?.classList.add('is-selected');
     other?.classList.add('is-dimmed');
+    sc.classList.remove('is-open');
     sc.classList.add('is-leaving');
   }
 
@@ -9196,16 +9743,36 @@ function pickU(u){
         setTimeout(function(){openTutorial(false);},520);
       }
     });
-  },110);
+  },90);
 
   setTimeout(function(){
     if(!sc)return;
     sc.style.display='none';
-    sc.classList.remove('is-leaving');
+    sc.setAttribute('aria-hidden','true');
+    sc.classList.remove('is-open','is-leaving','is-closing','has-current');
     sc.querySelectorAll('.usp').forEach(function(panel){
       panel.classList.remove('is-selected','is-dimmed');
     });
-  },300);
+  },260);
+}
+
+var universeSelectorCloseTimer=0;
+function hideUniverseSelector(immediate){
+  var sc=document.getElementById('usel');
+  if(!sc||universeTransitionActive)return;
+  clearTimeout(universeSelectorCloseTimer);
+  sc.classList.remove('is-open');
+  sc.classList.add('is-closing');
+  sc.setAttribute('aria-hidden','true');
+  function finish(){
+    sc.style.display='none';
+    sc.classList.remove('is-closing','has-current');
+    sc.querySelectorAll('.usp').forEach(function(panel){
+      panel.classList.remove('is-selected','is-dimmed');
+    });
+  }
+  if(immediate)finish();
+  else universeSelectorCloseTimer=setTimeout(finish,220);
 }
 
 function tryShowU(){
@@ -9214,10 +9781,26 @@ function tryShowU(){
 }
 function showU(){
   var sc=document.getElementById('usel');if(!sc)return;
-  sc.style.display='flex';sc.style.animation='fadeIn .3s ease-out both';
+  clearTimeout(universeSelectorCloseTimer);
+  sc.style.display='flex';
+  sc.style.animation='none';
+  sc.setAttribute('aria-hidden','false');
+  sc.classList.remove('is-closing','is-leaving');
+  void sc.offsetWidth;
+  sc.classList.add('is-open');
   document.querySelectorAll('.us-cur').forEach(function(b){b.remove();});
+  var hasCurrent=!!localStorage.getItem(UK);
+  sc.classList.toggle('has-current',hasCurrent);
   var u=getU(),panel=sc.querySelector('.usp.'+u);
-  if(panel){var b=document.createElement('div');b.className='us-cur';b.textContent='ACTIF';panel.appendChild(b);}
+  sc.querySelectorAll('.usp').forEach(function(card){
+    card.setAttribute('aria-pressed',String(hasCurrent&&card===panel));
+  });
+  if(hasCurrent&&panel){
+    var b=document.createElement('span');
+    b.className='us-cur';
+    b.textContent='ACTIF';
+    panel.appendChild(b);
+  }
 }
 (function(){
   var u=getU();
