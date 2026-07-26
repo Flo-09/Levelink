@@ -2,11 +2,12 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#05070c">
+<meta name="theme-color" content="#02040a">
+<meta name="color-scheme" content="dark">
 <title>Levelink</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -4467,10 +4468,418 @@ body[data-design=v10] .build-fill{animation:none!important}
   }
 }
 
+/* ═══════════════════════════════════════════════
+   LEVELINK LAYOUT v11 — COMPACT, ERGONOMIC, SOLID
+═══════════════════════════════════════════════ */
+html{
+  background-color:#02040a!important;
+  color-scheme:dark;
+}
+html,body{
+  min-height:100%;
+  min-height:100dvh;
+}
+body[data-layout=v11]{
+  --ui-bg:#02040a;
+  --ui-bg-2:#07101d;
+  --ui-panel:rgba(12,18,30,.96);
+  --ui-panel-strong:rgba(14,21,35,.99);
+  --ui-panel-soft:rgba(255,255,255,.045);
+  --ui-line:rgba(172,202,239,.115);
+  --ui-line-strong:rgba(190,219,255,.2);
+  --ui-shadow:0 22px 58px rgba(0,0,0,.32);
+  --ui-shadow-soft:0 10px 28px rgba(0,0,0,.2);
+  --t1:#f4f8ff;
+  --t2:#9fb3cc;
+  --t3:rgba(151,175,204,.56);
+  --tab-h:calc(76px + var(--sb));
+  background-color:#02040a!important;
+  background-image:
+    radial-gradient(ellipse 58% 42% at 12% -4%,color-mix(in srgb,var(--A) 15%,transparent),transparent 72%),
+    radial-gradient(ellipse 48% 38% at 102% 86%,color-mix(in srgb,var(--AL) 9%,transparent),transparent 72%),
+    linear-gradient(155deg,#02040a,#07101b 52%,#02050b)!important;
+  background-repeat:no-repeat!important;
+  background-attachment:fixed!important;
+}
+body[data-layout=v11]::before{
+  background:
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),
+    radial-gradient(ellipse at center,transparent 38%,rgba(0,0,0,.5) 100%);
+  background-size:40px 40px,40px 40px,100% 100%;
+  opacity:.2;
+}
+body[data-layout=v11]::after{
+  content:'';
+  position:fixed;
+  z-index:39;
+  left:0;right:0;bottom:0;
+  height:max(var(--sb),2px);
+  background:#03060d;
+  pointer-events:none;
+}
+body[data-layout=v11] #app{
+  width:100%;
+  height:100%;
+  height:100dvh;
+  min-height:100%;
+  min-height:100dvh;
+  padding-left:0!important;
+  background-color:transparent;
+}
+body[data-layout=v11] #app::after{opacity:.1}
+body[data-layout=v11] .orb{animation:none;opacity:.35;filter:blur(70px)}
+body[data-layout=v11] .orb1{left:-220px;top:-220px}
+body[data-layout=v11] .orb2{right:-180px;bottom:-230px}
+body[data-layout=v11] #rank-particles{opacity:.2}
+body[data-layout=v11] #scroll-area{
+  width:100%;
+  padding-left:0!important;
+  padding-bottom:calc(var(--tab-h) + 12px)!important;
+  scrollbar-gutter:auto;
+  background-color:transparent;
+}
+
+/* Integrated header */
+body[data-layout=v11] .app-topbar{
+  min-height:70px;
+  padding:11px clamp(16px,3vw,42px);
+  isolation:isolate;
+  background:rgba(3,7,13,.86);
+  border-bottom:1px solid rgba(175,207,245,.09);
+  box-shadow:0 10px 30px rgba(0,0,0,.16);
+  backdrop-filter:blur(22px) saturate(1.12);
+  -webkit-backdrop-filter:blur(22px) saturate(1.12);
+}
+body[data-layout=v11] .app-topbar::after{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  left:clamp(16px,3vw,42px);
+  right:clamp(16px,3vw,42px);
+  bottom:-1px;
+  height:1px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--A) 40%,transparent),transparent 30%,transparent 70%,color-mix(in srgb,var(--AL) 22%,transparent));
+}
+body[data-layout=v11] .app-brand{gap:12px;padding:2px;border-radius:14px}
+body[data-layout=v11] .app-brand-mark{
+  width:44px;height:44px;border-radius:15px;
+  color:#dff8ff;
+  background:
+    radial-gradient(circle at 50% 48%,color-mix(in srgb,var(--AL) 25%,transparent),transparent 58%),
+    linear-gradient(145deg,color-mix(in srgb,var(--A) 18%,#0c1422),rgba(7,12,21,.96));
+  border:1px solid color-mix(in srgb,var(--A) 34%,transparent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.11),0 10px 26px rgba(0,0,0,.28),0 0 22px color-mix(in srgb,var(--A) 12%,transparent);
+}
+body[data-layout=v11] .app-brand-mark svg{width:29px;height:29px;overflow:visible}
+body[data-layout=v11] .app-sword-blade{fill:currentColor}
+body[data-layout=v11] .app-sword-blade.blade-a{color:var(--AL)}
+body[data-layout=v11] .app-sword-blade.blade-b{color:#b8a8ff;opacity:.92}
+body[data-layout=v11] .app-sword-detail{
+  fill:none;stroke:#eaf8ff;stroke-width:2.15;stroke-linecap:round;stroke-linejoin:round;opacity:.9;
+}
+body[data-layout=v11] .app-sword-pommel{fill:#eaf8ff}
+body[data-layout=v11] .app-sword-core{fill:#fff;filter:drop-shadow(0 0 4px var(--AL))}
+body[data-layout=v11] .app-brand-copy{gap:3px}
+body[data-layout=v11] .app-brand-copy strong{font-size:13px;letter-spacing:2.8px}
+body[data-layout=v11] .app-brand-copy small{font-size:6.5px;letter-spacing:1.35px;color:rgba(164,190,220,.55)}
+body[data-layout=v11] .app-topbar-actions{gap:8px}
+body[data-layout=v11] .app-system-status{
+  min-height:36px;padding:0 12px;
+  background:rgba(255,255,255,.028);
+  border-color:rgba(177,208,245,.1);
+  color:rgba(173,197,224,.62);
+  font-size:7px;letter-spacing:1.2px;
+}
+body[data-layout=v11] .app-settings-btn{
+  width:42px;height:42px;border-radius:14px;
+  background:rgba(255,255,255,.035);
+  border-color:rgba(177,208,245,.11);
+}
+body[data-layout=v11] .app-settings-btn svg{width:18px;height:18px}
+
+/* Bottom navigation: anchored to the safe area, never floating over a light strip */
+body[data-layout=v11] #tab-bar{
+  position:fixed;
+  left:0;right:0;bottom:0;top:auto;
+  transform:none;
+  width:100%;height:calc(68px + var(--sb));
+  padding:6px 8px calc(6px + var(--sb));
+  gap:3px;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  border:0;
+  border-top:1px solid rgba(181,212,248,.12);
+  border-radius:22px 22px 0 0;
+  background:rgba(5,9,16,.96);
+  box-shadow:0 -16px 45px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.035);
+  backdrop-filter:blur(28px) saturate(1.15);
+  -webkit-backdrop-filter:blur(28px) saturate(1.15);
+  contain:layout style;
+}
+body[data-layout=v11] #tab-bar::before{
+  display:block;
+  content:'';
+  position:absolute;
+  left:14%;right:14%;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--A),var(--AL),transparent);
+  opacity:.35;
+}
+body[data-layout=v11] #tab-bar::after{display:none}
+body[data-layout=v11] .tab-btn{
+  flex:1;
+  width:auto;min-width:0;height:56px;
+  padding:4px 3px;
+  gap:4px;
+  flex-direction:column;
+  border-radius:15px;
+  color:rgba(167,188,214,.54);
+  font-size:8px;letter-spacing:.35px;
+  transition:color 160ms ease,background 160ms ease,transform 160ms var(--ui-ease);
+}
+body[data-layout=v11] .tab-btn svg{width:20px;height:20px}
+body[data-layout=v11] .tab-btn.active{
+  color:#f5f9ff;
+  background:linear-gradient(145deg,color-mix(in srgb,var(--A) 18%,transparent),rgba(255,255,255,.045));
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--A) 23%,transparent);
+}
+body[data-layout=v11] .tab-btn.active svg{transform:none;filter:drop-shadow(0 0 7px var(--AG))}
+body[data-layout=v11] .tab-btn.active span{letter-spacing:.45px}
+body[data-layout=v11] .tab-btn:focus-visible,
+body[data-layout=v11] .app-brand:focus-visible,
+body[data-layout=v11] .app-settings-btn:focus-visible,
+body[data-layout=v11] .fab:focus-visible,
+body[data-layout=v11] .section-cta:focus-visible,
+body[data-layout=v11] .btn-prim:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--AL) 74%,white 12%);
+  outline-offset:3px;
+}
+
+/* Clearer content hierarchy */
+body[data-layout=v11] .hero{
+  width:100%;
+  max-width:1240px;
+  padding:22px clamp(14px,2.3vw,28px) 10px!important;
+}
+body[data-layout=v11] .page-shell{
+  width:100%;
+  max-width:1240px;
+  padding:18px clamp(14px,2.3vw,28px) 10px;
+}
+body[data-layout=v11] .hero-grid{gap:14px}
+body[data-layout=v11] .hero-panel{
+  border-radius:20px;
+  background:linear-gradient(150deg,rgba(15,23,38,.97),rgba(8,14,24,.96));
+  border-color:rgba(176,207,243,.12);
+  box-shadow:0 18px 42px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.05);
+}
+body[data-layout=v11] .hero-panel:first-child{padding:20px!important}
+body[data-layout=v11] .hero-panel:last-child{padding:15px!important}
+body[data-layout=v11] .hero-stat{
+  min-height:58px;padding:12px 13px;
+  background:rgba(255,255,255,.042);
+}
+body[data-layout=v11] .hero-stat strong{font-size:17px}
+body[data-layout=v11] .hero-stat span{font-size:10px;color:rgba(176,197,222,.68)}
+body[data-layout=v11] .hero-build{padding:12px 13px;background:rgba(255,255,255,.028)}
+body[data-layout=v11] .build-top span,
+body[data-layout=v11] .build-top strong{font-size:8px}
+body[data-layout=v11] .xp-track{height:8px}
+body[data-layout=v11] .passive-chip{padding:11px 13px}
+body[data-layout=v11] .p-title{font-size:7.5px}
+body[data-layout=v11] .p-sub{font-size:12px;color:rgba(202,213,235,.75)}
+body[data-layout=v11] .section-head{padding:10px 2px;margin-bottom:10px}
+body[data-layout=v11] .section-head p{font-size:8px;letter-spacing:2px;color:rgba(149,174,205,.48)}
+body[data-layout=v11] .section-head h3{font-size:21px;letter-spacing:.2px}
+body[data-layout=v11] .page-shell>h2,
+body[data-layout=v11] .page-shell>div:first-child>h2{
+  font-size:19px!important;
+  letter-spacing:.7px!important;
+}
+
+body[data-layout=v11] .card,
+body[data-layout=v11] .command-card,
+body[data-layout=v11] .stat-card,
+body[data-layout=v11] .insight-hero,
+body[data-layout=v11] .mini-kpi,
+body[data-layout=v11] .a-kpi,
+body[data-layout=v11] .badge-card{
+  background:linear-gradient(155deg,rgba(13,20,33,.97),rgba(7,12,21,.97));
+  border-color:rgba(176,207,243,.11);
+  box-shadow:0 10px 28px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.04);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+body[data-layout=v11] .command-deck{gap:12px;margin-bottom:14px}
+body[data-layout=v11] .command-card-grid{gap:12px}
+body[data-layout=v11] .command-card{padding:19px;border-radius:20px}
+body[data-layout=v11] .command-card-major{min-height:174px}
+body[data-layout=v11] .command-title{font-size:8.5px;letter-spacing:1.7px;color:rgba(170,193,220,.56)}
+body[data-layout=v11] .command-metric{font-size:clamp(29px,4vw,40px);margin-top:7px}
+body[data-layout=v11] .command-copy{font-size:13px;color:rgba(183,202,225,.7)}
+body[data-layout=v11] .app-chip{font-size:7.5px;color:rgba(190,208,230,.68)}
+body[data-layout=v11] .section-cta{
+  min-height:44px;
+  padding:11px 15px;
+  border-radius:13px;
+  font-size:8.5px;letter-spacing:.65px;
+}
+body[data-layout=v11] .sticky-search{
+  top:70px;
+  padding:8px 0 9px;
+  background:linear-gradient(180deg,rgba(3,7,13,.94),rgba(3,7,13,.7) 72%,transparent);
+}
+body[data-layout=v11] #search-input{
+  height:50px!important;
+  border-radius:15px!important;
+  background:rgba(10,16,27,.94)!important;
+  border-color:rgba(176,207,243,.12)!important;
+  color:#eff6ff!important;
+}
+body[data-layout=v11] #search-input::placeholder{color:rgba(157,180,208,.44)}
+body[data-layout=v11] .habit-section-head strong{font-size:8.5px;color:rgba(184,204,227,.7)}
+body[data-layout=v11] .habit-section-head span{font-size:8px}
+body[data-layout=v11] .hcard{
+  min-height:76px;
+  padding:13px 14px 13px 11px;
+  border-radius:17px;
+  background:linear-gradient(150deg,rgba(14,22,36,.98),rgba(8,14,24,.97));
+}
+body[data-layout=v11] .hcard p{font-size:14px!important;color:#eef5ff!important}
+body[data-layout=v11] .lbl{font-size:8px;letter-spacing:1.15px;color:rgba(170,195,223,.58)}
+body[data-layout=v11] .stat-card{min-height:108px}
+body[data-layout=v11] .mini-kpi span{font-size:9px}
+body[data-layout=v11] .a-habit-row{padding:12px 0}
+body[data-layout=v11] #empty-habits>div{animation:none!important}
+
+/* Compact action button */
+body[data-layout=v11] .fab{
+  width:56px;height:56px;
+  right:16px;
+  bottom:calc(var(--tab-h) + 10px);
+  border-radius:17px;
+  background:linear-gradient(145deg,var(--A),var(--AL));
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 14px 32px color-mix(in srgb,var(--A) 32%,transparent),inset 0 1px 0 rgba(255,255,255,.24);
+}
+
+/* Sheets cover the safe area with the same dark surface */
+body[data-layout=v11] #overlay,
+body[data-layout=v11] #settings-ov,
+body[data-layout=v11] #del-modal,
+body[data-layout=v11] #tm-modal{
+  background-color:transparent;
+}
+body[data-layout=v11] .sheet{
+  padding-bottom:calc(22px + var(--sb));
+  background-color:#080d16;
+  background-image:linear-gradient(180deg,rgba(18,25,40,.995),rgba(6,10,18,.998));
+  border-color:rgba(190,219,255,.17);
+}
+
+/* Tablet keeps the bottom navigation but removes old desktop indentation */
+@media(min-width:720px){
+  body[data-layout=v11] .hero-grid{grid-template-columns:minmax(0,1.35fr) minmax(300px,.75fr)}
+  body[data-layout=v11] .command-deck{grid-template-columns:minmax(0,1.35fr) minmax(300px,.75fr)}
+}
+@media(min-width:960px){
+  body[data-layout=v11] #scroll-area{
+    padding-left:0!important;
+    padding-bottom:calc(var(--tab-h) + 12px)!important;
+  }
+  body[data-layout=v11] #tab-bar{
+    left:0;right:0;top:auto;bottom:0;
+    width:100%;height:calc(68px + var(--sb));
+    transform:none;
+    flex-direction:row;
+  }
+  body[data-layout=v11] .tab-btn{width:auto;height:56px;flex:1}
+  body[data-layout=v11] .fab{right:22px;bottom:calc(var(--tab-h) + 12px)}
+}
+
+/* Desktop navigation becomes one compact command bar at the top */
+@media(min-width:1100px){
+  body[data-layout=v11]{--tab-h:0px}
+  body[data-layout=v11] #scroll-area{padding-bottom:28px!important}
+  body[data-layout=v11] #tab-bar{
+    left:50%;right:auto;top:10px;bottom:auto;
+    width:auto;height:50px;
+    padding:5px;
+    gap:3px;
+    transform:translateX(-50%);
+    flex-direction:row;
+    border:1px solid rgba(181,212,248,.12);
+    border-radius:16px;
+    background:rgba(7,11,19,.9);
+    box-shadow:0 12px 32px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.045);
+  }
+  body[data-layout=v11] #tab-bar::before{display:none}
+  body[data-layout=v11] .tab-btn{
+    flex:none;
+    width:auto;min-width:86px;height:40px;
+    padding:0 12px;
+    gap:7px;
+    flex-direction:row;
+    border-radius:11px;
+    font-size:8px;letter-spacing:.45px;
+  }
+  body[data-layout=v11] .tab-btn svg{width:17px;height:17px}
+  body[data-layout=v11] .fab{right:28px;bottom:26px}
+  body[data-layout=v11] .app-topbar{min-height:70px}
+}
+
+@media(max-width:719px){
+  body[data-layout=v11] .app-topbar{
+    min-height:58px;
+    padding:7px 11px 7px 12px;
+  }
+  body[data-layout=v11] .app-topbar::after{left:12px;right:12px}
+  body[data-layout=v11] .app-brand{gap:9px}
+  body[data-layout=v11] .app-brand-mark{width:40px;height:40px;border-radius:14px}
+  body[data-layout=v11] .app-brand-mark svg{width:26px;height:26px}
+  body[data-layout=v11] .app-brand-copy strong{font-size:11px;letter-spacing:2.2px}
+  body[data-layout=v11] .app-brand-copy small{font-size:5.7px;letter-spacing:.8px}
+  body[data-layout=v11] .app-system-status{
+    width:18px;min-width:18px;height:36px;min-height:36px;padding:0;
+    border:0;background:transparent;font-size:0;
+  }
+  body[data-layout=v11] .app-system-status i{width:8px;height:8px}
+  body[data-layout=v11] .app-settings-btn{width:40px;height:40px}
+  body[data-layout=v11] .hero{padding:13px 12px 6px!important}
+  body[data-layout=v11] .page-shell{padding:13px 12px 8px}
+  body[data-layout=v11] .page{min-height:calc(100dvh - 58px)}
+  body[data-layout=v11] .sticky-search{top:58px}
+  body[data-layout=v11] .hero-panel:first-child{padding:16px!important}
+  body[data-layout=v11] .hero-panel:last-child{padding:13px!important}
+  body[data-layout=v11] .hero-summary{grid-template-columns:repeat(3,minmax(0,1fr))}
+  body[data-layout=v11] .hero-stat{min-height:56px;padding:10px 8px}
+  body[data-layout=v11] .hero-stat strong{font-size:14px}
+  body[data-layout=v11] .hero-stat span{font-size:8.5px}
+  body[data-layout=v11] .section-head h3{font-size:19px}
+  body[data-layout=v11] .command-card{padding:16px}
+  body[data-layout=v11] .command-card-major{min-height:auto}
+  body[data-layout=v11] .command-actions{gap:7px}
+  body[data-layout=v11] .section-cta{padding:10px 9px;font-size:7.7px}
+  body[data-layout=v11] .sheet{border-radius:24px 24px 0 0}
+}
+
+@media(max-width:390px){
+  body[data-layout=v11] .app-brand-copy small{display:none}
+  body[data-layout=v11] .app-brand-copy strong{font-size:10.5px;letter-spacing:1.8px}
+  body[data-layout=v11] .tab-btn{font-size:7.3px;gap:3px}
+  body[data-layout=v11] .tab-btn svg{width:19px;height:19px}
+  body[data-layout=v11] .hero-stat span{font-size:7.7px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  body[data-layout=v11] .orb{display:none}
+}
+
 
 </style>
 </head>
-<body data-design="v10">
+<body data-design="v10" data-layout="v11">
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
@@ -4635,10 +5044,14 @@ body[data-design=v10] .build-fill{animation:none!important}
     <header class="app-topbar">
       <button type="button" class="app-brand" onclick="goTab('habits')" aria-label="Retour aux quêtes">
         <span class="app-brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" fill="none">
-            <path d="M16 2.5L27 9v14L16 29.5 5 23V9L16 2.5Z" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M16 7v18M8.5 11.2L16 16l7.5-4.8M8.5 20.8L16 16l7.5 4.8" stroke="currentColor" stroke-width="1" opacity=".45"/>
-            <circle cx="16" cy="16" r="2.4" fill="currentColor"/>
+          <svg viewBox="0 0 40 40" fill="none">
+            <path class="app-sword-blade blade-a" d="M31.3 4.2l4.5-1-1 4.5-17.1 17.1-3.5-3.5L31.3 4.2Z"/>
+            <path class="app-sword-detail" d="m12.2 19.3 8.5 8.5M13.6 25.4l-7 7"/>
+            <circle class="app-sword-pommel" cx="5.6" cy="33.4" r="2"/>
+            <path class="app-sword-blade blade-b" d="m4.2 3.2 4.5 1 17.1 17.1-3.5 3.5L5.2 7.7l-1-4.5Z"/>
+            <path class="app-sword-detail" d="m19.3 27.8 8.5-8.5M26.4 25.4l7 7"/>
+            <circle class="app-sword-pommel" cx="34.4" cy="33.4" r="2"/>
+            <circle class="app-sword-core" cx="20" cy="23.1" r="2.2"/>
           </svg>
         </span>
         <span class="app-brand-copy">
@@ -4900,8 +5313,8 @@ body[data-design=v10] .build-fill{animation:none!important}
   </div><!-- /scroll-area -->
 
   <!-- ══ TAB BAR ══ -->
-  <div id="tab-bar">
-    <button type="button" class="tab-btn active" id="tb-habits" onclick="goTab('habits')">
+  <nav id="tab-bar" aria-label="Navigation principale">
+    <button type="button" class="tab-btn active" id="tb-habits" onclick="goTab('habits')" aria-current="page">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
       <span>Quêtes</span>
     </button>
@@ -4921,10 +5334,10 @@ body[data-design=v10] .build-fill{animation:none!important}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
       <span>Analyse</span>
     </button>
-  </div>
+  </nav>
 
   <!-- FAB -->
-  <button type="button" class="fab" id="fab" onclick="openSheet('habit')">
+  <button type="button" class="fab" id="fab" onclick="openSheet('habit')" aria-label="Créer une quête" title="Créer une quête">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
   </button>
 
@@ -5614,7 +6027,9 @@ window.goTab=function(tab){
   if(oldPage){
     oldPage.style.animation=`${dir>0?'pageOutL':'pageOutR'} .16s ease-out both`;
   }
-  document.getElementById(BTN_MAP[curTab])?.classList.remove('active');
+  const oldButton=document.getElementById(BTN_MAP[curTab]);
+  oldButton?.classList.remove('active');
+  oldButton?.removeAttribute('aria-current');
   curTab=tab;
   // Transition courte : le changement reste lisible sans ralentir la navigation.
   setTimeout(()=>{
@@ -5626,7 +6041,9 @@ window.goTab=function(tab){
         np.style.animation=`${dir>0?'pageInR':'pageInL'} .3s cubic-bezier(.22,1,.36,1) both`;
         setTimeout(()=>{if(np.classList.contains('active'))np.style.animation='';},340);
       }
-      document.getElementById(BTN_MAP[tab])?.classList.add('active');
+      const nextButton=document.getElementById(BTN_MAP[tab]);
+      nextButton?.classList.add('active');
+      nextButton?.setAttribute('aria-current','page');
       const fab=document.getElementById('fab');
       if(fab){
         if(tab==='habits'){fab.style.display='flex';fab.style.animation='rise .3s var(--ui-ease) both';}
