@@ -5893,17 +5893,121 @@ body[data-picker=v13] .us-close:focus-visible{
 }
 
 
+/* ═══════════════════════════════════════════════
+   LEVELINK POLISH v14 — lighter, sharper, faster
+═══════════════════════════════════════════════ */
+body[data-polish=v14]{
+  --ui-bg:#03060d;--ui-bg-2:#07101f;--ui-panel:rgba(11,17,29,.96);
+  --ui-line:rgba(151,190,235,.11);--ui-line-strong:rgba(174,211,255,.19);
+  background:
+    radial-gradient(ellipse 62% 38% at 12% -4%,color-mix(in srgb,var(--A) 14%,transparent),transparent 72%),
+    radial-gradient(ellipse 42% 30% at 92% 94%,color-mix(in srgb,var(--AL) 8%,transparent),transparent 76%),
+    linear-gradient(155deg,var(--ui-bg),var(--ui-bg-2) 52%,#03050a);
+  text-rendering:optimizeLegibility;
+}
+body[data-polish=v14]::before{opacity:.11;background-size:40px 40px,100% 100%}
+body[data-polish=v14] .orb{animation-duration:38s;opacity:.28;filter:blur(62px)}
+body[data-polish=v14] canvas,body[data-polish=v14] svg,body[data-polish=v14] img{image-rendering:auto}
+body[data-polish=v14] .card,body[data-polish=v14] .command-card,body[data-polish=v14] .stat-card,
+body[data-polish=v14] .insight-hero,body[data-polish=v14] .mini-kpi,body[data-polish=v14] .a-kpi,
+body[data-polish=v14] .badge-card{
+  background:linear-gradient(145deg,rgba(14,21,35,.97),rgba(7,12,21,.98));
+  border-color:var(--ui-line);box-shadow:0 12px 34px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.045);
+  backdrop-filter:none;-webkit-backdrop-filter:none;will-change:auto;backface-visibility:visible;
+}
+body[data-polish=v14] .card{transform:none}
+body[data-polish=v14] .card:active{transform:scale(.982)}
+body[data-polish=v14] .hcw{content-visibility:auto;contain-intrinsic-size:76px;contain:layout style}
+body[data-polish=v14] .hero-panel{
+  background:linear-gradient(145deg,rgba(15,23,39,.97),rgba(7,13,23,.98));
+  box-shadow:0 16px 44px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.055);
+}
+body[data-polish=v14] .hero-panel:first-child::after{
+  content:'';position:absolute;left:18px;right:18px;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--A),var(--AL),transparent);opacity:.55;
+}
+body[data-polish=v14] .app-topbar{background:rgba(4,8,15,.9);backdrop-filter:blur(16px) saturate(1.08);-webkit-backdrop-filter:blur(16px) saturate(1.08)}
+body[data-polish=v14] #tab-bar{background:rgba(7,12,21,.94);backdrop-filter:blur(16px) saturate(1.08);-webkit-backdrop-filter:blur(16px) saturate(1.08)}
+body[data-polish=v14] .tab-btn.active{background:linear-gradient(145deg,color-mix(in srgb,var(--A) 18%,transparent),rgba(255,255,255,.025));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--A) 26%,transparent),0 7px 18px rgba(0,0,0,.18)}
+body[data-polish=v14] .hcard{border-radius:18px;background:linear-gradient(145deg,rgba(13,20,33,.98),rgba(7,12,21,.98))}
+body[data-polish=v14] .hcard:hover{border-color:color-mix(in srgb,var(--A) 22%,var(--ui-line));box-shadow:0 14px 34px rgba(0,0,0,.25)}
+body[data-polish=v14] .sticky-search{backdrop-filter:none;-webkit-backdrop-filter:none;background:linear-gradient(180deg,#050a12 20%,rgba(5,10,18,.92) 72%,transparent)}
+body[data-polish=v14] #search-input{background:#0a101c!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important}
+body[data-polish=v14] .command-deck{gap:12px}
+body[data-polish=v14] .command-card{position:relative}
+body[data-polish=v14] .command-card::after{content:'';display:block;position:absolute;left:0;top:20px;bottom:20px;width:2px;border-radius:99px;background:linear-gradient(180deg,transparent,var(--A),transparent);opacity:.52}
+body[data-polish=v14] #scroll-area{scroll-behavior:auto;contain:layout style paint}
+body[data-polish=v14] .page.active{will-change:auto;contain:layout style}
+@media(max-width:600px){
+  body[data-polish=v14] .app-system-status{display:none}
+  body[data-polish=v14] .page-shell{padding-left:14px;padding-right:14px}
+  body[data-polish=v14] .hero{padding-left:14px!important;padding-right:14px!important}
+  body[data-polish=v14] #tab-bar{left:9px;right:9px;bottom:calc(8px + var(--sb));height:68px;border-radius:22px}
+  body[data-polish=v14] .tab-btn{height:56px;border-radius:16px}
+  body[data-polish=v14] .card,body[data-polish=v14] .command-card,body[data-polish=v14] .hero-panel{box-shadow:0 8px 24px rgba(0,0,0,.22)}
+}
+
+/* Intro v14 — System Gate */
+.intro-v14{--gate-a:#77e8ff;--gate-b:#876cff;background:#01040a!important}
+.intro-v14[data-intro-u=sao]{--gate-a:#72f4ff;--gate-b:#168cff}
+.intro-v14-aperture{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.intro-v14-aperture::before{content:'';position:absolute;left:50%;top:0;width:1px;height:100%;background:linear-gradient(transparent 4%,var(--gate-a) 36%,#fff 50%,var(--gate-b) 64%,transparent 96%);opacity:0;transform:scaleY(.08);box-shadow:0 0 22px var(--gate-a),0 0 60px var(--gate-b)}
+.intro-v14-aperture::after{content:'';position:absolute;left:50%;top:50%;width:min(78vw,440px);aspect-ratio:1;border:1px solid color-mix(in srgb,var(--gate-a) 24%,transparent);border-radius:50%;opacity:0;transform:translate(-50%,-50%) scale(.56)}
+.intro-v14.is-live .intro-v14-aperture::before{animation:gateBeamV14 1180ms cubic-bezier(.16,1,.3,1) both}
+.intro-v14.is-live .intro-v14-aperture::after{animation:gateRingV14 1180ms cubic-bezier(.16,1,.3,1) 210ms both}
+.intro-v14 .intro-v6-stage{z-index:2;width:min(88vw,390px)}
+.intro-v14-eyebrow{margin-bottom:22px;font:800 7px/1 'Orbitron',monospace;letter-spacing:3.4px;color:color-mix(in srgb,var(--gate-a) 74%,white);opacity:0;transform:translateY(7px)}
+.intro-v14.is-live .intro-v14-eyebrow{animation:gateTextV14 420ms ease-out 160ms both}
+.intro-v14 .intro-v6-cross{width:190px!important;height:190px!important;transform:scale(.82)}
+.intro-v14 .intro-v6-cross::before{width:92px!important;height:92px!important;background:radial-gradient(circle,rgba(255,255,255,.12),rgba(76,132,255,.05) 48%,transparent 72%)!important}
+.intro-v14 .intro-v6-cross::after{width:118px!important;height:118px!important;border-color:color-mix(in srgb,var(--gate-a) 24%,transparent)!important}
+.intro-v14.is-live .intro-v6-cross{animation:gateLockV14 720ms cubic-bezier(.16,1,.3,1) 360ms both!important}
+.intro-v14.is-live .sword-a{animation:gateSwordAV14 820ms cubic-bezier(.16,1,.3,1) 240ms both!important}
+.intro-v14.is-live .sword-b{animation:gateSwordBV14 820ms cubic-bezier(.16,1,.3,1) 270ms both!important}
+.intro-v14.is-live .intro-v6-impact::before{animation:gateImpactV14 620ms ease-out 900ms both!important}
+.intro-v14 .intro-v6-brand{margin-top:-7px!important}
+.intro-v14.is-live .intro-v6-brand{animation:gateBrandV14 560ms cubic-bezier(.16,1,.3,1) 880ms both!important}
+.intro-v14-status{display:flex;align-items:center;gap:8px;margin-top:15px;font:700 6.5px/1 'Orbitron',monospace;letter-spacing:2px;color:rgba(190,220,255,.38);opacity:0}
+.intro-v14-status i{width:5px;height:5px;border-radius:50%;background:var(--gate-a);box-shadow:0 0 10px var(--gate-a)}
+.intro-v14.is-live .intro-v14-status{animation:gateTextV14 380ms ease-out 1080ms both}
+.intro-v14.is-ready .intro-v14-status{color:rgba(190,255,225,.68)}
+.intro-v14.is-ready .intro-v14-status i{background:#4ade80;box-shadow:0 0 11px #4ade80}
+.intro-v14.is-ready .intro-v14-status span::after{content:'SYSTÈME PRÊT'}
+.intro-v14-status span::after{content:'SYNCHRONISATION'}
+.intro-v14.is-exiting .intro-v14-aperture::before{animation:gateExitV14 460ms cubic-bezier(.4,0,.2,1) both}
+.intro-v14.is-exiting .intro-v6-stage{opacity:0;transform:scale(.965);transition:opacity 260ms ease,transform 420ms cubic-bezier(.4,0,.2,1)}
+.intro-v14.is-exiting{opacity:0!important;transform:scale(1.008)!important;transition:opacity 440ms ease 70ms,transform 480ms ease!important}
+@keyframes gateBeamV14{0%{opacity:0;transform:scaleY(.08)}35%{opacity:.9;transform:scaleY(.82)}100%{opacity:.16;transform:scaleY(1)}}
+@keyframes gateRingV14{0%{opacity:0;transform:translate(-50%,-50%) scale(.56)}46%{opacity:.52}100%{opacity:.12;transform:translate(-50%,-50%) scale(1)}}
+@keyframes gateLockV14{0%{opacity:0;transform:scale(.82) rotate(-5deg)}64%{opacity:1;transform:scale(1.025) rotate(1deg)}100%{opacity:1;transform:scale(1)}}
+@keyframes gateSwordAV14{0%{opacity:0;transform:translate(-50%,-50%) translate3d(-80px,-100px,0) rotate(-20deg) scale(.9)}65%{opacity:1;transform:translate(-50%,-50%) rotate(-48deg) scale(1.015)}100%{opacity:1;transform:translate(-50%,-50%) rotate(-45deg)}}
+@keyframes gateSwordBV14{0%{opacity:0;transform:translate(-50%,-50%) translate3d(80px,-100px,0) rotate(20deg) scale(.9)}65%{opacity:1;transform:translate(-50%,-50%) rotate(48deg) scale(1.015)}100%{opacity:1;transform:translate(-50%,-50%) rotate(45deg)}}
+@keyframes gateImpactV14{0%{opacity:0;transform:scale(.3)}28%{opacity:.75}100%{opacity:0;transform:scale(9)}}
+@keyframes gateBrandV14{0%{opacity:0;transform:translateY(10px);clip-path:inset(0 50%);filter:none}100%{opacity:1;transform:none;clip-path:inset(0);filter:none}}
+@keyframes gateTextV14{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@keyframes gateExitV14{0%{opacity:.16;transform:scaleY(1)}45%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleX(120) scaleY(1)}}
+@media(prefers-reduced-motion:reduce){.intro-v14-aperture::before,.intro-v14-aperture::after,.intro-v14-eyebrow,.intro-v14-status{animation:none!important;opacity:1;transform:none}.intro-v14-aperture::after{transform:translate(-50%,-50%)}}
+
+/* Adaptive Mission Director */
+.director-card{position:relative;overflow:hidden;padding:16px;border:1px solid color-mix(in srgb,var(--director-color,var(--A)) 28%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--director-color,var(--A)) 11%,rgba(5,10,24,.96)),rgba(5,9,20,.96));box-shadow:0 16px 38px rgba(0,0,0,.22)}
+.director-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 10%,color-mix(in srgb,var(--director-color,var(--A)) 18%,transparent),transparent 38%);pointer-events:none}
+.director-head,.director-main,.director-actions{position:relative;z-index:1}.director-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.director-kicker{font-family:'Orbitron',monospace;font-size:7.5px;font-weight:800;letter-spacing:2px;color:var(--director-color,var(--A))}.director-live{display:flex;align-items:center;gap:6px;font-family:'Orbitron',monospace;font-size:7px;font-weight:800;color:var(--t3)}.director-live i{width:6px;height:6px;border-radius:50%;background:var(--director-color,var(--A));box-shadow:0 0 10px var(--director-color,var(--A))}
+.director-main{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:12px}.director-icon{width:48px;height:48px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:22px;background:color-mix(in srgb,var(--director-color,var(--A)) 13%,transparent);border:1px solid color-mix(in srgb,var(--director-color,var(--A)) 32%,transparent)}.director-name{font-size:16px;font-weight:800;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.director-reason{font-size:11px;font-weight:600;line-height:1.4;color:var(--t2);margin-top:3px}.director-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.director-meta span{padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:9px;font-weight:700;color:var(--t2)}
+.director-actions{display:flex;gap:8px;margin-top:13px}.director-actions button{flex:1;min-height:40px;border-radius:12px;font-family:'Orbitron',monospace;font-size:8px;font-weight:800;letter-spacing:1px;cursor:pointer}.director-primary{border:0;color:#fff;background:var(--director-color,var(--A));box-shadow:0 8px 22px color-mix(in srgb,var(--director-color,var(--A)) 28%,transparent)}.director-secondary{max-width:110px;color:var(--t2);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+@media(max-width:520px){.director-card{padding:14px}.director-secondary{max-width:88px}.director-actions button{font-size:7px}.director-reason{font-size:10.5px}}
 </style>
 </head>
-<body data-design="v10" data-layout="v11" data-motion="v12" data-picker="v13">
+<body data-design="v10" data-layout="v11" data-motion="v12" data-picker="v13" data-polish="v14">
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 <canvas id="rank-particles"></canvas>
 
-<!-- ══ INTRO v12 — EMBLÈME CINÉMATIQUE MINIMAL ══ -->
-<div id="intro" class="intro-v3 intro-v6" role="dialog" aria-modal="true" aria-label="Introduction Levelink">
+<!-- ══ INTRO v14 — SYSTEM GATE ══ -->
+<div id="intro" class="intro-v3 intro-v6 intro-v14" role="dialog" aria-modal="true" aria-label="Introduction Levelink">
+  <div class="intro-v14-aperture" aria-hidden="true"></div>
   <div class="intro-v6-stage">
+    <div class="intro-v14-eyebrow">SYSTEM // AWAKENING</div>
     <div class="intro-v6-cross" aria-hidden="true">
       <span class="intro-v6-sweep sweep-a"></span>
       <span class="intro-v6-sweep sweep-b"></span>
@@ -5955,6 +6059,7 @@ body[data-picker=v13] .us-close:focus-visible{
       <div class="intro-v6-word">LEVELINK</div>
       <span class="intro-v6-rule"></span>
     </div>
+    <div class="intro-v14-status" aria-live="polite"><i></i><span></span></div>
     <button type="button" id="intro-skip" class="intro-v6-skip">PASSER</button>
   </div>
 </div>
@@ -7084,37 +7189,31 @@ window.goTab=function(tab){
   if(tab===curTab)return;
   const dir=TAB_ORDER.indexOf(tab)>TAB_ORDER.indexOf(curTab)?1:-1;
   const oldPage=document.getElementById(PAGE_MAP[curTab]);
-  if(oldPage){
-    oldPage.style.animation=`${dir>0?'pageOutL':'pageOutR'} .16s ease-out both`;
-  }
   const oldButton=document.getElementById(BTN_MAP[curTab]);
   oldButton?.classList.remove('active');
   oldButton?.removeAttribute('aria-current');
   curTab=tab;
-  // Transition courte : le changement reste lisible sans ralentir la navigation.
-  setTimeout(()=>{
-    requestAnimationFrame(()=>{
-      document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');p.style.animation='';});
-      const np=document.getElementById(PAGE_MAP[tab]);
-      if(np){
-        np.classList.add('active');
-        np.style.animation=`${dir>0?'pageInR':'pageInL'} .3s cubic-bezier(.22,1,.36,1) both`;
-        setTimeout(()=>{if(np.classList.contains('active'))np.style.animation='';},340);
-      }
-      const nextButton=document.getElementById(BTN_MAP[tab]);
-      nextButton?.classList.add('active');
-      nextButton?.setAttribute('aria-current','page');
-      const fab=document.getElementById('fab');
-      if(fab){
-        if(tab==='habits'){fab.style.display='flex';fab.style.animation='rise .3s var(--ui-ease) both';}
-        else{fab.style.display='none';}
-      }
-      if(tab==='stats')renderStats();
-      if(tab==='badges')renderBadges();
-      if(tab==='analyse')renderAnalyse();
-      document.getElementById('scroll-area').scrollTo({top:0,behavior:'smooth'});
-    });
-  },35);
+  if(tab==='stats')renderStats();
+  if(tab==='badges')renderBadges();
+  if(tab==='analyse')renderAnalyse();
+  if(oldPage){oldPage.classList.remove('active');oldPage.style.animation='';}
+  const np=document.getElementById(PAGE_MAP[tab]);
+  if(np){
+    np.classList.add('active');
+    np.style.animation=`${dir>0?'pageInR':'pageInL'} .24s cubic-bezier(.16,1,.3,1) both`;
+    const clearAnimation=()=>{if(np.classList.contains('active'))np.style.animation='';};
+    np.addEventListener('animationend',clearAnimation,{once:true});
+    setTimeout(clearAnimation,300);
+  }
+  const nextButton=document.getElementById(BTN_MAP[tab]);
+  nextButton?.classList.add('active');
+  nextButton?.setAttribute('aria-current','page');
+  const fab=document.getElementById('fab');
+  if(fab){
+    if(tab==='habits'){fab.style.display='flex';fab.style.animation='rise .24s var(--ui-ease) both';}
+    else{fab.style.display='none';}
+  }
+  document.getElementById('scroll-area').scrollTo({top:0,behavior:'auto'});
 };
 
 // ══════════════════════════════════════════════
@@ -7366,6 +7465,45 @@ function startLiveBoardTick(){
 function stopLiveBoardTick(){clearInterval(_liveBoardInterval);_liveBoardInterval=null;}
 const timerBoardState={};
 
+// ── Adaptive Mission Director ──
+function recentCompletionRate(habit,days=14){
+  const completed=new Set(dates(habit));
+  let hits=0;
+  for(let i=1;i<=days;i++){
+    const day=new Date();day.setDate(day.getDate()-i);
+    if(completed.has(localDateKey(day)))hits++;
+  }
+  return hits/days;
+}
+function missionDirectorPick(){
+  const hour=new Date().getHours();
+  const pending=habits.filter(h=>!dates(h).includes(TODAY)&&!activeTimers.has(h.__id));
+  if(!pending.length)return null;
+  return pending.map(h=>{
+    const chain=streak(dates(h));
+    const duration=Math.max(0,currentDuration(h));
+    const rate=recentCompletionRate(h);
+    let score=chain*13+(1-rate)*28+Math.min(18,xpFinal(h,chain)/4);
+    if(hour>=20)score+=Math.max(0,18-duration)*1.1;
+    if(hour<12&&duration>=20)score+=8;
+    if((h.light_day||'')===TODAY)score+=14;
+    return{h,chain,duration,rate,score};
+  }).sort((a,b)=>b.score-a.score)[0];
+}
+function missionDirectorCard(){
+  const pick=missionDirectorPick();
+  if(!pick){
+    if(activeTimers.size)return'';
+    return habits.length?`<div class="command-card director-card" style="--director-color:#4ade80"><div class="director-head"><span class="director-kicker">DIRECTEUR DE MISSION</span><span class="director-live"><i></i> JOURNÉE VALIDÉE</span></div><div class="director-main"><div class="director-icon">✓</div><div><div class="director-name">Toutes les missions sont accomplies</div><div class="director-reason">Le système protège ton rythme. Reviens demain pour une nouvelle priorité.</div></div></div></div>`:'';
+  }
+  const {h,chain,duration,rate}=pick;
+  const color=h.color||'#2979ff';
+  const action=duration>0?`startTimer('${h.__id}')`:`toggleHabit('${h.__id}')`;
+  const label=duration>0?'LANCER LA MISSION':'VALIDER MAINTENANT';
+  const reason=chain>=3?`Priorité haute : ta série de ${chain} jours est à protéger.`:rate<.35?'Mission irrégulière détectée : la relancer maintenant aura le plus d’impact.':duration&&new Date().getHours()>=20?'Choix court et réaliste pour terminer la journée sans casser ton rythme.':'Meilleur rapport effort, progression et régularité pour maintenant.';
+  return`<div class="command-card director-card" style="--director-color:${color}"><div class="director-head"><span class="director-kicker">PROCHAINE MEILLEURE ACTION</span><span class="director-live"><i></i> ADAPTATIF</span></div><div class="director-main"><div class="director-icon">${h.icon||'⚡'}</div><div><div class="director-name">${escapeHTML(h.name)}</div><div class="director-reason">${reason}</div><div class="director-meta"><span>${chain}j de série</span><span>${Math.round(rate*100)}% sur 14j</span>${duration?`<span>${duration} min</span>`:''}<span>+${xpFinal(h,chain)} XP</span></div></div></div><div class="director-actions"><button type="button" class="director-primary" onclick="${action}">${label}</button><button type="button" class="director-secondary" onclick="document.querySelector('.hcw[data-id=&quot;${h.__id}&quot;]')?.scrollIntoView({behavior:'smooth',block:'center'})">VOIR</button></div></div>`;
+}
+
 
 function buildSAOBoard(live,pct,total,done,str,level,activeCount){
   var nxp=level.nextRank==='MAX'?0:Math.max(0,25-((pdata?pdata.total_xp:0)-(level.level-1)*25));
@@ -7408,6 +7546,7 @@ function renderMissionBoard(){
   </div>`:'';
   const nextXp=Math.max(0,level.nextXp-level.xp);
   const bestStreak=habits.length?Math.max(0,...habits.map(h=>streak(dates(h)))):0;
+  const directorCard=missionDirectorCard();
   let liveSection='';
   if(activeCount>0){
     const CIRC=+(2*Math.PI*20).toFixed(2);
@@ -7438,10 +7577,11 @@ function renderMissionBoard(){
     startLiveBoardTick();
   }else{stopLiveBoardTick();}
   if(getU()==='sao'){
-    board.innerHTML=bossCard+buildSAOBoard(liveSection,pct,total,doneToday,bestStreak,level,activeCount);
+    board.innerHTML=bossCard+directorCard+buildSAOBoard(liveSection,pct,total,doneToday,bestStreak,level,activeCount);
   }else{
     board.innerHTML=`
     ${bossCard}
+    ${directorCard}
     <div class="command-card command-card-major"><div><span class="command-title">Command Center</span><div class="command-metric">${total?pct:0}% <span style="font-size:16px;font-weight:700;color:var(--t2)">terminé</span></div><p class="command-copy">${!total?'Crée ta première quête.':doneToday===total?'Journée validée':`<strong style="color:var(--t1)">${Math.max(total-doneToday,0)} mission${Math.max(total-doneToday,0)>1?'s':''}</strong> restantes.`}</p><div class="app-chip-row"><span class="app-chip">${doneToday}/${total||0} complétées</span><span class="app-chip">${bestStreak}j série</span><span class="app-chip">${(pdata&&pdata.total_xp)||0} XP</span></div></div><div class="command-actions"><button type="button" class="section-cta primary" onclick="openSheet('habit')">+ Quête</button><button type="button" class="section-cta" onclick="openSheet('task')">+ Tâche</button><button type="button" class="section-cta" onclick="goTab('stats')">Stats →</button></div></div>
     ${liveSection}
     <div class="command-card-grid"><div class="command-card"><span class="command-title">Prochain rang</span><div class="command-metric" style="color:${level.nextRank==='MAX'?'#ffd700':'var(--t1)'}">${level.nextRank==='MAX'?'MAX':level.nextRank}</div><p class="command-copy">${level.nextRank==='MAX'?'Rang maximum.':`${nextXp} XP restants.`}</p></div><div class="command-card"><span class="command-title">Timers actifs</span><div class="command-metric" style="color:${activeCount?'var(--AL)':'var(--t1)'}">${activeCount}</div><p class="command-copy">${activeCount?'Garde le rythme.':'Aucun timer.'}</p></div></div>`;
@@ -9342,7 +9482,7 @@ function legacyCosmicIntro(){
 }
 
 // ══════════════════════════════════════════════
-// INTRO v12 — EMBLÈME CINÉMATIQUE MINIMAL (CSS + SVG)
+// INTRO v14 — SYSTEM GATE (CSS + SVG)
 // ══════════════════════════════════════════════
 (function(){
   const intro=document.getElementById('intro');
@@ -9351,7 +9491,7 @@ function legacyCosmicIntro(){
 
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   intro.dataset.introU=getU()==='sao'?'sao':'sl';
-  const alreadySeen=sessionStorage.getItem('hr_intro_v12')==='1';
+  const alreadySeen=sessionStorage.getItem('hr_intro_v14')==='1';
   let finished=false;
   const timers=[];
 
@@ -9377,6 +9517,7 @@ function legacyCosmicIntro(){
     finished=true;
     timers.forEach(clearTimeout);
     document.removeEventListener('keydown',onKeyDown);
+    sessionStorage.setItem('hr_intro_v14','1');
     sessionStorage.setItem('hr_intro_v12','1');
     sessionStorage.setItem('hr_intro_v9','1');
     sessionStorage.setItem('hr_done','1');
@@ -9404,8 +9545,8 @@ function legacyCosmicIntro(){
   requestAnimationFrame(()=>intro.classList.add('is-live'));
   document.addEventListener('keydown',onKeyDown);
   document.getElementById('intro-skip')?.addEventListener('click',()=>revealApp(false,true),{once:true});
-  timers.push(setTimeout(()=>intro.classList.add('is-ready'),reduced?20:1280));
-  timers.push(setTimeout(()=>revealApp(false),reduced?220:1780));
+  timers.push(setTimeout(()=>intro.classList.add('is-ready'),reduced?20:1240));
+  timers.push(setTimeout(()=>revealApp(false),reduced?220:1680));
 })();
 
 // ══════════════════════════════════════════════
