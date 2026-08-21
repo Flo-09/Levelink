@@ -5893,6 +5893,13 @@ body[data-picker=v13] .us-close:focus-visible{
 }
 
 
+/* Adaptive Mission Director */
+.director-card{position:relative;overflow:hidden;padding:16px;border:1px solid color-mix(in srgb,var(--director-color,var(--A)) 28%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--director-color,var(--A)) 11%,rgba(5,10,24,.96)),rgba(5,9,20,.96));box-shadow:0 16px 38px rgba(0,0,0,.22)}
+.director-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 10%,color-mix(in srgb,var(--director-color,var(--A)) 18%,transparent),transparent 38%);pointer-events:none}
+.director-head,.director-main,.director-actions{position:relative;z-index:1}.director-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.director-kicker{font-family:'Orbitron',monospace;font-size:7.5px;font-weight:800;letter-spacing:2px;color:var(--director-color,var(--A))}.director-live{display:flex;align-items:center;gap:6px;font-family:'Orbitron',monospace;font-size:7px;font-weight:800;color:var(--t3)}.director-live i{width:6px;height:6px;border-radius:50%;background:var(--director-color,var(--A));box-shadow:0 0 10px var(--director-color,var(--A))}
+.director-main{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:12px}.director-icon{width:48px;height:48px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:22px;background:color-mix(in srgb,var(--director-color,var(--A)) 13%,transparent);border:1px solid color-mix(in srgb,var(--director-color,var(--A)) 32%,transparent)}.director-name{font-size:16px;font-weight:800;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.director-reason{font-size:11px;font-weight:600;line-height:1.4;color:var(--t2);margin-top:3px}.director-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.director-meta span{padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:9px;font-weight:700;color:var(--t2)}
+.director-actions{display:flex;gap:8px;margin-top:13px}.director-actions button{flex:1;min-height:40px;border-radius:12px;font-family:'Orbitron',monospace;font-size:8px;font-weight:800;letter-spacing:1px;cursor:pointer}.director-primary{border:0;color:#fff;background:var(--director-color,var(--A));box-shadow:0 8px 22px color-mix(in srgb,var(--director-color,var(--A)) 28%,transparent)}.director-secondary{max-width:110px;color:var(--t2);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+@media(max-width:520px){.director-card{padding:14px}.director-secondary{max-width:88px}.director-actions button{font-size:7px}.director-reason{font-size:10.5px}}
 </style>
 </head>
 <body data-design="v10" data-layout="v11" data-motion="v12" data-picker="v13">
@@ -7366,6 +7373,45 @@ function startLiveBoardTick(){
 function stopLiveBoardTick(){clearInterval(_liveBoardInterval);_liveBoardInterval=null;}
 const timerBoardState={};
 
+// ── Adaptive Mission Director ──
+function recentCompletionRate(habit,days=14){
+  const completed=new Set(dates(habit));
+  let hits=0;
+  for(let i=1;i<=days;i++){
+    const day=new Date();day.setDate(day.getDate()-i);
+    if(completed.has(localDateKey(day)))hits++;
+  }
+  return hits/days;
+}
+function missionDirectorPick(){
+  const hour=new Date().getHours();
+  const pending=habits.filter(h=>!dates(h).includes(TODAY)&&!activeTimers.has(h.__id));
+  if(!pending.length)return null;
+  return pending.map(h=>{
+    const chain=streak(dates(h));
+    const duration=Math.max(0,currentDuration(h));
+    const rate=recentCompletionRate(h);
+    let score=chain*13+(1-rate)*28+Math.min(18,xpFinal(h,chain)/4);
+    if(hour>=20)score+=Math.max(0,18-duration)*1.1;
+    if(hour<12&&duration>=20)score+=8;
+    if((h.light_day||'')===TODAY)score+=14;
+    return{h,chain,duration,rate,score};
+  }).sort((a,b)=>b.score-a.score)[0];
+}
+function missionDirectorCard(){
+  const pick=missionDirectorPick();
+  if(!pick){
+    if(activeTimers.size)return'';
+    return habits.length?`<div class="command-card director-card" style="--director-color:#4ade80"><div class="director-head"><span class="director-kicker">DIRECTEUR DE MISSION</span><span class="director-live"><i></i> JOURNÉE VALIDÉE</span></div><div class="director-main"><div class="director-icon">✓</div><div><div class="director-name">Toutes les missions sont accomplies</div><div class="director-reason">Le système protège ton rythme. Reviens demain pour une nouvelle priorité.</div></div></div></div>`:'';
+  }
+  const {h,chain,duration,rate}=pick;
+  const color=h.color||'#2979ff';
+  const action=duration>0?`startTimer('${h.__id}')`:`toggleHabit('${h.__id}')`;
+  const label=duration>0?'LANCER LA MISSION':'VALIDER MAINTENANT';
+  const reason=chain>=3?`Priorité haute : ta série de ${chain} jours est à protéger.`:rate<.35?'Mission irrégulière détectée : la relancer maintenant aura le plus d’impact.':duration&&new Date().getHours()>=20?'Choix court et réaliste pour terminer la journée sans casser ton rythme.':'Meilleur rapport effort, progression et régularité pour maintenant.';
+  return`<div class="command-card director-card" style="--director-color:${color}"><div class="director-head"><span class="director-kicker">PROCHAINE MEILLEURE ACTION</span><span class="director-live"><i></i> ADAPTATIF</span></div><div class="director-main"><div class="director-icon">${h.icon||'⚡'}</div><div><div class="director-name">${escapeHTML(h.name)}</div><div class="director-reason">${reason}</div><div class="director-meta"><span>${chain}j de série</span><span>${Math.round(rate*100)}% sur 14j</span>${duration?`<span>${duration} min</span>`:''}<span>+${xpFinal(h,chain)} XP</span></div></div></div><div class="director-actions"><button type="button" class="director-primary" onclick="${action}">${label}</button><button type="button" class="director-secondary" onclick="document.querySelector('.hcw[data-id=&quot;${h.__id}&quot;]')?.scrollIntoView({behavior:'smooth',block:'center'})">VOIR</button></div></div>`;
+}
+
 
 function buildSAOBoard(live,pct,total,done,str,level,activeCount){
   var nxp=level.nextRank==='MAX'?0:Math.max(0,25-((pdata?pdata.total_xp:0)-(level.level-1)*25));
@@ -7408,6 +7454,7 @@ function renderMissionBoard(){
   </div>`:'';
   const nextXp=Math.max(0,level.nextXp-level.xp);
   const bestStreak=habits.length?Math.max(0,...habits.map(h=>streak(dates(h)))):0;
+  const directorCard=missionDirectorCard();
   let liveSection='';
   if(activeCount>0){
     const CIRC=+(2*Math.PI*20).toFixed(2);
@@ -7438,10 +7485,11 @@ function renderMissionBoard(){
     startLiveBoardTick();
   }else{stopLiveBoardTick();}
   if(getU()==='sao'){
-    board.innerHTML=bossCard+buildSAOBoard(liveSection,pct,total,doneToday,bestStreak,level,activeCount);
+    board.innerHTML=bossCard+directorCard+buildSAOBoard(liveSection,pct,total,doneToday,bestStreak,level,activeCount);
   }else{
     board.innerHTML=`
     ${bossCard}
+    ${directorCard}
     <div class="command-card command-card-major"><div><span class="command-title">Command Center</span><div class="command-metric">${total?pct:0}% <span style="font-size:16px;font-weight:700;color:var(--t2)">terminé</span></div><p class="command-copy">${!total?'Crée ta première quête.':doneToday===total?'Journée validée':`<strong style="color:var(--t1)">${Math.max(total-doneToday,0)} mission${Math.max(total-doneToday,0)>1?'s':''}</strong> restantes.`}</p><div class="app-chip-row"><span class="app-chip">${doneToday}/${total||0} complétées</span><span class="app-chip">${bestStreak}j série</span><span class="app-chip">${(pdata&&pdata.total_xp)||0} XP</span></div></div><div class="command-actions"><button type="button" class="section-cta primary" onclick="openSheet('habit')">+ Quête</button><button type="button" class="section-cta" onclick="openSheet('task')">+ Tâche</button><button type="button" class="section-cta" onclick="goTab('stats')">Stats →</button></div></div>
     ${liveSection}
     <div class="command-card-grid"><div class="command-card"><span class="command-title">Prochain rang</span><div class="command-metric" style="color:${level.nextRank==='MAX'?'#ffd700':'var(--t1)'}">${level.nextRank==='MAX'?'MAX':level.nextRank}</div><p class="command-copy">${level.nextRank==='MAX'?'Rang maximum.':`${nextXp} XP restants.`}</p></div><div class="command-card"><span class="command-title">Timers actifs</span><div class="command-metric" style="color:${activeCount?'var(--AL)':'var(--t1)'}">${activeCount}</div><p class="command-copy">${activeCount?'Garde le rythme.':'Aucun timer.'}</p></div></div>`;
