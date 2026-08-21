@@ -12,6 +12,7 @@ Levelink est un prototype d’application web qui transforme la progression pers
 - Deux univers visuels : Solo Leveling et Sword Art Online
 - Interface responsive avec animations adaptatives
 - Directeur de mission adaptatif : recommande la meilleure prochaine action selon les séries, la régularité, la durée et l'heure
+- Introduction « System Gate », navigation instantanée et rendu allégé pour une expérience plus fluide sur mobile
 
 ## Lancer le prototype
 
