@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#02040a">
 <meta name="color-scheme" content="dark">
+<meta name="description" content="Levelink transforme tes habitudes en quêtes, ton effort en XP et ta régularité en progression visible.">
 <title>Levelink</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -5995,72 +5996,209 @@ body[data-polish=v14] .page.active{will-change:auto;contain:layout style}
 .director-main{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:12px}.director-icon{width:48px;height:48px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:22px;background:color-mix(in srgb,var(--director-color,var(--A)) 13%,transparent);border:1px solid color-mix(in srgb,var(--director-color,var(--A)) 32%,transparent)}.director-name{font-size:16px;font-weight:800;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.director-reason{font-size:11px;font-weight:600;line-height:1.4;color:var(--t2);margin-top:3px}.director-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.director-meta span{padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);font-size:9px;font-weight:700;color:var(--t2)}
 .director-actions{display:flex;gap:8px;margin-top:13px}.director-actions button{flex:1;min-height:40px;border-radius:12px;font-family:'Orbitron',monospace;font-size:8px;font-weight:800;letter-spacing:1px;cursor:pointer}.director-primary{border:0;color:#fff;background:var(--director-color,var(--A));box-shadow:0 8px 22px color-mix(in srgb,var(--director-color,var(--A)) 28%,transparent)}.director-secondary{max-width:110px;color:var(--t2);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
 @media(max-width:520px){.director-card{padding:14px}.director-secondary{max-width:88px}.director-actions button{font-size:7px}.director-reason{font-size:10.5px}}
+
+/* ═══════════════════════════════════════════════
+   LEVELINK UX v15 — action first, calm and readable
+═══════════════════════════════════════════════ */
+body[data-ux=v15]{
+  --sidebar-w:248px;
+  --surface-0:#04070d;
+  --surface-1:#090f19;
+  --surface-2:#0e1725;
+  --ux-line:rgba(176,207,243,.12);
+  --ux-muted:rgba(177,198,223,.62);
+  background:#04070d;
+}
+body[data-ux=v15] #app{
+  background:
+    radial-gradient(ellipse 46% 32% at 92% 0%,color-mix(in srgb,var(--A) 10%,transparent),transparent 72%),
+    linear-gradient(155deg,#04070d,#07101a 52%,#03060b);
+}
+body[data-ux=v15] .app-topbar{
+  min-height:68px;
+  padding:10px clamp(14px,2.5vw,32px);
+  border-bottom:1px solid var(--ux-line);
+  background:rgba(4,8,14,.92);
+}
+.topbar-page-context{display:none;flex-direction:column;gap:3px;min-width:0}
+.topbar-page-context span{font:700 7px/1 'Orbitron',monospace;letter-spacing:2.2px;color:var(--t3)}
+.topbar-page-context strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:17px;line-height:1;color:#f2f7ff}
+.mission-page-head{
+  width:100%;max-width:1240px;margin:0 auto;padding:22px clamp(14px,2.3vw,28px) 4px;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:18px;
+}
+.mission-page-head-copy p{margin:0 0 5px;font:700 7px/1 'Orbitron',monospace;letter-spacing:2.4px;color:var(--A)}
+.mission-page-head-copy h1{margin:0;font:900 clamp(21px,3vw,30px)/1.08 'Orbitron',monospace;letter-spacing:.2px;color:#f4f8ff}
+.mission-page-head-copy span{display:block;margin-top:7px;font-size:12px;font-weight:600;color:var(--ux-muted)}
+.mission-page-actions{display:flex;align-items:center;gap:8px}
+.mission-world-button,.mission-create-button{
+  min-height:44px;border-radius:13px;padding:0 15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font:800 8px/1 'Orbitron',monospace;letter-spacing:.7px;cursor:pointer;transition:transform 160ms ease,border-color 160ms ease,background 160ms ease;
+}
+.mission-world-button{color:var(--ux-muted);border:1px solid var(--ux-line);background:rgba(255,255,255,.025)}
+.mission-create-button{color:#fff;border:1px solid rgba(255,255,255,.2);background:linear-gradient(135deg,var(--A),var(--AL));box-shadow:0 10px 25px color-mix(in srgb,var(--A) 24%,transparent)}
+.mission-page-actions svg{width:16px;height:16px}
+@media(hover:hover){.mission-world-button:hover,.mission-create-button:hover{transform:translateY(-1px)}.mission-world-button:hover{border-color:color-mix(in srgb,var(--A) 34%,var(--ux-line));color:#f4f8ff}}
+body[data-ux=v15] .hero{padding-top:12px!important}
+body[data-ux=v15] .hero-panel,body[data-ux=v15] .card,body[data-ux=v15] .command-card,
+body[data-ux=v15] .stat-card,body[data-ux=v15] .insight-hero,body[data-ux=v15] .badge-card{
+  border-color:var(--ux-line);
+  background:linear-gradient(145deg,rgba(14,22,35,.98),rgba(7,12,20,.99));
+  box-shadow:0 12px 32px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045);
+}
+body[data-ux=v15] .hero-panel:first-child>div:first-child .btn-icon{display:none}
+body[data-ux=v15] .section-head{align-items:end}
+body[data-ux=v15] .section-head h3{font-size:22px}
+body[data-ux=v15] .page-shell{padding-bottom:28px}
+body[data-ux=v15] .sticky-search{top:68px}
+.nav-rail-brand{display:none}
+
+/* Intro v15 — world-first launch screen */
+.intro-v15{
+  --intro-a:#6ee7ff;--intro-b:#806bff;
+  position:fixed;inset:0;z-index:9999;isolation:isolate;overflow:auto;
+  display:grid;place-items:center;padding:max(22px,var(--st)) 18px max(22px,var(--sb));
+  color:#edf7ff;background:
+    radial-gradient(circle at 50% 8%,rgba(70,136,255,.2),transparent 31%),
+    radial-gradient(circle at 12% 88%,rgba(124,77,255,.1),transparent 27%),
+    linear-gradient(150deg,#02050b,#07101f 52%,#02050b);
+}
+.intro-v15[data-intro-u=sao]{--intro-a:#71f1ff;--intro-b:#158cff}
+.intro-v15::before{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;background-image:linear-gradient(rgba(142,192,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(142,192,255,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 82%)}
+.intro-v15::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 32%,rgba(0,0,0,.63) 100%)}
+.intro-v15-shell{width:min(100%,760px);display:grid;justify-items:center;text-align:center;opacity:0;transform:translateY(14px)}
+.intro-v15.is-live .intro-v15-shell{animation:introV15In 620ms cubic-bezier(.16,1,.3,1) both}
+.intro-v15-brand{display:flex;align-items:center;gap:12px;margin-bottom:15px}
+.intro-v15-mark{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;color:var(--intro-a);border:1px solid color-mix(in srgb,var(--intro-a) 38%,transparent);background:linear-gradient(145deg,color-mix(in srgb,var(--intro-a) 14%,#0d1725),#070c15);box-shadow:0 12px 34px rgba(0,0,0,.34),0 0 28px color-mix(in srgb,var(--intro-a) 12%,transparent)}
+.intro-v15-mark svg{width:34px;height:34px;filter:drop-shadow(0 0 7px currentColor)}
+.intro-v15-mark path{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.intro-v15-brand-copy{text-align:left}
+.intro-v15-brand-copy strong{display:block;font:900 18px/1 'Orbitron',monospace;letter-spacing:3.2px;color:#f5f9ff}
+.intro-v15-brand-copy span{display:block;margin-top:5px;font:700 6px/1 'Orbitron',monospace;letter-spacing:2px;color:rgba(174,205,238,.46)}
+.intro-v15-kicker{margin:0 0 8px;font:800 7px/1 'Orbitron',monospace;letter-spacing:2.6px;color:var(--intro-a)}
+.intro-v15 h1{max-width:620px;margin:0;font:900 clamp(24px,5vw,39px)/1.08 'Orbitron',monospace;letter-spacing:-.6px;color:#f6f9ff}
+.intro-v15-lead{max-width:510px;margin:11px auto 0;font-size:13px;font-weight:600;line-height:1.5;color:rgba(184,207,232,.62)}
+.intro-v15-worlds{width:100%;margin-top:25px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.intro-world-option{
+  --world:#6ee7ff;position:relative;min-height:154px;padding:18px;text-align:left;overflow:hidden;cursor:pointer;
+  border:1px solid rgba(176,207,243,.12);border-radius:20px;color:#edf7ff;background:linear-gradient(145deg,rgba(15,24,39,.96),rgba(7,12,21,.98));
+  transition:transform 180ms cubic-bezier(.16,1,.3,1),border-color 180ms ease,box-shadow 180ms ease,background 180ms ease;
+}
+.intro-world-option[data-world=sao]{--world:#37d8ff}
+.intro-world-option::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 88% 2%,color-mix(in srgb,var(--world) 16%,transparent),transparent 43%);opacity:.65}
+.intro-world-option::after{content:'';position:absolute;left:18px;right:18px;bottom:0;height:2px;border-radius:99px;background:linear-gradient(90deg,var(--world),transparent);opacity:0;transform:scaleX(.35);transform-origin:left;transition:opacity 180ms,transform 240ms cubic-bezier(.16,1,.3,1)}
+.intro-world-option.is-selected{border-color:color-mix(in srgb,var(--world) 48%,transparent);background:linear-gradient(145deg,color-mix(in srgb,var(--world) 10%,#111b2b),rgba(7,12,21,.99));box-shadow:0 16px 40px rgba(0,0,0,.28),inset 0 0 0 1px color-mix(in srgb,var(--world) 10%,transparent)}
+.intro-world-option.is-selected::after{opacity:1;transform:scaleX(1)}
+.intro-world-check{position:absolute;right:15px;top:15px;width:22px;height:22px;border-radius:8px;display:grid;place-items:center;border:1px solid rgba(176,207,243,.14);color:transparent;background:rgba(255,255,255,.03)}
+.intro-world-option.is-selected .intro-world-check{color:#07101a;border-color:var(--world);background:var(--world);box-shadow:0 0 14px color-mix(in srgb,var(--world) 45%,transparent)}
+.intro-world-check svg{width:13px;height:13px}
+.intro-world-index{position:relative;font:800 6px/1 'Orbitron',monospace;letter-spacing:1.8px;color:color-mix(in srgb,var(--world) 80%,white 10%)}
+.intro-world-name{position:relative;display:block;margin-top:12px;font:900 17px/1.1 'Orbitron',monospace;letter-spacing:.45px;color:#f4f8ff}
+.intro-world-description{position:relative;display:block;margin-top:7px;font-size:11px;font-weight:600;line-height:1.35;color:rgba(179,203,229,.62)}
+.intro-world-meta{position:relative;display:flex;flex-wrap:wrap;gap:5px;margin-top:13px}
+.intro-world-meta span{padding:5px 7px;border-radius:8px;border:1px solid rgba(176,207,243,.09);background:rgba(255,255,255,.025);font-size:8px;font-weight:700;color:rgba(201,218,237,.66)}
+.intro-v15-footer{width:100%;margin-top:13px;display:flex;align-items:center;gap:11px}
+.intro-v15-status{flex:1;text-align:left;font:700 6.5px/1.35 'Orbitron',monospace;letter-spacing:1.4px;color:rgba(166,192,220,.42)}
+.intro-v15-status b{color:var(--intro-a);font-weight:800}
+.intro-v15-enter{min-width:232px;min-height:48px;padding:0 18px;border:1px solid rgba(255,255,255,.22);border-radius:14px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--intro-b),var(--intro-a));box-shadow:0 12px 30px color-mix(in srgb,var(--intro-a) 18%,transparent);font:900 8px/1 'Orbitron',monospace;letter-spacing:.85px;transition:transform 180ms cubic-bezier(.16,1,.3,1),box-shadow 180ms ease}
+.intro-v15-enter svg{width:16px;height:16px}
+.intro-v15-enter:disabled{cursor:wait;opacity:.72}
+.intro-v15-enter:focus-visible,.intro-world-option:focus-visible{outline:2px solid var(--intro-a);outline-offset:3px}
+.intro-v15.is-ready .intro-v15-enter{box-shadow:0 0 0 4px color-mix(in srgb,var(--intro-a) 9%,transparent),0 14px 36px color-mix(in srgb,var(--intro-a) 25%,transparent)}
+.intro-v15.is-exiting{opacity:0;transform:scale(1.008);transition:opacity 430ms ease,transform 500ms cubic-bezier(.4,0,.2,1);pointer-events:none}
+@media(hover:hover){.intro-world-option:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--world) 32%,transparent)}.intro-v15-enter:hover{transform:translateY(-1px);box-shadow:0 16px 38px color-mix(in srgb,var(--intro-a) 27%,transparent)}}
+@keyframes introV15In{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* Desktop: persistent command rail */
+@media(min-width:1024px){
+  body[data-ux=v15]{--tab-h:0px}
+  body[data-ux=v15] #scroll-area{padding-left:var(--sidebar-w)!important;padding-bottom:0!important}
+  body[data-ux=v15] #tab-bar{
+    left:0!important;right:auto!important;top:0!important;bottom:0!important;transform:none!important;
+    width:var(--sidebar-w)!important;height:100dvh!important;padding:18px 14px 94px!important;gap:6px!important;
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;
+    border:0!important;border-right:1px solid var(--ux-line)!important;border-radius:0!important;
+    background:linear-gradient(180deg,rgba(7,12,20,.98),rgba(4,8,14,.99))!important;box-shadow:18px 0 45px rgba(0,0,0,.2)!important;
+  }
+  body[data-ux=v15] #tab-bar::before{display:block!important;content:'';left:auto!important;right:-1px!important;top:26px!important;bottom:26px!important;width:1px!important;height:auto!important;background:linear-gradient(transparent,var(--A),var(--AL),transparent)!important;opacity:.28!important}
+  body[data-ux=v15] .nav-rail-brand{display:flex;align-items:center;gap:11px;min-height:58px;margin:0 4px 18px;padding:0 8px;border-bottom:1px solid rgba(176,207,243,.09)}
+  .nav-rail-mark{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,color-mix(in srgb,var(--A) 18%,#101b2b),#080d16);border:1px solid color-mix(in srgb,var(--A) 30%,transparent);color:var(--AL);font:900 13px/1 'Orbitron',monospace;box-shadow:0 8px 20px rgba(0,0,0,.24)}
+  .nav-rail-copy{display:flex;flex-direction:column;gap:4px;min-width:0}.nav-rail-copy strong{font:900 11px/1 'Orbitron',monospace;letter-spacing:2px;color:#f0f6ff}.nav-rail-copy span{font:700 6px/1 'Orbitron',monospace;letter-spacing:1.5px;color:var(--t3)}
+  body[data-ux=v15] .tab-btn{flex:0 0 auto!important;width:100%!important;min-width:0!important;height:48px!important;padding:0 13px!important;gap:12px!important;flex-direction:row!important;justify-content:flex-start!important;border-radius:13px!important;font-size:8px!important;letter-spacing:.8px!important;color:rgba(172,194,219,.56)!important}
+  body[data-ux=v15] .tab-btn svg{width:18px!important;height:18px!important;flex:0 0 auto}
+  body[data-ux=v15] .tab-btn.active{color:#f5f9ff!important;background:linear-gradient(90deg,color-mix(in srgb,var(--A) 17%,transparent),rgba(255,255,255,.025))!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--A) 20%,transparent)!important}
+  body[data-ux=v15] .tab-btn.active::after{display:block;content:'';left:0!important;right:auto!important;top:13px!important;bottom:13px!important;width:2px!important;height:auto!important;border-radius:0 99px 99px 0!important;background:var(--AL)!important;box-shadow:0 0 10px var(--AG)!important;opacity:1!important}
+  body[data-ux=v15] .tab-btn.active svg{transform:none!important;filter:drop-shadow(0 0 6px var(--AG))!important}
+  body[data-ux=v15] .fab{left:16px!important;right:auto!important;bottom:20px!important;width:216px!important;height:52px!important;border-radius:14px!important;gap:10px!important}
+  body[data-ux=v15] .fab::after{content:'NOUVELLE QUÊTE';font:900 8px/1 'Orbitron',monospace;letter-spacing:.9px;color:#fff}
+  body[data-ux=v15] .fab svg{width:18px;height:18px}
+  body[data-ux=v15] .app-brand{display:none}
+  body[data-ux=v15] .topbar-page-context{display:flex}
+  body[data-ux=v15] .app-topbar{padding-left:30px}
+  body[data-ux=v15] .hero,body[data-ux=v15] .page-shell,body[data-ux=v15] .mission-page-head{max-width:1180px}
+}
+@media(max-width:1023px){
+  body[data-ux=v15] #tab-bar{left:8px!important;right:8px!important;bottom:calc(7px + var(--sb))!important;width:auto!important;height:66px!important;padding:5px 6px!important;border:1px solid var(--ux-line)!important;border-radius:21px!important;background:rgba(7,12,20,.96)!important;box-shadow:0 14px 38px rgba(0,0,0,.42)!important}
+  body[data-ux=v15] #scroll-area{padding-bottom:calc(84px + var(--sb))!important}
+  body[data-ux=v15] .tab-btn{height:54px!important;border-radius:15px!important;font-size:7.5px!important}
+  body[data-ux=v15] .tab-btn.active::after{display:none}
+  body[data-ux=v15] .fab{width:52px!important;height:52px!important;right:14px!important;bottom:calc(82px + var(--sb))!important;border-radius:16px!important}
+}
+@media(max-width:640px){
+  .mission-page-head{align-items:center;padding:16px 12px 2px}.mission-page-head-copy h1{font-size:20px}.mission-page-head-copy span{font-size:11px}.mission-world-button{display:none}.mission-create-button{width:44px;min-width:44px;padding:0;font-size:0}.mission-create-button svg{width:18px;height:18px}
+  body[data-ux=v15] .hero{padding-top:10px!important}
+  body[data-ux=v15] .hero-grid{gap:10px}
+  body[data-ux=v15] .hero-panel{border-radius:18px}
+  body[data-ux=v15] .intro-v15{place-items:start center;padding-top:max(18px,var(--st))}
+  .intro-v15-brand{margin-bottom:12px}.intro-v15-mark{width:46px;height:46px;border-radius:15px}.intro-v15-brand-copy strong{font-size:15px}.intro-v15 h1{font-size:24px}.intro-v15-lead{font-size:11.5px}.intro-v15-worlds{margin-top:18px;gap:8px}.intro-world-option{min-height:142px;padding:14px;border-radius:17px}.intro-world-name{font-size:12px;letter-spacing:0}.intro-world-description{font-size:9.5px}.intro-world-meta{margin-top:10px}.intro-world-meta span{font-size:7px;padding:4px 5px}.intro-world-check{right:11px;top:11px}.intro-v15-footer{flex-direction:column-reverse;gap:9px}.intro-v15-status{text-align:center}.intro-v15-enter{width:100%;min-width:0}
+}
+@media(max-width:390px){
+  body[data-ux=v15] #tab-bar{left:6px!important;right:6px!important}.intro-v15-brand-copy span{display:none}.intro-world-option{min-height:134px;padding:12px}.intro-world-description{min-height:26px}.intro-world-meta span:last-child{display:none}
+}
+@media(prefers-reduced-motion:reduce){.intro-v15-shell,.intro-v15.is-live .intro-v15-shell{opacity:1;transform:none;animation:none}.intro-world-option,.intro-v15-enter{transition:none}}
 </style>
 </head>
-<body data-design="v10" data-layout="v11" data-motion="v12" data-picker="v13" data-polish="v14">
+<body data-design="v10" data-layout="v11" data-motion="v12" data-picker="v13" data-polish="v14" data-ux="v15">
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 <canvas id="rank-particles"></canvas>
 
-<!-- ══ INTRO v14 — SYSTEM GATE ══ -->
-<div id="intro" class="intro-v3 intro-v6 intro-v14" role="dialog" aria-modal="true" aria-label="Introduction Levelink">
-  <div class="intro-v14-aperture" aria-hidden="true"></div>
-  <div class="intro-v6-stage">
-    <div class="intro-v14-eyebrow">SYSTEM // AWAKENING</div>
-    <div class="intro-v6-cross" aria-hidden="true">
-      <span class="intro-v6-sweep sweep-a"></span>
-      <span class="intro-v6-sweep sweep-b"></span>
-      <svg class="intro-v6-sword sword-a" viewBox="0 0 56 212" style="--blade-fill:url(#intro-blade-a)">
-        <defs>
-          <linearGradient id="intro-blade-a" x1="19" y1="0" x2="37" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="var(--sword-a)" stop-opacity=".22"/>
-            <stop offset=".36" stop-color="#dff9ff" stop-opacity=".82"/>
-            <stop offset=".5" stop-color="#fff" stop-opacity=".98"/>
-            <stop offset=".7" stop-color="var(--sword-a)" stop-opacity=".62"/>
-            <stop offset="1" stop-color="var(--sword-a)" stop-opacity=".18"/>
-          </linearGradient>
-        </defs>
-        <path class="intro-v6-blade" d="M28 1L35.5 16L37 126L32 147L28 157L24 147L19 126L20.5 16Z"/>
-        <path class="intro-v6-fuller" d="M28 8L31.5 20L32 125L28 145L24 125L24.5 20Z"/>
-        <path class="intro-v6-edge" d="M28 4L35 18L35.5 124L31 145M28 4L21 18L20.5 124L25 145"/>
-        <path class="intro-v6-ridge" d="M28 9V145"/>
-        <path class="intro-v6-shine" d="M28 10V146"/>
-        <path class="intro-v6-guard" d="M4 150Q16 143 23 147L28 142L33 147Q40 143 52 150L47 158L34 153L28 160L22 153L9 158Z"/>
-        <path class="intro-v6-guard-core" d="M22 148H34L32 159H24Z"/>
-        <path class="intro-v6-grip" d="M23 157H33V193H23Z"/>
-        <path class="intro-v6-wrap" d="M23 163L33 168M23 171L33 176M23 179L33 184M23 187L33 192"/>
-        <path class="intro-v6-pommel" d="M28 191L36 201L28 211L20 201Z"/>
-      </svg>
-      <svg class="intro-v6-sword sword-b" viewBox="0 0 56 212" style="--blade-fill:url(#intro-blade-b)">
-        <defs>
-          <linearGradient id="intro-blade-b" x1="19" y1="0" x2="37" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="var(--sword-b)" stop-opacity=".22"/>
-            <stop offset=".36" stop-color="#eef0ff" stop-opacity=".82"/>
-            <stop offset=".5" stop-color="#fff" stop-opacity=".98"/>
-            <stop offset=".7" stop-color="var(--sword-b)" stop-opacity=".62"/>
-            <stop offset="1" stop-color="var(--sword-b)" stop-opacity=".18"/>
-          </linearGradient>
-        </defs>
-        <path class="intro-v6-blade" d="M28 1L35.5 16L37 126L32 147L28 157L24 147L19 126L20.5 16Z"/>
-        <path class="intro-v6-fuller" d="M28 8L31.5 20L32 125L28 145L24 125L24.5 20Z"/>
-        <path class="intro-v6-edge" d="M28 4L35 18L35.5 124L31 145M28 4L21 18L20.5 124L25 145"/>
-        <path class="intro-v6-ridge" d="M28 9V145"/>
-        <path class="intro-v6-shine" d="M28 10V146"/>
-        <path class="intro-v6-guard" d="M4 150Q16 143 23 147L28 142L33 147Q40 143 52 150L47 158L34 153L28 160L22 153L9 158Z"/>
-        <path class="intro-v6-guard-core" d="M22 148H34L32 159H24Z"/>
-        <path class="intro-v6-grip" d="M23 157H33V193H23Z"/>
-        <path class="intro-v6-wrap" d="M23 163L33 168M23 171L33 176M23 179L33 184M23 187L33 192"/>
-        <path class="intro-v6-pommel" d="M28 191L36 201L28 211L20 201Z"/>
-      </svg>
-      <span class="intro-v6-impact"></span>
+<!-- ══ INTRO v15 — CHOIX DU MONDE ══ -->
+<div id="intro" class="intro-v15" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+  <div class="intro-v15-shell">
+    <div class="intro-v15-brand" aria-label="Levelink">
+      <span class="intro-v15-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48"><path d="m36.5 5.5 6-2-2 6-16 16-4-4 16-16ZM11.5 5.5l-6-2 2 6 16 16 4-4-16-16ZM18 25l-8 8m20-8 8 8M7 33l8 8m26-8-8 8M20.5 21.5h7v7h-7z"/></svg>
+      </span>
+      <span class="intro-v15-brand-copy"><strong>LEVELINK</strong><span>DISCIPLINE SYSTEM</span></span>
     </div>
-    <div class="intro-v6-brand" role="img" aria-label="Levelink">
-      <div class="intro-v6-word">LEVELINK</div>
-      <span class="intro-v6-rule"></span>
+    <p class="intro-v15-kicker">SYSTEM // WORLD SELECT</p>
+    <h1 id="intro-title">Choisis ton système de progression</h1>
+    <p class="intro-v15-lead">Un même objectif : transformer tes efforts réels en puissance visible. Choisis l’univers qui te donnera envie d’avancer chaque jour.</p>
+    <div class="intro-v15-worlds" role="radiogroup" aria-label="Choisir un univers">
+      <button type="button" class="intro-world-option" data-world="sl" role="radio" aria-checked="false">
+        <span class="intro-world-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="intro-world-index">MONDE 01</span>
+        <strong class="intro-world-name">SOLO LEVELINK</strong>
+        <span class="intro-world-description">L’ascension du chasseur, sombre et exigeante.</span>
+        <span class="intro-world-meta"><span>Rangs E → SSS</span><span>Progression RPG</span></span>
+      </button>
+      <button type="button" class="intro-world-option" data-world="sao" role="radio" aria-checked="false">
+        <span class="intro-world-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="intro-world-index">MONDE 02</span>
+        <strong class="intro-world-name">SWORD ART ONLINE</strong>
+        <span class="intro-world-description">Une interface lumineuse tournée vers le niveau 100.</span>
+        <span class="intro-world-meta"><span>Niveaux 1 → 100</span><span>Système cyan</span></span>
+      </button>
     </div>
-    <div class="intro-v14-status" aria-live="polite"><i></i><span></span></div>
-    <button type="button" id="intro-skip" class="intro-v6-skip">PASSER</button>
+    <div class="intro-v15-footer">
+      <p class="intro-v15-status" id="intro-world-status" aria-live="polite"></p>
+      <button type="button" class="intro-v15-enter" id="intro-enter">
+        <span>ENTRER DANS SOLO LEVELINK</span>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M14 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -6082,7 +6220,7 @@ body[data-polish=v14] .page.active{will-change:auto;contain:layout style}
       <h1 class="us-h" id="usel-title">LEVELINK</h1>
     </header>
     <div class="us-panels" role="group" aria-label="Univers disponibles">
-      <button type="button" class="usp sl" onclick="pickU('sl')" aria-label="Choisir l’univers Solo Leveling" aria-pressed="false">
+      <button type="button" class="usp sl" onclick="pickU('sl')" aria-label="Choisir l’univers Solo Levelink" aria-pressed="false">
         <span class="us-card-top">
           <span class="us-logo" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none">
@@ -6106,8 +6244,8 @@ body[data-polish=v14] .page.active{will-change:auto;contain:layout style}
             </svg>
           </span>
           <span class="us-card-copy">
-            <span class="us-series">RANGS • E À SSS</span>
-            <span class="us-name">SOLO LEVELING</span>
+            <span class="us-series">UNIVERS PRINCIPAL • E À SSS</span>
+            <span class="us-name">SOLO LEVELINK</span>
           </span>
         </span>
         <span class="us-feats" aria-hidden="true">
@@ -6221,9 +6359,13 @@ body[data-polish=v14] .page.active{will-change:auto;contain:layout style}
         </span>
         <span class="app-brand-copy">
           <strong>LEVELINK</strong>
-          <small id="app-universe-label">SOLO LEVELING</small>
+          <small id="app-universe-label">SOLO LEVELINK</small>
         </span>
       </button>
+      <div class="topbar-page-context" aria-live="polite">
+        <span>ESPACE JOUEUR</span>
+        <strong id="topbar-page-title">Quêtes du jour</strong>
+      </div>
       <div class="app-topbar-actions">
         <span class="app-system-status"><i></i>SYSTÈME ACTIF</span>
         <button type="button" class="app-settings-btn" onclick="openSettings()" aria-label="Ouvrir les paramètres">
@@ -6234,6 +6376,21 @@ body[data-polish=v14] .page.active{will-change:auto;contain:layout style}
 
     <!-- ══ PAGE QUÊTES ══ -->
     <div class="page active" id="p-habits">
+      <div class="mission-page-head">
+        <div class="mission-page-head-copy">
+          <p>MISSION CONTROL</p>
+          <h1>Ton tableau de progression</h1>
+          <span>Choisis ta prochaine action, lance-la et garde ton rythme.</span>
+        </div>
+        <div class="mission-page-actions">
+          <button type="button" class="mission-world-button" onclick="tryShowU()">
+            <i data-lucide="orbit"></i><span>CHANGER D’UNIVERS</span>
+          </button>
+          <button type="button" class="mission-create-button" onclick="openSheet('habit')">
+            <i data-lucide="plus"></i><span>NOUVELLE QUÊTE</span>
+          </button>
+        </div>
+      </div>
       <!-- HERO -->
       <div class="hero" style="padding:20px 16px 22px">
         <div class="hero-shell">
@@ -6479,6 +6636,10 @@ body[data-polish=v14] .page.active{will-change:auto;contain:layout style}
 
   <!-- ══ TAB BAR ══ -->
   <nav id="tab-bar" aria-label="Navigation principale">
+    <div class="nav-rail-brand" aria-hidden="true">
+      <span class="nav-rail-mark">L</span>
+      <span class="nav-rail-copy"><strong>LEVELINK</strong><span>PLAYER SYSTEM</span></span>
+    </div>
     <button type="button" class="tab-btn active" id="tb-habits" onclick="goTab('habits')" aria-current="page">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
       <span>Quêtes</span>
@@ -6563,7 +6724,7 @@ body[data-polish=v14] .page.active{will-change:auto;contain:layout style}
           <button type="button" onclick="setSound(false)" data-sbtn="off" style="flex:1;padding:11px;border-radius:11px;border:1.5px solid transparent;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.05);color:var(--t3);transition:all .22s var(--spring);opacity:.45">SON OFF</button>
         </div>
       </div>
-      <button type="button" onclick="tryShowU()" style="width:100%;padding:12px 16px;border-radius:var(--r);border:1px solid var(--bdr);background:rgba(41,121,255,.06);color:var(--t1);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;margin-bottom:10px"><span id="cur-u-lbl">SOLO LEVELING</span><span style="color:var(--t3);font-size:8px">CHANGER →</span></button>
+      <button type="button" onclick="tryShowU()" style="width:100%;padding:12px 16px;border-radius:var(--r);border:1px solid var(--bdr);background:rgba(41,121,255,.06);color:var(--t1);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;margin-bottom:10px"><span id="cur-u-lbl">SOLO LEVELINK</span><span style="color:var(--t3);font-size:8px">CHANGER →</span></button>
       <button type="button" onclick="closeSettings();openTutorial(true)" style="width:100%;padding:12px 16px;border-radius:var(--r);border:1px solid rgba(41,182,246,.15);background:linear-gradient(135deg,rgba(41,121,255,.06),rgba(124,77,255,.04));color:var(--AL);font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;margin-bottom:10px"><span>REJOUER LE TUTORIEL</span><span style="color:var(--t3);font-size:8px">INTERACTIF →</span></button>
       <button type="button" onclick="doReset()" style="width:100%;padding:12px;border-radius:var(--r);background:rgba(229,57,53,.07);border:1px solid rgba(229,57,53,.16);color:#e57373;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .22s;margin-bottom:4px" onmouseover="this.style.background='rgba(229,57,53,.12)'" onmouseout="this.style.background='rgba(229,57,53,.07)'">RÉINITIALISER LES DONNÉES</button>
     </div>
@@ -7208,6 +7369,8 @@ window.goTab=function(tab){
   const nextButton=document.getElementById(BTN_MAP[tab]);
   nextButton?.classList.add('active');
   nextButton?.setAttribute('aria-current','page');
+  const pageTitle=document.getElementById('topbar-page-title');
+  if(pageTitle)pageTitle.textContent=({habits:'Quêtes du jour',tasks:'Sous-tâches',stats:'Statistiques',badges:'Palmarès',analyse:'Rapport de mission'})[tab]||'Levelink';
   const fab=document.getElementById('fab');
   if(fab){
     if(tab==='habits'){fab.style.display='flex';fab.style.animation='rise .24s var(--ui-ease) both';}
@@ -9482,18 +9645,38 @@ function legacyCosmicIntro(){
 }
 
 // ══════════════════════════════════════════════
-// INTRO v14 — SYSTEM GATE (CSS + SVG)
+// INTRO v15 — CHOIX DU MONDE
 // ══════════════════════════════════════════════
 (function(){
   const intro=document.getElementById('intro');
   const app=document.getElementById('app');
   if(!intro||!app)return;
 
-  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  intro.dataset.introU=getU()==='sao'?'sao':'sl';
-  const alreadySeen=sessionStorage.getItem('hr_intro_v14')==='1';
+  const hadUniverse=!!localStorage.getItem(UK);
+  let selectedU=getU()==='sao'?'sao':'sl';
+  const alreadySeen=sessionStorage.getItem('hr_intro_v15')==='1'&&hadUniverse;
   let finished=false;
+  let entering=false;
   const timers=[];
+  const worldButtons=[...intro.querySelectorAll('.intro-world-option')];
+  const enterButton=document.getElementById('intro-enter');
+  const enterLabel=enterButton?.querySelector('span');
+  const status=document.getElementById('intro-world-status');
+
+  function worldName(u){return u==='sao'?'SWORD ART ONLINE':'SOLO LEVELINK'}
+  function worldDetail(u){return u==='sao'?'NIVEAUX 1 → 100 · INTERFACE CYAN':'RANGS E → SSS · ASCENSION DU CHASSEUR'}
+  function selectWorld(u,focus=false){
+    selectedU=u==='sao'?'sao':'sl';
+    intro.dataset.introU=selectedU;
+    worldButtons.forEach(button=>{
+      const active=button.dataset.world===selectedU;
+      button.classList.toggle('is-selected',active);
+      button.setAttribute('aria-checked',String(active));
+      if(active&&focus)button.focus({preventScroll:true});
+    });
+    if(enterLabel)enterLabel.textContent='ENTRER DANS '+worldName(selectedU);
+    if(status)status.innerHTML='<b>'+worldName(selectedU)+'</b><br>'+worldDetail(selectedU);
+  }
 
   function entrance(){
     app.classList.add('e-app');
@@ -9517,6 +9700,7 @@ function legacyCosmicIntro(){
     finished=true;
     timers.forEach(clearTimeout);
     document.removeEventListener('keydown',onKeyDown);
+    sessionStorage.setItem('hr_intro_v15','1');
     sessionStorage.setItem('hr_intro_v14','1');
     sessionStorage.setItem('hr_intro_v12','1');
     sessionStorage.setItem('hr_intro_v9','1');
@@ -9528,15 +9712,37 @@ function legacyCosmicIntro(){
       return;
     }
     entrance();
-    if(skipped)intro.classList.add('is-skipping');
     intro.classList.add('is-exiting');
-    setTimeout(()=>{intro.style.display='none';},500);
+    setTimeout(()=>{intro.style.display='none';},460);
   }
 
   function onKeyDown(event){
-    if(event.key==='Escape')revealApp(false,true);
+    if(event.key==='Escape'&&hadUniverse)revealApp(false,true);
+    if(event.key==='ArrowLeft'||event.key==='ArrowRight'){
+      event.preventDefault();
+      selectWorld(selectedU==='sl'?'sao':'sl',true);
+    }
   }
 
+  function enterWorld(){
+    if(entering||finished)return;
+    entering=true;
+    if(enterButton){
+      enterButton.disabled=true;
+      if(enterLabel)enterLabel.textContent='CONNEXION AU SYSTÈME';
+    }
+    setU(selectedU);
+    applyUniverse(selectedU);
+    intro.classList.add('is-ready');
+    timers.push(setTimeout(()=>{
+      revealApp(false);
+      if(!hadUniverse&&!localStorage.getItem('lk_tutorial_v2_done')){
+        setTimeout(()=>openTutorial(false),720);
+      }
+    },220));
+  }
+
+  selectWorld(selectedU);
   if(alreadySeen){
     revealApp(true);
     return;
@@ -9544,9 +9750,8 @@ function legacyCosmicIntro(){
 
   requestAnimationFrame(()=>intro.classList.add('is-live'));
   document.addEventListener('keydown',onKeyDown);
-  document.getElementById('intro-skip')?.addEventListener('click',()=>revealApp(false,true),{once:true});
-  timers.push(setTimeout(()=>intro.classList.add('is-ready'),reduced?20:1240));
-  timers.push(setTimeout(()=>revealApp(false),reduced?220:1680));
+  worldButtons.forEach(button=>button.addEventListener('click',()=>selectWorld(button.dataset.world)));
+  enterButton?.addEventListener('click',enterWorld,{once:true});
 })();
 
 // ══════════════════════════════════════════════
@@ -9560,9 +9765,9 @@ function applyUniverse(u, skipRender){
   var scan=document.querySelector('.sao-scan-line');
   if(scan)scan.style.display=u==='sao'?'block':'none';
   var lbl=document.getElementById('cur-u-lbl');
-  if(lbl)lbl.textContent=u==='sao'?'SWORD ART ONLINE':'SOLO LEVELING';
+  if(lbl)lbl.textContent=u==='sao'?'SWORD ART ONLINE':'SOLO LEVELINK';
   var appUniverseLabel=document.getElementById('app-universe-label');
-  if(appUniverseLabel)appUniverseLabel.textContent=u==='sao'?'SWORD ART ONLINE':'SOLO LEVELING';
+  if(appUniverseLabel)appUniverseLabel.textContent=u==='sao'?'SWORD ART ONLINE':'SOLO LEVELINK';
   var brandMark=document.querySelector('.app-brand-mark');
   if(brandMark){
     brandMark.classList.remove('world-arrival');
@@ -9634,7 +9839,7 @@ function playUniverseTransitionLegacy(targetU,cb){
   sb.style.color=col;
   sb.style.opacity='.55';
 
-  var nameText = s ? 'SWORD ART ONLINE' : 'SOLO LEVELING';
+  var nameText = s ? 'SWORD ART ONLINE' : 'SOLO LEVELINK';
   var subText  = s ? 'CONNEXION AU SYSTÈME' : 'ACCÈS AU DONJON';
   nm.textContent = nameText;
   sb.textContent = subText;
@@ -9825,7 +10030,7 @@ function playUniverseTransition(targetU,cb){
   }
 
   ov.dataset.target=targetU==='sao'?'sao':'sl';
-  if(name)name.textContent=targetU==='sao'?'SWORD ART ONLINE':'SOLO LEVELING';
+  if(name)name.textContent=targetU==='sao'?'SWORD ART ONLINE':'SOLO LEVELINK';
   ov.setAttribute('aria-hidden','false');
   ov.style.display='grid';
   ov.classList.remove('is-running');
@@ -9951,13 +10156,8 @@ function showU(){
   renderStats();
   updateLevel();
   updateHeroSummary();
-  if(!localStorage.getItem(UK)){
-    var iv=setInterval(function(){
-      if(sessionStorage.getItem('hr_done')){clearInterval(iv);setTimeout(showU,200);}
-    },80);
-    setTimeout(function(){clearInterval(iv);},8000);
-  }else if(!localStorage.getItem('lk_tutorial_v2_done')&&!habits.length){
-    setTimeout(()=>openTutorial(false),3400);
+  if(localStorage.getItem(UK)&&!localStorage.getItem('lk_tutorial_v2_done')&&!habits.length){
+    setTimeout(()=>openTutorial(false),2600);
   }
 })();
 
@@ -11212,7 +11412,7 @@ function openPresentation(){
     {icon:'⚡',e:1,title:'CONTRAT DE DISCIPLINE',sub:'ENGAGEMENT XP PERSONNEL',desc:'Engage ton XP et complète toutes tes quêtes pendant plusieurs jours.',color:'#fbbf24',ft:['Prudent · Ambitieux · Légendaire','Objectif réussi = bonus ×3','Objectif manqué = XP engagé retiré','Résultat clairement présenté']},
     {icon:'🏆',e:1,title:'PALMARÈS',sub:'BADGES & COLLECTION',desc:'Débloque 8 badges en atteignant des objectifs. Chaque badge a son animation unique.',color:'#f59e0b',ft:['Badges dorés animés','Barre de progression orbe lumineux','Effet holographique shimmer','Burst de particules']},
     {icon:'📊',e:1,title:'ANALYSE',sub:'INTELLIGENCE DE MISSION',desc:'90 jours de données analysées. Rapport narratif RPG généré automatiquement.',color:'#29b6f6',ft:['Heatmap hebdomadaire','Performance par jour','Résistance temps réel','Projection de rang']},
-    {icon:'🌌',e:1,title:'DEUX UNIVERS',sub:'SOLO LEVELING · SAO',desc:'Solo Leveling : rangs E→SSS, donjon sombre. SAO : niveaux 1→100, interface holographique.',color:'#00d4ff',ft:['Transition cinématique','Données synchronisées','Interface adaptée','Modifiable à tout moment']},
+    {icon:'🌌',e:1,title:'DEUX UNIVERS',sub:'SOLO LEVELINK · SAO',desc:'Solo Levelink : rangs E→SSS, ascension sombre. SAO : niveaux 1→100, interface holographique.',color:'#00d4ff',ft:['Transition cinématique','Données synchronisées','Interface adaptée','Modifiable à tout moment']},
     {icon:'<svg viewBox="0 0 64 64" fill="none" style="width:52px;height:52px"><circle cx="32" cy="32" r="26" stroke="url(#gp)" stroke-width="3" fill="none"/><defs><linearGradient id="gp" x1="0" y1="0" x2="64" y2="64"><stop offset="0%" stop-color="#2979ff"/><stop offset="50%" stop-color="#29b6f6"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient></defs><path d="M24 32l6 6 12-14" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',title:'PRÊT ?',sub:'COMMENCE MAINTENANT',desc:'Crée ta première quête. Monte en rang. Deviens ta meilleure version.',color:'#4ade80',cta:true}
   ];
 
