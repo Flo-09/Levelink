@@ -9810,7 +9810,7 @@ function legacyCosmicIntro(){
 
   const hadUniverse=!!localStorage.getItem(UK);
   let selectedU=getU()==='sao'?'sao':'sl';
-  const alreadySeen=sessionStorage.getItem('hr_intro_v15')==='1'&&hadUniverse;
+  const alreadySeen=sessionStorage.getItem('hr_intro_v16')==='1'&&hadUniverse;
   let finished=false;
   let entering=false;
   const timers=[];
@@ -9856,6 +9856,7 @@ function legacyCosmicIntro(){
     finished=true;
     timers.forEach(clearTimeout);
     document.removeEventListener('keydown',onKeyDown);
+    sessionStorage.setItem('hr_intro_v16','1');
     sessionStorage.setItem('hr_intro_v15','1');
     sessionStorage.setItem('hr_intro_v14','1');
     sessionStorage.setItem('hr_intro_v12','1');
