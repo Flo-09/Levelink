@@ -13,6 +13,7 @@ Levelink est un prototype d’application web qui transforme la progression pers
 - Interface responsive avec animations adaptatives
 - Directeur de mission adaptatif : recommande la meilleure prochaine action selon les séries, la régularité, la durée et l'heure
 - Écran d’entrée avec choix direct de l’univers, navigation latérale sur ordinateur et barre tactile compacte sur mobile
+- Intro animée avec deux épées détaillées et tutoriel contextuel v3 adapté au clavier mobile et aux grands écrans
 
 ## Lancer le prototype
 
