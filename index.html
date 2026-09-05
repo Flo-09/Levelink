@@ -6269,22 +6269,28 @@ body[data-ux=v15] .tutorial-finish{min-height:34px;padding:0 13px;border-radius:
   body[data-ux=v15] .tutorial-focus,body[data-ux=v15] .tutorial-action::after{animation:none}
 }
 </style>
+<link rel="stylesheet" href="legendary.css?v=17.0">
 </head>
-<body data-design="v10" data-layout="v11" data-motion="v12" data-picker="v13" data-polish="v14" data-ux="v15">
+<body data-design="v10" data-layout="v11" data-motion="v12" data-picker="v13" data-polish="v14" data-ux="v15" data-legendary="v17">
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 <canvas id="rank-particles"></canvas>
 
-<!-- ══ INTRO v15 — CHOIX DU MONDE ══ -->
-<div id="intro" class="intro-v15" role="dialog" aria-modal="true" aria-labelledby="intro-title">
-  <div class="intro-v15-shell">
+<!-- ══ LEGENDARY INTRO — original Levelink swords, coordinated motion ══ -->
+<div id="intro" class="intro-v15 intro-legendary" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+  <div class="intro-v15-shell lk-intro-shell">
+    <header class="lk-intro-header">
     <div class="intro-v15-brand" aria-label="Levelink">
       <span class="intro-v15-mark" aria-hidden="true">
         <svg viewBox="0 0 48 48"><path d="m36.5 5.5 6-2-2 6-16 16-4-4 16-16ZM11.5 5.5l-6-2 2 6 16 16 4-4-16-16ZM18 25l-8 8m20-8 8 8M7 33l8 8m26-8-8 8M20.5 21.5h7v7h-7z"/></svg>
       </span>
       <span class="intro-v15-brand-copy"><strong>LEVELINK</strong><span>DISCIPLINE SYSTEM</span></span>
     </div>
+    <span class="lk-intro-edition">LEGENDARY EDITION<br>ÉVEIL DU SYSTÈME</span>
+    </header>
+    <div class="lk-intro-scene">
+    <div class="lk-orbit" aria-hidden="true"></div>
     <div class="intro-v16-swords" aria-hidden="true">
       <span class="intro-v16-ring ring-a"></span>
       <span class="intro-v16-ring ring-b"></span>
@@ -6329,9 +6335,13 @@ body[data-ux=v15] .tutorial-finish{min-height:34px;padding:0 13px;border-radius:
       <span class="intro-v16-core"><i></i></span>
       <span class="intro-v16-impact"></span>
     </div>
-    <p class="intro-v15-kicker">SYSTEM // WORLD SELECT</p>
-    <h1 id="intro-title">Choisis ton système de progression</h1>
-    <p class="intro-v15-lead">Un même objectif : transformer tes efforts réels en puissance visible. Choisis l’univers qui te donnera envie d’avancer chaque jour.</p>
+    <p class="lk-intro-wordmark" aria-hidden="true">LEVEL<em>INK</em></p>
+    <p class="lk-intro-mantra">Chaque effort change ton niveau.</p>
+    </div>
+    <section class="lk-intro-control" aria-labelledby="intro-title">
+    <p class="intro-v15-kicker">01 / CHOISIS TON UNIVERS</p>
+    <h1 id="intro-title">Ton ascension<br>commence ici.</h1>
+    <p class="intro-v15-lead">Tes quêtes, ton rythme, ta progression. Entre dans le monde qui te donne envie d’avancer.</p>
     <div class="intro-v15-worlds" role="radiogroup" aria-label="Choisir un univers">
       <button type="button" class="intro-world-option" data-world="sl" role="radio" aria-checked="false">
         <span class="intro-world-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -6349,20 +6359,22 @@ body[data-ux=v15] .tutorial-finish{min-height:34px;padding:0 13px;border-radius:
       </button>
     </div>
     <div class="intro-v15-footer">
-      <p class="intro-v15-status" id="intro-world-status" aria-live="polite"></p>
       <button type="button" class="intro-v15-enter" id="intro-enter">
         <span>ENTRER DANS SOLO LEVELINK</span>
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M14 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
+      <p class="intro-v15-status" id="intro-world-status" aria-live="polite"></p>
     </div>
+    </section>
+    <footer class="lk-intro-footnote">
+      <span>Ta progression te suit dans les deux univers.</span>
+      <button type="button" class="lk-intro-skip" id="intro-skip" hidden>Reprendre mes quêtes</button>
+    </footer>
   </div>
 </div>
 
-
-
-
 <!-- ══ APP ══ -->
-<div id="app" style="opacity:0;visibility:hidden">
+<div id="app" inert style="opacity:0;visibility:hidden">
 <!-- ══ UNIVERSE SELECT ══ -->
 <div id="usel" role="dialog" aria-modal="true" aria-labelledby="usel-title" aria-hidden="true">
   <div class="us-selector-shell">
@@ -6534,9 +6546,9 @@ body[data-ux=v15] .tutorial-finish{min-height:34px;padding:0 13px;border-radius:
     <div class="page active" id="p-habits">
       <div class="mission-page-head">
         <div class="mission-page-head-copy">
-          <p>MISSION CONTROL</p>
-          <h1>Ton tableau de progression</h1>
-          <span>Choisis ta prochaine action, lance-la et garde ton rythme.</span>
+          <p>LEVELINK / QUÊTES DU JOUR</p>
+          <h1>Écris ta prochaine victoire.</h1>
+          <span>Une quête à la fois. Un niveau plus loin.</span>
         </div>
         <div class="mission-page-actions">
           <button type="button" class="mission-world-button" onclick="tryShowU()">
@@ -6873,6 +6885,16 @@ body[data-ux=v15] .tutorial-finish{min-height:34px;padding:0 13px;border-radius:
         </div>
         <p class="theme-lock-note"><span class="theme-lock-icon">◆</span><span>COULEURS PREMIUM — ABONNEMENT REQUIS</span></p>
       </div>
+      <div class="lk-motion-setting">
+        <label class="lbl" for="lk-motion-mode">Animations</label>
+        <select id="lk-motion-mode" aria-describedby="lk-motion-help">
+          <option value="auto">Spectaculaires · adaptatives</option>
+          <option value="lite">Légères</option>
+          <option value="off">Désactivées</option>
+        </select>
+        <p id="lk-motion-help">Les effets s’adaptent à ton appareil et respectent la réduction des animations de ton système.</p>
+      </div>
+      <button type="button" class="lk-replay" onclick="replayLevelinkIntro()">REVOIR L’INTRO CINÉMATIQUE</button>
       <div style="margin-bottom:24px">
         <label class="lbl">Son de fin</label>
         <div style="display:flex;gap:8px">
@@ -6887,6 +6909,8 @@ body[data-ux=v15] .tutorial-finish{min-height:34px;padding:0 13px;border-radius:
   </div>
 </div>
 
+<div id="lk-motion-announcer" class="lk-sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+<script src="legendary-motion.js?v=17.0"></script>
 <script>
 // ══════════════════════════════════════════════
 // 🚀 PERFORMANCE GUARDIAN — Auto low-perf detection
@@ -7169,16 +7193,8 @@ function ensurePData(){
 }
 function bossData(){ensurePData();return pdata.floor_boss&&pdata.floor_boss.active?pdata.floor_boss:null;}
 function showUrgentAlert(){
-  document.body.classList.add('urgent-alert');
-  if(navigator.vibrate)navigator.vibrate([120,80,120,80,220]);
-  const ov=document.createElement('div');
-  ov.className='urgent-overlay';
-  ov.innerHTML=`<div class="urgent-overlay-box">
-    <p style="font-family:'Orbitron',monospace;font-size:11px;font-weight:900;letter-spacing:2px;color:#ff8a80;margin-bottom:8px">SYSTEM OVERRIDE</p>
-    <p style="font-family:'Orbitron',monospace;font-size:17px;font-weight:900;letter-spacing:1.5px;color:#ff5252;text-shadow:0 0 18px rgba(255,82,82,.6)">ALERTE : QUÊTE URGENTE DÉTECTÉE</p>
-  </div>`;
-  document.body.appendChild(ov);
-  setTimeout(()=>{ov.remove();document.body.classList.remove('urgent-alert');},2300);
+  if(window.LKMotion)window.LKMotion.celebrate('QUÊTE URGENTE','BOSS DE PALIER','Un nouveau défi t’attend dans tes quêtes.','#ff7f91');
+  else toast('Quête urgente : Boss de Palier');
 }
 function activateFloorBoss(triggerXp){
   ensurePData();
@@ -7204,19 +7220,26 @@ function applyXpGain(amount){
   const ni=lvlInfo(pdata.total_xp);
   if(ni.idx>old){
     const xfill=document.getElementById('xp-fill');
-    if(xfill){
+    const version=++xpBarAnimationVersion;
+    if(xfill&&window.LKMotion?.canAnimate()){
       xpBarLevelUpAnimating=true;
       xfill.style.transition='width .26s linear';
       xfill.style.width='100%';
       setTimeout(()=>{
-        xfill.style.transition='none';
-        xfill.style.width='0%';
-        requestAnimationFrame(()=>requestAnimationFrame(()=>{
-          xfill.style.transition='width .9s cubic-bezier(.19,1,.22,1)';
-          xfill.style.width=`${ni.pct.toFixed(2)}%`;
+        if(version!==xpBarAnimationVersion)return;
+        xfill.style.transition='none';xfill.style.width='0%';
+        const finish=()=>{
+          if(version!==xpBarAnimationVersion)return;
+          xfill.style.transition='width .85s cubic-bezier(.16,1,.3,1)';
+          xfill.style.width=`${lvlInfo(pdata.total_xp||0).pct.toFixed(2)}%`;
           xpBarLevelUpAnimating=false;
-        }));
+        };
+        if(document.hidden)finish();
+        else requestAnimationFrame(()=>requestAnimationFrame(finish));
       },280);
+    }else{
+      xpBarLevelUpAnimating=false;
+      if(xfill)xfill.style.width=`${ni.pct.toFixed(2)}%`;
     }
   }
   if(ni.idx>old)showLevelUp(ni.isSAO?'NIVEAU '+ni.level:ni.rank,ni.color);
@@ -7227,6 +7250,7 @@ function revokeXp(amount){
   amount=Math.max(0,Math.round(Number(amount)||0));
   const previous=pdata.total_xp||0;
   pdata.total_xp=Math.max(0,previous-amount);
+  xpBarAnimationVersion++;xpBarLevelUpAnimating=false;
   return previous-pdata.total_xp;
 }
 function advanceFloorTitle(){
@@ -7378,7 +7402,7 @@ function initButtonFeedback(){
   const release=el=>{
     if(!el)return;
     el.classList.remove('is-pressing');
-    if(reduced.matches||document.body.classList.contains('low-perf'))return;
+    if(reduced.matches||document.body.classList.contains('low-perf')||window.LKMotion?.quality()==='off')return;
     el.classList.remove('press-release');
     requestAnimationFrame(()=>el.classList.add('press-release'));
   };
@@ -7412,7 +7436,7 @@ function initOrbParallax(){
   const area=document.getElementById('scroll-area');if(!area)return;
   let raf=0;
   area.addEventListener('scroll',()=>{
-    if(raf)return;
+    if(raf||window.LKMotion?.quality()!=='full')return;
     raf=requestAnimationFrame(()=>{
       raf=0;
       const y=area.scrollTop||0;
@@ -7430,18 +7454,19 @@ function initOrbParallax(){
 // Animate number counting
 function countAnim(el,to,suf='',dur=650){
   if(!el)return;
+  cancelAnimationFrame(el._lkCountRaf||0);
   const from=parseInt(el.textContent)||0;
-  if(from===to)return;
-  const ease=t=>1-Math.pow(1-t,3);
+  if(from===to||window.LKMotion?.quality()==='off'||document.hidden){el.textContent=to+suf;return;}
   let start=null;
   function step(ts){
-    if(!start)start=ts;
+    if(!el.isConnected)return;
+    if(start===null)start=ts;
     const p=Math.min(1,(ts-start)/dur);
-    el.textContent=Math.round(from+(to-from)*ease(p))+suf;
-    if(p<1)requestAnimationFrame(step);
-    else el.textContent=to+suf;
+    el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-p,3)))+suf;
+    if(p<1&&!document.hidden)el._lkCountRaf=requestAnimationFrame(step);
+    else{el.textContent=to+suf;el._lkCountRaf=0;}
   }
-  requestAnimationFrame(step);
+  el._lkCountRaf=requestAnimationFrame(step);
 }
 
 // ══════════════════════════════════════════════
@@ -7503,7 +7528,7 @@ const BTN_MAP={habits:'tb-habits',tasks:'tb-tasks',stats:'tb-stats',badges:'tb-b
 const TAB_ORDER=['habits','tasks','stats','badges','analyse'];
 
 window.goTab=function(tab){
-  if(tab===curTab)return;
+  if(!PAGE_MAP[tab]||tab===curTab)return;
   const dir=TAB_ORDER.indexOf(tab)>TAB_ORDER.indexOf(curTab)?1:-1;
   const oldPage=document.getElementById(PAGE_MAP[curTab]);
   const oldButton=document.getElementById(BTN_MAP[curTab]);
@@ -7517,10 +7542,7 @@ window.goTab=function(tab){
   const np=document.getElementById(PAGE_MAP[tab]);
   if(np){
     np.classList.add('active');
-    np.style.animation=`${dir>0?'pageInR':'pageInL'} .24s cubic-bezier(.16,1,.3,1) both`;
-    const clearAnimation=()=>{if(np.classList.contains('active'))np.style.animation='';};
-    np.addEventListener('animationend',clearAnimation,{once:true});
-    setTimeout(clearAnimation,300);
+    window.LKMotion?.reveal(np,dir);
   }
   const nextButton=document.getElementById(BTN_MAP[tab]);
   nextButton?.classList.add('active');
@@ -7563,14 +7585,17 @@ window.closeSheet=function(){
   }
   const ovbg=document.getElementById('ov-bg');
   if(ovbg){ovbg.style.transition='opacity .3s ease-out';ovbg.style.opacity='0';}
+  let cleaned=false;
   const cleanup=()=>{
+    if(cleaned||document.getElementById('sheet-wrap').firstElementChild!==sw)return;
+    cleaned=true;
     ov.style.display='none';
     if(ovbg)ovbg.style.cssText='position:absolute;inset:0;background:rgba(2,5,14,.88);backdrop-filter:blur(14px)';
     document.getElementById('sheet-wrap').innerHTML='';
     document.body.style.overflow='';
   };
   if(sw)sw.addEventListener('transitionend',cleanup,{once:true});
-  else setTimeout(cleanup,340);
+  setTimeout(cleanup,window.LKMotion?.quality()==='off'?0:380);
 };
 
 function habitSheet(h){
@@ -7651,6 +7676,7 @@ function renderAll(){
     renderHabits();renderTasks();updateProgress();updateWeekDots();updateLevel();
     updateHeroSummary();renderMissionBoard();renderTaskBoard();
     injectNegotiationButtons();updateBetUI();
+    window.LKMotion?.decorateQuests();
   });
 }
 
@@ -8128,6 +8154,7 @@ function updateProgress(){
 
 let _lastWeekHash='';
 let xpBarLevelUpAnimating=false;
+let xpBarAnimationVersion=0;
 function updateWeekDots(){
   const ct=document.getElementById('week-dots'),sc=document.getElementById('week-score');
   if(!ct)return;
@@ -8219,6 +8246,7 @@ function toggleHabit(id){
   const h=habits.find(x=>x.__id===id);if(!h)return;
   const ds=dates(h),idx=ds.indexOf(TODAY);
   if(idx<0){
+    window.LKMotion?.markQuest(id);
     const resistMult=autoResistance();
     const nowISO=new Date().toISOString();
     const shield=maybeConsumeWillShield(ds);
@@ -8229,19 +8257,8 @@ function toggleHabit(id){
     applyXpGain(xp);
     triggerHit();
     appendCompletionRecord(h,{completedAt:nowISO,resistance:resistMult,xp,source:(h.light_day||'')===TODAY?'light':'manual'});
-    const wrap=document.querySelector('.hcw[data-id="'+id+'"]');
-    if(wrap){
-      const card=wrap.querySelector('.card');
-      if(card){
-        card.style.transition='background .08s,transform .12s var(--bounce),box-shadow .2s';
-        card.style.background=h.color+'28';card.style.transform='scale(1.03)';
-        card.style.boxShadow='0 0 24px '+h.color+'30';
-        setTimeout(()=>{card.style.background='';card.style.transform='';card.style.boxShadow='';},120);
-      }
-    }
     showXP(xp,resistMult>=1.3?resistanceLabel(resistMult).label:null);
     if(shield.used)toast('🛡️ Bouclier de Volonté activé : série protégée');
-    if(navigator.vibrate)navigator.vibrate([10,40,25]);
     h.completed_dates=ds.join(',');syncAll();
     requestAnimationFrame(()=>requestAnimationFrame(()=>{renderAll();checkAllDay();}));
   }else{
@@ -8253,9 +8270,7 @@ function toggleHabit(id){
   }
 }
 function triggerHit(){
-  document.body.classList.add('hit-impact');
-  if(navigator.vibrate)navigator.vibrate(25);
-  setTimeout(()=>document.body.classList.remove('hit-impact'),180);
+  if(window.LKMotion?.canAnimate()&&navigator.vibrate)navigator.vibrate(18);
 }
 window.uncomplete=id=>{
   const h=habits.find(x=>x.__id===id);if(!h)return;
@@ -8268,6 +8283,7 @@ function toggleTask(id){
   const ds=dates(s),idx=ds.indexOf(TODAY);
   if(idx>=0)removeCompletionRecord(s,TODAY);
   else{
+    window.LKMotion?.task([...document.querySelectorAll('.task-tog')].find(button=>button.dataset.tid===id));
     ds.push(TODAY);s.completed_dates=ds.join(',');
     appendCompletionRecord(s,{xp:0,source:'task'});
   }
@@ -8567,6 +8583,7 @@ function completedTimer(h,modal){
     renderAll();
     return;
   }
+  window.LKMotion?.markQuest(h.__id);
   ds.push(TODAY);
   const str=streak([...ds].sort().reverse());
   const resistMult=autoResistance();
@@ -8576,17 +8593,10 @@ function completedTimer(h,modal){
   applyXpGain(xp);
   appendCompletionRecord(hh,{completedAt:nowISO,resistance:resistMult,xp,source:(hh.light_day||'')===TODAY?'light-timer':'timer'});
   hh.completed_dates=ds.join(',');syncAll();
-  if(navigator.vibrate)navigator.vibrate([50,30,50,30,180]);
   const resist=resistanceLabel(resistMult);
-  if(modal){
-    modal.innerHTML='<div style="text-align:center;padding:52px 36px;animation:rise .5s var(--out-expo)">'+
-      '<div style="margin-bottom:16px;animation:pop .6s var(--bounce)"><svg viewBox="0 0 64 64" fill="none" style="width:56px;height:56px"><polygon points="36,4 20,34 30,34 28,60 44,30 34,30" fill="#2979ff" opacity=".9"/></svg></div>'+
-      '<p style="font-family:\'Orbitron\',monospace;font-size:20px;font-weight:900;letter-spacing:2px;color:#4ade80;text-shadow:0 0 24px rgba(74,222,128,.6)">VICTOIRE !</p>'+
-      '<p style="font-size:20px;font-weight:700;color:rgba(74,222,128,.5);margin-top:10px">+'+xp+' XP</p>'+
-      (resistMult>=1.3?'<p style="font-family:\'Orbitron\',monospace;font-size:8px;font-weight:700;letter-spacing:2px;color:'+resist.color+';margin-top:8px;padding:4px 12px;border-radius:99px;background:'+resist.color+'18;display:inline-block">'+resist.label+' · ×'+resistMult.toFixed(1)+'</p>':'')+'</div>';
-    modal.style.background='rgba(2,8,18,.96)';
-  }
-  setTimeout(()=>{if(modal)modal.remove();renderAll();checkAllDay();},2100);
+  if(modal)modal.remove();
+  showXP(xp,resistMult>=1.3?resist.label:null);
+  renderAll();checkAllDay();
 }
 
 function updateHabitCard(id,active){
@@ -9106,48 +9116,13 @@ function playSound(){
   }catch(e){}
 }
 
-function showXP(xp, resistLabel){
-  const p=document.createElement('div');p.className='xp-popup';
-  p.style.cssText='left:50%;top:42%;transform:translate(-50%,-50%)';
-  p.textContent='+'+xp+' XP';
-  if(resistLabel){
-    const tag=document.createElement('div');
-    tag.style.cssText='position:fixed;left:50%;top:calc(42% + 32px);transform:translateX(-50%);z-index:9999;font-family:\'Orbitron\',monospace;font-size:7.5px;font-weight:700;letter-spacing:2px;padding:4px 12px;border-radius:99px;background:rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.3);color:#ff6b35;animation:xpup 2s ease-out forwards;pointer-events:none;white-space:nowrap';
-    tag.textContent=resistLabel;document.body.appendChild(tag);
-    setTimeout(()=>tag.remove(),2100);
-  }
-  document.body.appendChild(p);
-  for(let i=0;i<10;i++){
-    const sp=document.createElement('div');
-    const a=(i/10)*Math.PI*2,d=50+Math.random()*24;
-    sp.style.cssText='position:fixed;left:50%;top:42%;z-index:9999;pointer-events:none;width:'+(Math.random()*4+2)+'px;height:'+(Math.random()*4+2)+'px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.9);opacity:1';
-    document.body.appendChild(sp);
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      sp.style.transition='transform .7s cubic-bezier(.2,0,.8,1),opacity .7s ease-out';
-      sp.style.transform='translate('+(Math.cos(a)*d-2)+'px,'+(Math.sin(a)*d-2)+'px) scale(0)';
-      sp.style.opacity='0';
-    }));
-    setTimeout(()=>sp.remove(),740);
-  }
-  setTimeout(()=>p.remove(),2100);
+function showXP(xp,resistLabel){
+  if(window.LKMotion)window.LKMotion.reward(xp,resistLabel);
+  else toast('+'+xp+' XP');
 }
-
 function showLevelUp(rank,color){
-  const m=document.createElement('div');
-  m.style.cssText='position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:rgba(2,5,14,.65);backdrop-filter:blur(12px);animation:fadeIn .3s ease-out';
-  m.innerHTML=`<div style="text-align:center;animation:lvlup .7s var(--out-expo)">
-    <div style="position:relative;display:inline-block;margin-bottom:18px">
-      <div style="font-size:76px;filter:drop-shadow(0 0 32px ${color})">⭐</div>
-      <div style="position:absolute;inset:-20px;border-radius:50%;border:1.5px solid ${color}44;animation:ripple 1.2s ease-out infinite"></div>
-      <div style="position:absolute;inset:-38px;border-radius:50%;border:1px solid ${color}22;animation:ripple 1.2s ease-out infinite .6s"></div>
-    </div>
-    <p style="font-family:'Orbitron',monospace;font-size:8.5px;letter-spacing:4.5px;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:12px">LEVEL UP</p>
-    <p style="font-family:'Orbitron',monospace;font-size:76px;font-weight:900;line-height:1;color:${color};filter:drop-shadow(0 0 44px ${color})">${rank}</p>
-    <p style="font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3.5px;color:rgba(255,255,255,.25);margin-top:12px">RANG ATTEINT</p>
-  </div>`;
-  document.body.appendChild(m);
-  if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);
-  setTimeout(()=>{m.style.transition='opacity .45s';m.style.opacity='0';setTimeout(()=>m.remove(),460);},3000);
+  if(window.LKMotion)window.LKMotion.celebrate('ASCENSION',rank,getU()==='sao'?'Nouveau niveau atteint. Continue ton ascension.':'Nouveau rang atteint. Tes efforts prennent forme.',color);
+  else toast('Nouveau rang : '+rank);
 }
 
 function toast(msg,type='ok'){
@@ -9166,27 +9141,8 @@ function checkAllDay(){
   if(habits.every(h=>dates(h).includes(TODAY))){lastConf=TODAY;allDayConfetti();}
 }
 function allDayConfetti(){
-  if(navigator.vibrate)navigator.vibrate([80,40,80,40,80,40,250]);
-  const ov=document.createElement('div');
-  ov.style.cssText='position:fixed;inset:0;z-index:190;background:rgba(2,5,14,.9);backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;pointer-events:none;animation:fadeIn .38s ease-out';
-  const cv=document.createElement('canvas');cv.style.cssText='position:absolute;inset:0;width:100%;height:100%';
-  cv.width=window.innerWidth;cv.height=window.innerHeight;ov.appendChild(cv);
-  const box=document.createElement('div');box.style.cssText='position:relative;z-index:2;text-align:center;padding:0 32px';
-  box.innerHTML=`<div id="vc-icon" style="margin-bottom:18px;opacity:0;transform:scale(.2) rotate(-20deg);transition:none"><svg viewBox="0 0 80 80" fill="none" style="width:72px;height:72px"><polygon points="46,4 26,42 40,42 34,76 54,38 40,38" fill="#2979ff" opacity=".95"/></svg></div>
-    <p id="vc-sub" style="font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:5px;color:rgba(74,222,128,.55);text-transform:uppercase;margin-bottom:10px;opacity:0">JOURNÉE PARFAITE</p>
-    <h2 id="vc-t1" style="font-family:'Orbitron',monospace;font-size:clamp(26px,7vw,48px);font-weight:900;letter-spacing:4px;margin:0;opacity:0;background:linear-gradient(135deg,#4ade80,#22d3ee,#2979ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">TOUTES LES QUÊTES</h2>
-    <h2 id="vc-t2" style="font-family:'Orbitron',monospace;font-size:clamp(26px,7vw,48px);font-weight:900;letter-spacing:4px;margin:4px 0 0;opacity:0;background:linear-gradient(135deg,#22d3ee,#2979ff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">ACCOMPLIES</h2>`;
-  ov.appendChild(box);document.body.appendChild(ov);
-  const ctx=cv.getContext('2d');
-  const cols=['#4ade80','#22d3ee','#2979ff','#a78bfa','#fbbf24','#f472b6','#fb923c'];
-  const parts=Array.from({length:120},()=>({x:Math.random()*cv.width,y:cv.height+10,vx:(Math.random()-.5)*5.5,vy:-(Math.random()*10+5),r:Math.random()*4+1.5,c:cols[0|Math.random()*cols.length],rot:Math.random()*360,vr:(Math.random()-.5)*7,life:1,decay:Math.random()*.006+.002,delay:Math.random()*40,shape:Math.random()>.5?'r':'c'}));
-  let fr=0,raf2;
-  function dp(){ctx.clearRect(0,0,cv.width,cv.height);fr++;parts.forEach(p=>{if(fr<p.delay)return;p.x+=p.vx;p.y+=p.vy;p.vy+=.17;p.rot+=p.vr;p.life-=p.decay;if(p.life<=0)return;ctx.save();ctx.globalAlpha=p.life;ctx.fillStyle=p.c;ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);if(p.shape==='c'){ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill();}else ctx.fillRect(-p.r,-p.r/2,p.r*2,p.r);ctx.restore();});if(parts.some(p=>p.life>0))raf2=requestAnimationFrame(dp);}
-  raf2=requestAnimationFrame(dp);
-  const eb='cubic-bezier(.34,1.4,.64,1)',es='cubic-bezier(.19,1,.22,1)';
-  function sh(id,delay,dur,ease=es,extra=''){setTimeout(()=>{const el=box.querySelector('#'+id);if(!el)return;el.style.transition=`opacity ${dur}ms ${ease},transform ${dur}ms ${ease}`;el.style.opacity='1';el.style.transform='scale(1) rotate(0) translateY(0)';},delay);}
-  sh('vc-icon',80,600,eb);sh('vc-sub',380,500);sh('vc-t1',580,540);sh('vc-t2',730,540);
-  setTimeout(()=>{cancelAnimationFrame(raf2);ov.style.transition='opacity .5s';ov.style.opacity='0';setTimeout(()=>ov.remove(),520);},3600);
+  if(window.LKMotion)window.LKMotion.celebrate('JOURNÉE PARFAITE','TOUTES LES QUÊTES ACCOMPLIES','Tu as tenu tes engagements. Savoure cette victoire.','#efc783');
+  else toast('Journée parfaite : toutes les quêtes accomplies !');
 }
 
 // ══════════════════════════════════════════════
@@ -9801,114 +9757,116 @@ function legacyCosmicIntro(){
 }
 
 // ══════════════════════════════════════════════
-// INTRO v15 — CHOIX DU MONDE
+// INTRO v17 — cinematic entry, keyboard navigation and safe replay
 // ══════════════════════════════════════════════
 (function(){
   const intro=document.getElementById('intro');
   const app=document.getElementById('app');
   if(!intro||!app)return;
-
-  const hadUniverse=!!localStorage.getItem(UK);
+  const seenKey='hr_intro_v17';
+  const stored=(store,key)=>{try{return store.getItem(key);}catch{return null;}};
+  const rememberSeen=()=>{try{sessionStorage.setItem(seenKey,'1');}catch{}};
+  let hadUniverse=!!stored(localStorage,UK);
   let selectedU=getU()==='sao'?'sao':'sl';
-  const alreadySeen=sessionStorage.getItem('hr_intro_v16')==='1'&&hadUniverse;
-  let finished=false;
-  let entering=false;
+  let finished=false,entering=false;
   const timers=[];
   const worldButtons=[...intro.querySelectorAll('.intro-world-option')];
   const enterButton=document.getElementById('intro-enter');
-  const enterLabel=enterButton?.querySelector('span');
+  const enterLabel=enterButton.querySelector('span');
+  const skipButton=document.getElementById('intro-skip');
   const status=document.getElementById('intro-world-status');
-
-  function worldName(u){return u==='sao'?'SWORD ART ONLINE':'SOLO LEVELINK'}
-  function worldDetail(u){return u==='sao'?'NIVEAUX 1 → 100 · INTERFACE CYAN':'RANGS E → SSS · ASCENSION DU CHASSEUR'}
+  const reduced=()=>window.LKMotion?.quality()==='off'||matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function worldName(u){return u==='sao'?'SWORD ART ONLINE':'SOLO LEVELINK';}
   function selectWorld(u,focus=false){
+    if(entering)return;
     selectedU=u==='sao'?'sao':'sl';
     intro.dataset.introU=selectedU;
     worldButtons.forEach(button=>{
       const active=button.dataset.world===selectedU;
       button.classList.toggle('is-selected',active);
       button.setAttribute('aria-checked',String(active));
-      if(active&&focus)button.focus({preventScroll:true});
+      button.tabIndex=active?0:-1;
+      if(active&&focus){button.focus({preventScroll:true});window.LKMotion?.selectWorld(button);}
     });
-    if(enterLabel)enterLabel.textContent='ENTRER DANS '+worldName(selectedU);
-    if(status)status.innerHTML='<b>'+worldName(selectedU)+'</b><br>'+worldDetail(selectedU);
+    enterLabel.textContent='ENTRER DANS '+worldName(selectedU);
+    status.textContent=selectedU==='sao'?'Niveaux 1 → 100 · Sword Art Online':'Rangs E → SSS · Solo Levelink';
   }
-
-  function entrance(){
-    app.classList.add('e-app');
-    const elements=[
-      [document.querySelector('.hero'),'e-hero'],
-      [document.getElementById('mission-board'),'e-board'],
-      [document.getElementById('habits-list'),'e-list'],
-      [document.getElementById('empty-habits'),'e-list'],
-      [document.getElementById('tab-bar'),'e-tab'],
-      [document.getElementById('fab'),'e-fab']
-    ];
-    elements.forEach(([el,cls])=>el?.classList.add(cls));
-    timers.push(setTimeout(()=>{
-      app.classList.remove('e-app');
-      elements.forEach(([el,cls])=>el?.classList.remove(cls));
-    },650));
-  }
-
-  function revealApp(immediate=false,skipped=false){
+  function revealApp(immediate=false){
     if(finished)return;
     finished=true;
-    timers.forEach(clearTimeout);
-    document.removeEventListener('keydown',onKeyDown);
-    sessionStorage.setItem('hr_intro_v16','1');
-    sessionStorage.setItem('hr_intro_v15','1');
-    sessionStorage.setItem('hr_intro_v14','1');
-    sessionStorage.setItem('hr_intro_v12','1');
-    sessionStorage.setItem('hr_intro_v9','1');
-    sessionStorage.setItem('hr_done','1');
-    app.style.visibility='visible';
-    app.style.opacity='1';
-    if(immediate){
-      intro.style.display='none';
-      return;
+    timers.forEach(clearTimeout);timers.length=0;
+    rememberSeen();
+    app.inert=false;
+    app.style.visibility='visible';app.style.opacity='1';
+    intro.setAttribute('aria-hidden','true');
+    const hide=()=>{intro.style.display='none';};
+    if(immediate||reduced())hide();
+    else{
+      intro.classList.add('is-exiting');
+      timers.push(setTimeout(hide,550));
+      window.LKMotion?.reveal(document.querySelector('.page.active'));
     }
-    entrance();
-    intro.classList.add('is-exiting');
-    setTimeout(()=>{intro.style.display='none';},460);
+    if(!immediate)document.querySelector('.tab-btn.active')?.focus({preventScroll:true});
   }
-
-  function onKeyDown(event){
-    if(event.key==='Escape'&&hadUniverse)revealApp(false,true);
-    if(event.key==='ArrowLeft'||event.key==='ArrowRight'){
-      event.preventDefault();
-      selectWorld(selectedU==='sl'?'sao':'sl',true);
-    }
-  }
-
   function enterWorld(){
     if(entering||finished)return;
-    entering=true;
-    if(enterButton){
-      enterButton.disabled=true;
-      if(enterLabel)enterLabel.textContent='CONNEXION AU SYSTÈME';
-    }
-    setU(selectedU);
-    applyUniverse(selectedU);
+    entering=true;enterButton.disabled=true;
+    worldButtons.forEach(button=>button.disabled=true);
+    skipButton.disabled=true;
+    enterLabel.textContent='OUVERTURE DU SYSTÈME';
+    setU(selectedU);applyUniverse(selectedU);
     intro.classList.add('is-ready');
+    window.LKMotion?.introImpact();
     timers.push(setTimeout(()=>{
       revealApp(false);
-      if(!hadUniverse&&!localStorage.getItem('lk_tutorial_v3_done')){
-        setTimeout(()=>openTutorial(false),720);
+      if(!hadUniverse&&!stored(localStorage,'lk_tutorial_v3_done')){
+        timers.push(setTimeout(()=>openTutorial(false),reduced()?100:650));
       }
-    },220));
+    },reduced()?0:420));
   }
-
-  selectWorld(selectedU);
-  if(alreadySeen){
-    revealApp(true);
-    return;
+  function launch(){
+    timers.forEach(clearTimeout);timers.length=0;
+    finished=false;entering=false;
+    hadUniverse=!!stored(localStorage,UK);
+    selectedU=getU()==='sao'?'sao':'sl';
+    enterButton.disabled=false;skipButton.disabled=false;
+    worldButtons.forEach(button=>button.disabled=false);
+    skipButton.hidden=!hadUniverse;
+    app.inert=true;
+    intro.style.display='grid';intro.setAttribute('aria-hidden','false');
+    intro.classList.remove('is-exiting','is-ready','is-live');
+    selectWorld(selectedU);
+    // The intro stays usable immediately; the choreography never gates a click.
+    requestAnimationFrame(()=>{
+      if(finished)return;
+      intro.classList.add('is-live');
+      worldButtons.find(button=>button.dataset.world===selectedU)?.focus({preventScroll:true});
+    });
+    timers.push(setTimeout(()=>{if(!finished)window.LKMotion?.introImpact();},880));
   }
-
-  requestAnimationFrame(()=>intro.classList.add('is-live'));
-  document.addEventListener('keydown',onKeyDown);
-  worldButtons.forEach(button=>button.addEventListener('click',()=>selectWorld(button.dataset.world)));
-  enterButton?.addEventListener('click',enterWorld,{once:true});
+  intro.addEventListener('keydown',event=>{
+    if(finished||entering)return;
+    if(event.key==='Escape'&&hadUniverse){event.preventDefault();revealApp(false);return;}
+    if(event.target.closest('[role="radiogroup"]')&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(event.key)){
+      event.preventDefault();
+      selectWorld(event.key==='Home'?'sl':event.key==='End'?'sao':selectedU==='sl'?'sao':'sl',true);
+    }
+    if(event.key==='Tab'){
+      const focusable=[...intro.querySelectorAll('button:not([disabled]):not([hidden])')].filter(button=>button.tabIndex>=0);
+      const first=focusable[0],last=focusable[focusable.length-1];
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}
+    }
+  });
+  worldButtons.forEach(button=>button.addEventListener('click',()=>{selectWorld(button.dataset.world);window.LKMotion?.selectWorld(button);}));
+  enterButton.addEventListener('click',enterWorld);
+  skipButton.addEventListener('click',()=>{if(!entering)revealApp(false);});
+  window.replayLevelinkIntro=()=>{
+    if(activeTimers.size){toast('Termine ou arrête ton chrono avant de revoir l’intro.');return;}
+    closeSettings();closeTutorial(false);launch();
+  };
+  if(stored(sessionStorage,seenKey)==='1'&&hadUniverse)revealApp(true);
+  else launch();
 })();
 
 // ══════════════════════════════════════════════
@@ -12149,7 +12107,7 @@ function initRankParticles() {
   }
   
   function animateParticles(ts) {
-    if(!RANK_PARTICLES.running||document.hidden||document.body.classList.contains('low-perf')){
+    if(!RANK_PARTICLES.running||document.hidden||document.body.classList.contains('low-perf')||window.LKMotion?.quality()!=='full'){
       RANK_PARTICLES.running=false;RANK_PARTICLES.raf=null;return;
     }
     const ctx = RANK_PARTICLES.ctx;
@@ -12254,7 +12212,7 @@ function initRankParticles() {
   }
 
   function startParticles(){
-    if(RANK_PARTICLES.running||document.hidden||document.body.classList.contains('low-perf'))return;
+    if(RANK_PARTICLES.running||document.hidden||document.body.classList.contains('low-perf')||window.LKMotion?.quality()!=='full')return;
     RANK_PARTICLES.running=true;
     RANK_PARTICLES.raf=requestAnimationFrame(animateParticles);
   }
@@ -12316,7 +12274,7 @@ function applyRankEvolution(rank) {
   }
   
   // Flash effect on rank change
-  if (oldRank && oldRank !== effectiveRank) {
+  if (oldRank && oldRank !== effectiveRank && !window.LKMotion) {
     const flash = document.createElement('div');
     const rankColor = RANK_PARTICLES.configs[effectiveRank]?.colors?.[0] || '#2979ff';
     flash.style.cssText = `position:fixed;inset:0;z-index:200;pointer-events:none;
@@ -12348,8 +12306,13 @@ updateLevel = function() {
 // ══════════════════════════════════════════════
 (function bootEnhancedSystems() {
   
+  window.LKMotion?.boot();
   // Rank particles
   initRankParticles();
+  window.LKMotion?.onModeChange(level=>{
+    if(level!=='full')RANK_PARTICLES.stop?.();
+    else if(RANK_PARTICLES.targetIntensity>0)RANK_PARTICLES.start?.();
+  });
   
   // Apply initial rank
   if (pdata) {
