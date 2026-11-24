@@ -12,28 +12,23 @@ Levelink est un prototype d’application web qui transforme la progression pers
 - Deux univers visuels : Solo Levelink (inspiré de Solo Leveling) et Sword Art Online
 - Interface responsive avec animations adaptatives
 - Directeur de mission adaptatif : recommande la meilleure prochaine action selon les séries, la régularité, la durée et l'heure
-- Écran d’entrée avec choix direct de l’univers, navigation latérale sur ordinateur et barre tactile compacte sur mobile
-- Intro Legendary : croisement des épées originales, anneaux, onde d’impact et sélection d’univers au clavier
-- Retours de quête, particules d’XP, transitions des pages et apparitions progressives des panneaux
-- Célébrations de rang, boss et journée parfaite coordonnées pour éviter leur superposition
-- Animations adaptatives, mode léger et désactivation dans les paramètres ; respect de la réduction des animations du système
-- Relecture de l’intro depuis les paramètres, sans réinitialiser la progression
-- Tutoriel contextuel v3 adapté au clavier mobile et aux grands écrans
+- Deux cartes illustrées pour choisir son univers et un accès direct au journal lors des visites suivantes
+- Journal de quêtes avec recherche insensible aux accents, filtres et modèles personnalisables
+- Progression du joueur, calendrier hebdomadaire et guide interactif à la demande
+- Animations adaptatives, mode léger et prise en compte de la réduction des animations du système
 
-## Design Legendary v17
+## Interface
 
-`legendary.css` porte les nouveaux styles et `legendary-motion.js` gère uniquement les effets de présentation. Les règles du jeu et les données restent dans `index.html`. Conservez ces trois fichiers ensemble lors de la publication.
+Le journal place les quêtes et le bouton de création en tête sur mobile. Sur ordinateur, la fiche du joueur et sa semaine occupent la colonne de droite. Les illustrations accompagnent le choix d’univers et le journal. Les polices, icônes et illustrations sont fournies avec l’application.
 
-L’intro apparaît une fois par session, y compris pour les personnes ayant déjà vu la v16. Un joueur existant peut reprendre directement ses quêtes. Sa relecture est bloquée pendant un chrono actif afin de préserver la session.
-
-Les effets temporaires sont limités et nettoyés. Les particules s’arrêtent lorsque l’onglet est masqué ; les récompenses restent annoncées lorsque les animations sont désactivées. Les compteurs et la barre d’XP tiennent compte des récompenses successives et des annulations.
+Pour distribuer le projet, conservez `index.html`, `journal.css`, `legendary.css`, `legendary-motion.js` et le dossier `assets/` ensemble. Le guide et le choix initial des mondes peuvent être rejoués depuis les paramètres.
 
 ## Vérification
 
 Les tests utilisent uniquement Node.js, sans installation de dépendances :
 
 ```bash
-node --test tests/legendary.test.cjs
+node --test tests/*.test.cjs
 ```
 
 Ils vérifient la syntaxe, l’entrée et la relecture de l’intro, les commandes clavier, le mode sans animations, les courses entre récompenses, la fermeture des formulaires, la file des célébrations et le nettoyage des effets. Ces tests simulent les événements et l’état ; ils ne vérifient pas le rendu visuel ni la fluidité réelle dans un navigateur.

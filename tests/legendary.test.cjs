@@ -86,14 +86,14 @@ test('both shipped JavaScript sources parse without dependencies', () => {
   new vm.Script(inline); new vm.Script(engine);
   for (const name of ['legendary.css', 'legendary-motion.js']) assert(html.includes(`${name}?v=17.0`));
 });
-test('the update shows the new intro even when v16 was already seen', () => {
-  const f = introFixture(); f.time.run(20);
+test('a new player chooses a universe on their first visit', () => {
+  const f = introFixture({ first:true }); f.time.run(20);
   assert.equal(f.nodes.intro.style.display, 'grid');
   assert.equal(f.nodes.app.inert, true);
   assert.equal(f.document.activeElement, f.radios[0]);
 });
-test('a completed v17 intro is skipped on the next visit in this session', () => {
-  const f = introFixture({ seen:true });
+test('a saved universe opens the journal even in a new session', () => {
+  const f = introFixture();
   assert.equal(f.nodes.intro.style.display, 'none');
   assert.equal(f.nodes.app.inert, false);
   assert.equal(f.calls.apply, 0);
@@ -107,7 +107,7 @@ test('immediate repeated entry commits a selected universe only once', () => {
   assert.equal(f.localStorage.getItem('lk_u'), 'sao');
   assert.equal(f.nodes.intro.style.display, 'none');
   assert.equal(f.nodes.app.inert, false);
-  assert.equal(f.calls.tutorial, 1);
+  assert.equal(f.calls.tutorial, 0);
 });
 test('replay is reusable without stacking handlers or changing saved progression', () => {
   const f = introFixture({ seen:true });
@@ -126,7 +126,7 @@ test('replay is blocked while a quest timer is running', () => {
   assert.equal(f.context.activeTimers.size, 1);
 });
 test('radio arrows stay scoped, tab wraps, and Escape resumes the current universe', () => {
-  const f = introFixture(); f.time.run(20);
+  const f = introFixture(); f.context.replayLevelinkIntro(); f.time.run(20);
   f.key('ArrowRight');
   assert.equal(f.radios[1].getAttribute('aria-checked'), 'true');
   assert.equal(f.radios[0].tabIndex, -1);
@@ -138,7 +138,7 @@ test('radio arrows stay scoped, tab wraps, and Escape resumes the current univer
   assert.equal(f.nodes.app.inert, false);
 });
 test('reduced motion entry has no cinematic delay', () => {
-  const f = introFixture({ reduced:true }); f.nodes['intro-enter'].emit('click'); f.time.run(0);
+  const f = introFixture({ first:true, reduced:true }); f.nodes['intro-enter'].emit('click'); f.time.run(0);
   assert.equal(f.nodes.intro.style.display, 'none'); assert.equal(f.nodes.app.inert, false);
 });
 function progressFixture(animated = true) {
@@ -263,4 +263,66 @@ test('hidden tabs clear effects and postpone pending celebrations', () => {
   assert.equal(f.document.getElementById('lk-celebrations').children.length, 0);
   f.document.hidden = false; f.document.emit('visibilitychange');
   assert.equal(f.document.getElementById('lk-celebrations').children.length, 1);
+});
+
+test('journal search combines the selected status with accent-insensitive text', () => {
+  const today = '2026-11-24';
+  const items = [
+    { name:'Réviser le français', completed_dates:today },
+    { name:'Réviser les maths', completed_dates:'2026-11-23' },
+    { name:'Lire', completed_dates:'' }
+  ];
+  const ctx = vm.createContext({ TODAY:today, dates:h => h.completed_dates.split(',') });
+  vm.runInContext(slice('function foldQuestText(', 'window.filterHabits='), ctx);
+  assert.deepEqual(ctx.filterJournalQuests(items,' reviser ','all'), items.slice(0,2));
+  assert.deepEqual(ctx.filterJournalQuests(items,'RÉViser','pending'), [items[1]]);
+  assert.deepEqual(ctx.filterJournalQuests(items,'francais','done'), [items[0]]);
+  assert.deepEqual(ctx.filterJournalQuests(items,'Lire','done'), []);
+});
+
+test('a timer restores the remaining deadline and relinquishes its minimized view only once', () => {
+  const habit = { __id:'habit' }, state = { tLeft:17, deadline:20291, paused:false };
+  let pill, activeModal = false, detaches = 0;
+  const resumed = [];
+  const ctx = vm.createContext({
+    habits:[habit], performance:{ now:() => 3800 },
+    document:{ getElementById:id => id === 'tm-card' ? activeModal : pill },
+    buildTimerModal:(item,id,value) => { activeModal=true; resumed.push({item,id,value}); }
+  });
+  ctx.window=ctx;
+  vm.runInContext(slice('function remainingTimerSeconds(', 'function completedTimer('), ctx);
+  pill = { detachTimer() { detaches++; pill=null; return state; } };
+  ctx.restoreTimer('habit');ctx.restoreTimer('habit');
+  assert.equal(detaches,1);
+  assert.equal(resumed.length,1);
+  assert.equal(resumed[0].item,habit);
+  assert.equal(resumed[0].value.deadline,state.deadline);
+  assert.equal(ctx.remainingTimerSeconds(20291),17);
+  assert.equal(ctx.remainingTimerSeconds(3800),0);
+  assert.equal(ctx.remainingTimerSeconds(1850),0);
+});
+
+test('both world illustrations, icon symbols and local font files ship with the application', () => {
+  const css = fs.readFileSync(path.join(root,'journal.css'),'utf8');
+  assert(!/<(?:link|script)[^>]+(?:src|href)="https?:/i.test(html));
+  const assets = new Set([...html.matchAll(/(?:src|href)="(assets\/[^"]+)"/g)].map(m=>m[1]));
+  for(const m of css.matchAll(/url\("(assets\/[^"]+)"\)/g))assets.add(m[1]);
+  assert(assets.has('assets/solo.webp') && assets.has('assets/aincrad.webp'));
+  for (const asset of assets) assert(fs.statSync(path.join(root,asset)).size>0,asset);
+  for (const [,name] of html.matchAll(/data-lucide="([a-z0-9-]+)"/g)) {
+    assert(html.includes(`<symbol id="lk-icon-${name}"`),name);
+  }
+});
+
+test('completed quest cards show the recorded award after a world change', () => {
+  const today='2026-11-24';
+  const item={ __id:'quest', name:'Lire', color:'#7c4dff', completed_dates:today, completion_log:[{date:today,xp:3}] };
+  const ctx=vm.createContext({
+    TODAY:today, dates:h=>[h.completed_dates], streak:()=>1, xpFinal:()=>4,
+    currentDuration:()=>1, activeTimers:new Set(), escapeHTML:value=>value
+  });
+  vm.runInContext(slice('function habitCard(', 'function renderTaskSection('),ctx);
+  assert.match(ctx.habitCard(item,0),/\+3 XP/);
+  assert.doesNotMatch(ctx.habitCard(item,0),/\+4 XP/);
+  assert.doesNotMatch(ctx.habitCard({...item,completion_log:undefined},0),/\+(?:4|undefined|null) XP/);
 });
